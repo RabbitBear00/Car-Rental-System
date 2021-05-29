@@ -19,14 +19,14 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
         
         if(choice == '1'):
             client_interface(user_data, data_clients, login_index, space_clients)
-            pass
+            
             
         elif(choice == '2'):
             car_interface(user_data, data_carlist, login_index, space_cars)
-            pass
+            
         elif(choice == '3'):
-            #transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
-            pass
+            transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            
         
         elif(choice == '4'):
             #returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
@@ -478,8 +478,130 @@ def addcar_menu(data_carlist, space_cars):
         if(choice == '2'):
             return
         
+def filter_menu(data_transactions, space_transactions):
+    while(1):
+        title = "You can filter transactions here"
+        menu = ["Client ID", "Name", "Date","Return"]
+        while(1):
+            default.print_title(title)
+            while(1):
+                default.general_menu(menu)
+                choice = input("Please select: ")
+                if choice == '1' or choice == '2' or choice == '3' or choice == '4':
+                    break
+        
+        
+            if(choice == '1'):
+                while(1):
+                    temp = input("Enter the ID: ")
+                    i = 0 
+                    key = 0
+                    for i in range(len(data_transactions)):
+                        if(temp == data_transactions[i][0]):
+                            key = 1
+                            break
+                    break
+            
+                if(key == 1):
+                    default.print_table(data_transactions, 7, space_transactions, temp)
+                else:
+                    print("Either client doesn't exists/Client has no transaction records before.")
+                    return
+        
+            if(choice == '2'):
+                while(1):
+                    temp = input("Enter the ID: ")
+                    i = 0 
+                    key = 0
+                    for i in range(len(data_transactions)):
+                        if(temp == data_transactions[i][1]):
+                            key = 1
+                            break
+                    break
+            
+                if(key == 1):
+                    default.print_table(data_transactions, 8, space_transactions, temp)
+                else:
+                    print("Either client doesn't exists/Client has no transaction records before.")
+        
+            if(choice == '3'):
+                sequence = sub_filter_date(data_transactions, space_transactions)
+                if(sequence != 0):
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)
+            
+        
+            if(choice == '4'):
+                return
+
+            return
+        
+def sub_filter_date(data_transactions, space_transactions):
+    sequence = []
+    while(1):
+        from_date = clients.select_date("From: ", "admin001")
+        print("")
+        if(from_date == 1):
+            continue
+        elif(from_date == 2):
+            return 0
+        else:
+            break
+ 
+    while(1):
+        to_date = clients.select_date("To: ", "admin001")
+        print("")
+        if(to_date == 1):
+            continue
+        elif(to_date == 2):
+            return 0
+        else:
+            break   
+        
+      
+    #print(type(from_date))
+    from_date = datetime.datetime.strptime(from_date, "%d-%m-%Y")
+    to_date = datetime.datetime.strptime(to_date, "%d-%m-%Y")
+    #print(type(from_date))
+    if from_date < to_date:
+        for index in range(1, len(data_transactions)):
+            temp_from = data_transactions[index][7]
+            
+            temp_from = datetime.datetime.strptime(temp_from, "%d-%m-%Y")
+            temp_to = data_transactions[index][9]
+            
+            temp_to = datetime.datetime.strptime(temp_to, "%d-%m-%Y")
+            if(from_date <= temp_from and to_date >= temp_to):
+                sequence.append(index)
                 
+        #print(sequence)
+        
+        return sequence
+                
+        
+    else:
+        print("You can only book a date for a period in the future.")
+    
+    return
+
+            
+
+
+def transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+    default.print_table(data_transactions, 3, space_transactions)
+    while(1):
+        while(1):
+            menu = ["Filter", "Return"]
+            default.general_menu(menu)
+            choice = input("Please select: ")
+            if choice == '1' or choice == '2':
+                break
+        if(choice == '1'):
+            filter_menu(data_transactions, space_transactions)
+        
+        if(choice == '2'):
+            return
             
         
         
-        
+
+    

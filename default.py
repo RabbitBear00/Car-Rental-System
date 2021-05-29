@@ -232,7 +232,7 @@ def startup_interface(main_title, data_clients, data_carlist):
     elif(choice == '3'):
         enquiry_interface()
     
-def print_table(data, mode, space, login_name):
+def print_table(data, mode, space, login_name = ""):
     rows = len(data)
     start = 1
     if(mode == 1):
@@ -246,20 +246,29 @@ def print_table(data, mode, space, login_name):
         columns = 13
         blanks = 183
         
-    elif(mode == 3 or mode == 5):
+    elif(mode == 3):
         #space = space_transactions
         columns = 16
-        blanks = 234
+        blanks = 247
         
     elif(mode == 4):
         #space = space_cars
         columns = 13
         blanks = 143
     
+    elif(mode == 5):
+        columns = 16
+        blanks = 234
+    
     elif(mode == 6):
         #space = space_cars
         columns = 3
         blanks = 61
+    
+    elif(mode == 7 or mode == 8):
+        #space = space_transactions
+        columns = 16
+        blanks = 247
         
     k = 0 
     for i in data[0]:
@@ -292,6 +301,11 @@ def print_table(data, mode, space, login_name):
             if(mode == 5 and data[i][0] != login_name):
                 continue
             
+            if(mode == 7 and data[i][0] != login_name):
+                continue
+            if(mode == 8 and data[i][1] != login_name):
+                continue
+            
             if(mode == 1 and k == 3):
                 continue
 
@@ -300,7 +314,7 @@ def print_table(data, mode, space, login_name):
         #if(i == 0):
         #    print("")
         #    print("-" * blanks, end = "")
-        if((mode == 4 and data[i][8] == "Unavailable") or (mode == 5 and data[i][0] != login_name)):
+        if((mode == 4 and data[i][8] == "Unavailable") or (mode == 5 and data[i][0] != login_name) or (mode == 7 and data[i][0] != login_name) or (mode == 8 and data[i][1] != login_name)):
             pass
         else:
             print("")
@@ -317,16 +331,17 @@ def print_sorttable(data, mode, sequence, space):
         columns = 13
         blanks = 180
         
-    elif(mode == 3 or mode == 5):
+    elif(mode == 3):
         #space = space_transactions
-        columns = 11
-        blanks = 180
+        columns = 16
+        blanks = 247
         
     elif(mode == 4):
         #space = space_cars
         columns = 13
         blanks = 143
-                    
+    
+                   
     sequence.insert(0, 0)
     
     for i in sequence:
@@ -448,7 +463,7 @@ def validation_length(length):
 def validation_number(length):
     length = int(length)
     while(1):
-        temp = input("What do you want to change to? : ")
+        temp = input("Please Enter :: ")
         
         if temp.isdecimal() == True and len(temp) <= length:
             return temp
@@ -459,7 +474,7 @@ def validation_number(length):
 def validation_email(length):
     length = int(length)
     while(1):
-        temp = input("What do you want to change to? : ")
+        temp = input("Please Enter :: ")
         
         if "@" in temp and ".com" in temp:
             break
@@ -473,14 +488,14 @@ def validation_email(length):
         else:
             print("You cannot exceed " + str(length) + " characters" )
             print("")
-            temp = input("What do you want to change to? : ")
+            temp = input("Please Enter :: ")
             
     return temp
 def validation_date():
     
     while(1):
         print("Please enter date in DD-MM-YYYY")
-        temp = input("What do you want to change to? :")
+        temp = input("Please Enter ::")
         try:
             date = datetime.datetime.strptime(temp, "%d-%m-%Y")
             birth = date.strftime("%d-%m-%Y")
@@ -493,7 +508,6 @@ def validation_date():
             
 def validation_totalquantity(data_carlist, car_data, mode = 1):
 
-    
     while(1):
         print("Total Quantity = Available + Unavailable + In Service")
         print("You can only input upto 4 positive digits")
@@ -760,5 +774,5 @@ def validation_carnormal(target):
     
     temp = input("Please enter " + str(target) +": ")
     
-    temp[0].upper() + temp[1:len(temp)].lower()
+    temp = temp[0].upper() + temp[1:len(temp)].lower()
     return temp

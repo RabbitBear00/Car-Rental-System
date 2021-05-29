@@ -505,7 +505,7 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
         from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M")
         to_datetime = datetime.datetime.strptime(to_date + " " + to_time, "%d-%m-%Y %H:%M")
         from_date = from_datetime.strftime("%d-%m-%Y")
-        from_date = from_datetime.strftime("%H:%M:%S")
+        from_time = from_datetime.strftime("%H:%M:%S")
         to_date = to_datetime.strftime("%d-%m-%Y")
         to_time = to_datetime.strftime("%H:%M:%S")
         
@@ -513,8 +513,8 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
         now_date = now_datetime.strftime("%d-%m-%Y")
         now_time = now_datetime.strftime("%H:%M:%S")
 
-        #print(from_datetime)
-        #print(to_datetime)
+        #print(from_date)
+        #print(to_date)
         
         if(from_datetime < to_datetime and now_datetime < from_datetime):
             total_hours = to_datetime - from_datetime
@@ -523,6 +523,8 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
             
             total_price = round(total_hours * int(data[6]), 2)
             
+            print(from_date)
+            print(to_date)
             data.append(from_date)
             data.append(from_time)
             data.append(to_date)
