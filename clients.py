@@ -22,16 +22,16 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
                 break
         
         if(choice == '1'):
-            profile_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            profile_menu(user_data, data_clients, login_index, space_clients)
         
         elif(choice == '2'):
-            rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            rentcar_interface(user_data, data_carlist, data_transactions, login_index, space_cars)
         
         elif(choice == '3'):
-            view_indhistory(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            view_indhistory(user_data,data_transactions,space_transactions)
         
         elif(choice == '4'):
-            update_password(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            update_password(user_data, data_clients, login_index, space_clients)
         
         elif(choice == '5'):
             title = user_data[2] + ", you have successfully log out."
@@ -39,7 +39,7 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
             print("")
             return 
 
-def profile_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def profile_menu(user_data, data_clients, login_index, space_clients):
     while(1):    
         print("\n")
         for i in range(2,9):
@@ -59,12 +59,12 @@ def profile_menu(user_data, data_clients, data_carlist, data_transactions, login
             print("Error!")
     
         if(choice == '1'):
-            edit_profile(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            edit_profile(user_data, data_clients, login_index, space_clients)
         
         elif(choice == '2'):
             return
         
-def edit_profile(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def edit_profile(user_data, data_clients, login_index, space_clients):
     print("\nWhat do you want to edit?")
     menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
     
@@ -113,7 +113,7 @@ def edit_profile(user_data, data_clients, data_carlist, data_transactions, login
         
     return
         
-def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def rentcar_interface(user_data, data_carlist, data_transactions, login_index, space_cars):
     while(1):    
         menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
         title = user_data[2] + ", do you want to rent a car?"
@@ -127,18 +127,18 @@ def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, 
         
         if(choice == '1'):
             default.print_table(data_carlist, 4, space_cars, login_index)
-            view_allcars(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            view_allcars(user_data, data_carlist, space_cars)
         
         if(choice == '2'):
-            searchcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            searchcar_menu(user_data, data_carlist, space_cars)
         
         if(choice == '3'):
-            bookcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            bookcar_interface(user_data, data_carlist, data_transactions)
         
         if(choice == '4'):
             return
 
-def view_allcars(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def view_allcars(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Sort the List", "Return"]
         while(1):
@@ -148,12 +148,12 @@ def view_allcars(user_data, data_clients, data_carlist, data_transactions, login
                 break
     
         if(choice == '1'):
-            sortcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            sortcar_menu(user_data, data_carlist, space_cars)
             
         elif(choice == '2'):
             return
         
-def sortcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def sortcar_menu(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can sort the list here"
@@ -221,7 +221,7 @@ def sub_sort_menu(header, data, mode):
         
     return sequence
             
-def searchcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def searchcar_menu(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can search a car here"
@@ -276,7 +276,7 @@ def sub_search_menu(header, data, mode):
     
     return sequence
 
-def view_indhistory(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def view_indhistory(user_data,data_transactions,space_transactions):
     title = user_data[2] + ", view your rental history here"
     default.print_table(data_transactions, 5, space_transactions, user_data[0])
     print("")
@@ -290,7 +290,7 @@ def view_indhistory(user_data, data_clients, data_carlist, data_transactions, lo
     if(choice == '1'):
         return
     
-def update_password(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def update_password(user_data, data_clients, login_index, space_clients):
     title = user_data[2] + ", change your password here."
     menu = ["Change My Password", "Return"]
     while(1):
@@ -331,7 +331,7 @@ def update_password(user_data, data_clients, data_carlist, data_transactions, lo
         write = csv.writer(clients_file)
         write.writerows(data_clients)
         
-def bookcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def bookcar_interface(user_data, data_carlist, data_transactions):
     while(1):
         title = user_data[2] + ", you can book a car here"
         menu = ["Book with Car ID", "Return"]
@@ -343,12 +343,12 @@ def bookcar_interface(user_data, data_clients, data_carlist, data_transactions, 
                 break
     
         if(choice == '1'):
-            bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            bookcar_menu(user_data, data_carlist, data_transactions)
     
         if(choice == '2'):
             return
 
-def select_date(header, user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def select_date(header, user_data):
     title = user_data[2] + ", select your time here"
     i = 0
     while(1):
@@ -377,7 +377,7 @@ def select_date(header, user_data, data_clients, data_carlist, data_transactions
     #print(from_date)
     return temp
         
-def select_time(title, user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def select_time(title):
     i = 0
     while(1):
         print(title)
@@ -407,7 +407,7 @@ def select_time(title, user_data, data_clients, data_carlist, data_transactions,
     return temp
     #print(from_time)
         
-def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def bookcar_menu(user_data, data_carlist, data_transactions):
     data = []
     time = []
     index = -2
@@ -434,7 +434,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login
                     break
             
             if(choice == '1'):
-                bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+                bookcar_menu(user_data, data_carlist, data_transactions)
                 
             if(choice == '2'):
                 return
@@ -450,7 +450,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login
     
     while(1):   
         while(1):
-            from_date = select_date("From: ", user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            from_date = select_date("From: ", user_data)
             print("")
             if(from_date == 1):
                 pass
@@ -462,7 +462,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login
         #print(from_date)
     
         while(1):
-            from_time = select_time("From: ", user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            from_time = select_time("From: ")
             print("")
             if(from_time == 1):
                 pass
@@ -477,7 +477,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login
 
     
         while(1):
-            to_date = select_date("To: ", user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            to_date = select_date("To: ", user_data)
             print("")
             if(to_date == 1):
                 pass
@@ -489,7 +489,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login
         #print(to_date)
     
         while(1):
-            to_time = select_time("To: ", user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            to_time = select_time("To: ")
             print("")
             if(to_time == 1):
                 pass

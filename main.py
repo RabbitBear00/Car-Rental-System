@@ -26,7 +26,6 @@ def main():
     space_clients = [11, 6, 20, 20, 13, 15, 13, 35, 16, 8, 10]
 
     space_cars = [7, 10, 20, 13, 10, 15, 15, 15, 15, 15, 10, 20, 12]
-
     space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10]
 
     data_clients = default.input_dataclients()

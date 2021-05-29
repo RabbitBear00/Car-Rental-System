@@ -295,7 +295,7 @@ def print_table(data, mode, space, login_name):
             if(mode == 1 and k == 3):
                 continue
 
-            print(data[i][k] + " " * (int(space[k]) - int(len(str(data[i][k])))) + " | ", end = "")
+            print(str(data[i][k]) + " " * (int(space[k]) - int(len(str(data[i][k])))) + " | ", end = "")
         
         #if(i == 0):
         #    print("")
@@ -491,7 +491,7 @@ def validation_date():
             print("Error! Incorrect date format")    
             print("")
             
-def validation_totalquantity(data_carlist, car_data):
+def validation_totalquantity(data_carlist, car_data, mode = 1):
 
     
     while(1):
@@ -514,8 +514,11 @@ def validation_totalquantity(data_carlist, car_data):
             print("Please enter again")
             print("")
             continue
+        if(mode == 2):
+            car_data = sub_total_quantity_menu2(temp, car_data)
+            break
             
-        if(temp > int(car_data[5])):
+        elif(temp > int(car_data[5])):
             car_data = sub_total_quantity_menu1(temp, car_data, 1)
             print_title("This is the current record.")
             for i in range(0,13):
@@ -739,6 +742,23 @@ def sub_total_quantity_menu2(temp, car_data):
         car_data[8] = num3          
                     
     return car_data
-        
-                                 
+
+def validation_cartypes():
+    
+    while(1):
+        print("You can only enter: City, Electric, Prestige, Van, Truck")    
+        print("")
+        temp = input("Please enter car type: ")
+        temp.lower()
+        if temp == 'city' or temp == 'electric' or temp == 'prestige' or temp == 'van' or temp == 'truck':
+            break
                 
+    temp = temp[0].upper() + temp[1:len(temp)]
+    return temp          
+
+def validation_carnormal(target):
+    
+    temp = input("Please enter " + str(target) +": ")
+    
+    temp[0].upper() + temp[1:len(temp)].lower()
+    return temp

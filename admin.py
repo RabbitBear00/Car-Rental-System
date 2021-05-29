@@ -2,6 +2,8 @@ import default
 import clients
 import datetime
 import csv
+import sys
+import time
 
 def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
     title = user_data[2] + ", welcome back"
@@ -16,18 +18,18 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
                 break
         
         if(choice == '1'):
-            client_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            client_interface(user_data, data_clients, login_index, space_clients)
             pass
             
         elif(choice == '2'):
-            car_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            car_interface(user_data, data_carlist, login_index, space_cars)
             pass
         elif(choice == '3'):
             #transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
             pass
         
         elif(choice == '4'):
-            #update_password(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            #returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
             pass
         
         elif(choice == '5'):
@@ -36,10 +38,10 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
             print("")
             return 
         
-def client_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def client_interface(user_data, data_clients, login_index, space_clients):
     while(1):    
         menu = ["Sort", "Search", "Return"]
-        title = user_data[2] + ", do you want to rent a car?"
+        title = user_data[2] + ", what do you want to do?"
     
         while(1):
             default.print_title(title)
@@ -50,15 +52,15 @@ def client_interface(user_data, data_clients, data_carlist, data_transactions, l
         
         if(choice == '1'):
             default.print_table(data_clients, 1, space_clients, login_index)
-            sortclient_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            sortclient_menu(user_data, data_clients, space_clients)
             
         if(choice == '2'):
-            searchcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            searchclient_menu(user_data, data_clients, space_clients)
             
         if(choice == '3'):
             return
 
-def sortclient_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def sortclient_menu(user_data, data_clients, space_clients):
     while(1):
         menu = ["User ID", "Status", "Name", "Email", "Points","Return"]
         title = user_data[2] + ", you can sort the list here"
@@ -98,7 +100,7 @@ def sortclient_menu(user_data, data_clients, data_carlist, data_transactions, lo
         default.print_sorttable(data_clients, 1, sequence, space_clients)
         print("")
         
-def searchcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def searchclient_menu(user_data, data_clients, space_clients):
     while(1):
         menu = ["User ID", "Status", "Name", "License", "Phone Number", "Email", "Return"]
         title = user_data[2] + ", you can search a client here"
@@ -142,7 +144,7 @@ def searchcar_menu(user_data, data_clients, data_carlist, data_transactions, log
         default.print_sorttable(data_clients, 1, sequence, space_clients)
         print("")
         
-def edit_carprofile(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def edit_carprofile(user_data, data_clients, login_index, space_clients):
     print("\nWhat do you want to edit?")
     menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Total Quantity", "Available", "Unavailable", "In Service", "Price per Hour", "Fuel Type", "Return"]
     
@@ -205,10 +207,10 @@ def edit_carprofile(user_data, data_clients, data_carlist, data_transactions, lo
         
     return
 
-def car_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def car_interface(user_data, data_carlist, login_index, space_cars):
     while(1):    
         menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
-        title = user_data[2] + ", do you want to rent a car?"
+        title = user_data[2] + ", what would you like to do"
     
         while(1):
             default.print_title(title)
@@ -219,22 +221,22 @@ def car_interface(user_data, data_clients, data_carlist, data_transactions, logi
         
         if(choice == '1'):
             default.print_table(data_carlist, 2, space_cars, login_index)
-            sort_cars(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            sort_cars(user_data, data_carlist, space_cars)
         
         if(choice == '2'):
-            clients.searchcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            clients.searchcar_menu(user_data, data_carlist, space_cars)
         
         if(choice == '3'):
-            carprofile_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            carprofile_menu(data_carlist, space_cars)
             pass  
         
         if(choice == '4'):
-            #addcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            addcar_menu(data_carlist, space_cars)
             pass
         if(choice == '5'):
             return
     
-def sort_cars(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def sort_cars(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can sort the list here"
@@ -246,8 +248,6 @@ def sort_cars(user_data, data_clients, data_carlist, data_transactions, login_in
             if(choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8'):
                 break
     
-        if(choice == '8'):
-            return
         
         if(choice == '1'):
             header = "Car ID"
@@ -276,12 +276,15 @@ def sort_cars(user_data, data_clients, data_carlist, data_transactions, login_in
         if(choice == '7'):
             header = "Weight Load"
             sequence = clients.sub_sort_menu(header, data_carlist, 2)
-    
+        
+        if(choice == '8'):
+            return
+        
         
         default.print_sorttable(data_carlist, 2, sequence, space_cars)
         print("")    
 
-def carprofile_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def carprofile_menu(data_carlist, space_cars):
     
     
     while(1):
@@ -308,7 +311,7 @@ def carprofile_menu(user_data, data_clients, data_carlist, data_transactions, lo
                         break
                     
                 if(choice == '1'):
-                    carprofile_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+                    carprofile_menu(data_carlist, space_cars)
                     
                                 
                 if(choice == '2'):
@@ -331,13 +334,13 @@ def carprofile_menu(user_data, data_clients, data_carlist, data_transactions, lo
             print("Error!")
     
         if(choice == '1'):
-            edit_carprofile(index, car_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            edit_carprofile(index, car_data, data_carlist, space_cars)
             return
         
         elif(choice == '2'):
             return
               
-def edit_carprofile(index, car_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def edit_carprofile(index, car_data, data_carlist, space_cars):
     print("\nWhat do you want to edit?")
     menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
     
@@ -398,3 +401,85 @@ def edit_carprofile(index, car_data, data_clients, data_carlist, data_transactio
         write.writerows(data_carlist)
         
     return   
+
+def addcar_menu(data_carlist, space_cars):
+    default.print_title("You can add a car here")
+    prev_id = data_carlist[-1][0]
+   
+    while(1):
+        data = []
+        id = int(prev_id) + 1
+        data.append(id)
+        type = default.validation_cartypes()
+        print("")
+        data.append(type)
+        brand = default.validation_carnormal("car brand")
+        print("")
+        data.append(brand)
+        model = default.validation_carnormal("car model")
+        print("")
+        data.append(model)
+        print("Please enter model year: ")
+        year = default.validation_number(4)
+        print("")
+        data.append(year)
+        for i in range(4):
+            data.append(0)
+        data = default.validation_totalquantity(data_carlist, data, 2)
+        #print(data)
+      
+        print("")
+        print("Please enter price per hour: ")
+        price = default.validation_number(4)
+        data.append(price)
+        print("")
+        print("Please enter fuel type: ")
+        fuel = default.validation_length(space_cars[10])
+        data.append(fuel)
+        print("")
+        print("Please enter passenger number: ")
+        passenger = default.validation_number(3)
+        data.append(passenger)
+        print("")
+        print("Please enter price weight load: ")
+        weight = default.validation_number(10)
+        data.append(weight)
+        print("")
+        
+        default.print_title("Confirm Car Details")
+        k = 0
+        for i in data:
+            print(data_carlist[0][k] + ": " + str(i))
+            k += 1
+            
+        menu = ["Confirm", "Return"]
+        while(1):
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            if(choice == '1' or choice == '2'):
+                break
+        
+        if(choice == '1'):
+            data_carlist.append(data)
+            print(data)
+            with open("./data/cars_lists.csv", mode = 'w', newline = "") as cars_file:
+                write = csv.writer(cars_file)
+                write.writerows(data_carlist)
+            
+            default.print_title("Car Information has successfuly recorded.")
+            for remaining in range(5, -1, -1):
+                sys.stdout.write("\r")
+                sys.stdout.write("Will be directed in {:2d}......".format(remaining)) 
+                sys.stdout.flush()
+                time.sleep(1)
+            sys.stdout.write("\n")
+            return
+        
+        if(choice == '2'):
+            return
+        
+                
+            
+        
+        
+        
