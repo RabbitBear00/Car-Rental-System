@@ -533,7 +533,8 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
             data.append(now_time)
             data.append(str(total_hours))
             data.append(str(total_price))
-            
+            booking_id = int(data_transactions[-1][-1]) + 1
+            data.append(str(booking_id))
             choice = confirm_booking(data_transactions[0], data)
             if(choice == 1):
                 data_transactions.append(data)
@@ -558,7 +559,7 @@ def confirm_booking(headers, data):
         default.print_title(title)
         print("")
         
-        for i in range(15):
+        for i in range(16):
             print(headers[i] + ": " + str(data[i]))
             
         print("")

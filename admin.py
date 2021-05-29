@@ -25,11 +25,11 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
             car_interface(user_data, data_carlist, login_index, space_cars)
             
         elif(choice == '3'):
-            transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            transaction_interface(data_transactions, space_transactions)
             
         
         elif(choice == '4'):
-            #returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
             pass
         
         elif(choice == '5'):
@@ -481,13 +481,13 @@ def addcar_menu(data_carlist, space_cars):
 def filter_menu(data_transactions, space_transactions):
     while(1):
         title = "You can filter transactions here"
-        menu = ["Client ID", "Name", "Date","Return"]
+        menu = ["Client ID", "Name", "Date","Booking ID","Return"]
         while(1):
             default.print_title(title)
             while(1):
                 default.general_menu(menu)
                 choice = input("Please select: ")
-                if choice == '1' or choice == '2' or choice == '3' or choice == '4':
+                if choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5':
                     break
         
         
@@ -529,8 +529,25 @@ def filter_menu(data_transactions, space_transactions):
                 if(sequence != 0):
                     default.print_sorttable(data_transactions, 3, sequence, space_transactions)
             
-        
             if(choice == '4'):
+                while(1):
+                    temp = input("Enter the ID: ")
+                    i = 0 
+                    key = 0
+                    for i in range(len(data_transactions)):
+                        if(temp == data_transactions[i][-1]):
+                            key = 1
+                            index = i
+                            break
+                    break
+                if(key == 0):
+                    print("Booking ID does not exist.")
+                else:
+                    sequence = []
+                    sequence.append(index)
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)                    
+        
+            if(choice == '5'):
                 return
 
             return
@@ -586,7 +603,7 @@ def sub_filter_date(data_transactions, space_transactions):
             
 
 
-def transaction_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def transaction_interface(data_transactions, space_transactions):
     default.print_table(data_transactions, 3, space_transactions)
     while(1):
         while(1):
@@ -601,7 +618,8 @@ def transaction_interface(user_data, data_clients, data_carlist, data_transactio
         if(choice == '2'):
             return
             
-        
-        
+def returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+    while(1):
+        pass
 
     
