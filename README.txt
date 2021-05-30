@@ -1,9 +1,6 @@
 user:admin001
 password:admin001
 
-user:hello
-password:888
-
 user:nihao
 password:555
 
