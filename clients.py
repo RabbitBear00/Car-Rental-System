@@ -25,7 +25,7 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
             profile_menu(user_data, data_clients, login_index, space_clients)
         
         elif(choice == '2'):
-            rentcar_interface(user_data, data_carlist, data_transactions, login_index, space_cars)
+            rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
         
         elif(choice == '3'):
             view_indhistory(user_data,data_transactions,space_transactions)
@@ -113,7 +113,7 @@ def edit_profile(user_data, data_clients, login_index, space_clients):
         
     return
         
-def rentcar_interface(user_data, data_carlist, data_transactions, login_index, space_cars):
+def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars):
     while(1):    
         menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
         title = user_data[2] + ", do you want to rent a car?"
@@ -133,7 +133,7 @@ def rentcar_interface(user_data, data_carlist, data_transactions, login_index, s
             searchcar_menu(user_data, data_carlist, space_cars)
         
         if(choice == '3'):
-            bookcar_interface(user_data, data_carlist, data_transactions)
+            bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
         
         if(choice == '4'):
             return
@@ -331,7 +331,7 @@ def update_password(user_data, data_clients, login_index, space_clients):
         write = csv.writer(clients_file)
         write.writerows(data_clients)
         
-def bookcar_interface(user_data, data_carlist, data_transactions):
+def bookcar_interface(user_data, data_clients, data_carlist, data_transactions):
     while(1):
         title = user_data[2] + ", you can book a car here"
         menu = ["Book with Car ID", "Return"]
@@ -343,7 +343,7 @@ def bookcar_interface(user_data, data_carlist, data_transactions):
                 break
     
         if(choice == '1'):
-            bookcar_menu(user_data, data_carlist, data_transactions)
+            bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     
         if(choice == '2'):
             return
@@ -407,7 +407,7 @@ def select_time(title):
     return temp
     #print(from_time)
         
-def bookcar_menu(user_data, data_carlist, data_transactions):
+def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     data = []
     time = []
     index = -2
@@ -434,7 +434,7 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
                     break
             
             if(choice == '1'):
-                bookcar_menu(user_data, data_carlist, data_transactions)
+                bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 
             if(choice == '2'):
                 return
@@ -522,9 +522,47 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
             total_hours = round(total_hours.total_seconds() / 3600, 2)
             
             total_price = round(total_hours * int(data[6]), 2)
+            if(user_data[1] == "VIP"):
+                temp = total_price
+                print("We dected you are a VIP member, you will get a 10% discount")
+                total_price = round(total_price * 0.9, 2)
+                print("RM" + str(temp) + " * 90% = " + "RM" + str(total_price))
             
-            print(from_date)
-            print(to_date)
+            voucher = 0
+            if(int(user_data[-1]) > 100):
+                
+                while(1):
+                    print("Points currently: " + str(user_data[-1]))
+                    print("100 points = RM5 voucher")
+                    print("The rebate will automatically be deducted in your transactions")
+                    print("If you cancel the current payment, no points will be deducted")
+                    print("")
+                    count = int(input("How many RM5 vouchers do you want to exchange? "))
+                    if((int(user_data[-1])/100) >= count):
+                        print("Eligible. Do you want to exchange " + str(count) + "RM5 voucher ?")
+                        while(1):
+                            menu = ["Confirm", "Return"]
+                            default.general_menu(menu)
+                            choice = input("Please select: ")
+                            if(choice == '1' or choice == '2'):
+                                break
+                        if(choice == '1'):
+                            print("You have successfully exchange " + str(count) + " RM5 vouchers")
+                            voucher = count
+                            temp = total_price
+                            total_price = total_price - count * 5
+                            print("RM" + str(temp) + " - " + "RM" + str(count * 5) + " = RM" + str(total_price))
+                        
+                        if(choice == '2'):
+                            print("Exchange has been cancelled.")
+                
+                        
+                        break
+                    else:
+                        continue
+            
+            #print(from_date)
+            #print(to_date)
             data.append(from_date)
             data.append(from_time)
             data.append(to_date)
@@ -533,17 +571,37 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
             data.append(now_time)
             data.append(str(total_hours))
             data.append(str(total_price))
-            booking_id = int(data_transactions[-1][-1]) + 1
+            booking_id = int(data_transactions[-1][-4]) + 1
             data.append(str(booking_id))
             data.append("Rented")
             data.append("0")
             data.append("-")
             choice = confirm_booking(data_transactions[0], data)
             if(choice == 1):
+                
                 data_transactions.append(data)
                 with open("./data/transactions.csv", mode = "w", newline = "") as transactions_file:
                     write = csv.writer(transactions_file)
                     write.writerows(data_transactions)
+
+                user_data[-1] = str(int(user_data[-1]) - int(voucher) * 100)
+                user_data[-2] = str(float(user_data[-2]) + total_price)
+                user_data[-1] = str(int(total_price) + int(user_data[-1]))
+                
+                if(int(float(user_data[-2])) > 2000 and user_data[1] == "Normal"):
+                    default.print_title("You have become our VIP member")
+                    print("Congratulations " + str(user_data[1] +",\nYou will get 10% discount for every payment"))
+                    user_data[1] = "VIP"
+                    print("")
+                    
+                for i in range(len(data_clients)):
+                    if(user_data[0] == data_clients[i][0]):
+                        data_clients[i] = user_data
+                        break
+                    
+                with open("./data/clients.csv", mode = "w", newline = "") as clients_file:
+                    write = csv.writer(clients_file)
+                    write.writerows(data_clients)
                     
             if(choice == 2):
                 return

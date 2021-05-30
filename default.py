@@ -28,7 +28,7 @@ def init():
 #Startup menu 
 def startup_menu(main_title):
     print_title(main_title)
-    menu = ["Registered", "Unregistered","Contact us if you have any enquiries"]
+    menu = ["Registered", "Unregistered","Exit"]
     general_menu(menu)
     choice = input("Please Select: ")
     
@@ -112,9 +112,9 @@ def check_usernameID(data, username):
 
 #print title for super car
 def print_title(title):
-    print("============================================")
-    print(" " * int((44-len(title))/2) + title)
-    print("============================================")
+    print("================================================================")
+    print(" " * int((64-len(title))/2) + title)
+    print("================================================================")
 
 #input list, and then this function will generate a list accordingly with numbers 1-xxx,2-xxx,3-xxx
 def general_menu(list):
@@ -136,7 +136,7 @@ def current_date():
     clock_date = time.strftime("%d-%m-%Y", now)
     return clock_date
 
-def login_interface(main_title, data_clients, data_carlist):
+def login_interface(main_title, data_clients, data_carlist, space_cars, space_clients):
     
     i = 0 
     while(1):
@@ -168,18 +168,18 @@ def login_interface(main_title, data_clients, data_carlist):
                 break
             
         if(choice == '1'):
-            password_key = login_interface(main_title, data_clients, data_carlist)
+            password_key = login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return password_key
             
         if(choice == '2'):
-            login_index = startup_interface(main_title, data_clients, data_carlist)
+            login_index = startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return login_index
             
     return password_key
                         
                     
 
-def unregistered_interface(main_title, data_clients, data_carlist):
+def unregistered_interface(data_clients, data_carlist, space_cars,space_clients):
     title = "Guest, Welcome to Super Car Rental System"
     menu = ["Register", "View Available Cars", "Return"]
     while(1):
@@ -190,10 +190,10 @@ def unregistered_interface(main_title, data_clients, data_carlist):
             break
         
     if(choice == '1'):
-        #register_interface()
-        pass
+        register_interface(data_clients, space_clients)
+        
     if(choice == '2'):
-        print_table(data_carlist, 6)
+        print_table(data_carlist, 6, space_cars)
         print("")
         while(1):
             menu = ["Return"]
@@ -207,30 +207,128 @@ def unregistered_interface(main_title, data_clients, data_carlist):
     if(choice == '3'):
         return
             
+def register_interface(data_clients, space_clients):
+    print_title("You can register here")
+    prev_id = data_clients[-1][0]
+   
+    while(1):
+        data = []
+        id = int(prev_id) + 1
+        data.append(id)
+        data.append("Normal")
+        print("Plase enter your name")
+        name = validation_length(space_clients[2])
+        print("")
+        data.append(name)
+        while(1):
+            print("Plase enter your password")
+            password_1 = validation_length(space_clients[3])
+            print("")
+            print("Please confirm your password")
+            password_2 = validation_length(space_clients[3])
+            if(password_1 == password_2):
+                hash_object = hashlib.md5(password_1.encode())
+                md5_hash = hash_object.hexdigest()
+                password_1 = md5_hash
+                data.append(password_1)
+                break
+            else:
+                print("The password you enter are not the same. Please try again")
+                print("")
+            
+        print("")
+        
+        print("Please enter your date of birth: ")
+        birth_date = validation_date()
+        print("")
+        data.append(birth_date)
+        
+        print("Please enter your license: ")
+        license = validation_length(space_clients[5])
+        print("")
+        data.append(license)
+        
+        print("Please enter your phone number: ")
+        phone = validation_number(space_clients[6])
+        print("")
+        data.append(phone)
+        
+        print("Please enter your email: ")
+        email = validation_email(space_clients[7])
+        print("")
+        data.append(email)
+        
+        print("Please enter your credit/debit card number: ")
+        card = validation_number(12)
+        print("")
+        data.append(card)
+        data.append(0)
+        data.append(0)
+        
+        
+        print_title("Confirm Registeration Details")
+        k = 0
+        for i in data:
+            if(k == 3):
+                k += 1
+                continue
                 
+            print(data_clients[0][k] + ": " + str(i))
+            k += 1
+            
+        menu = ["Confirm", "Return"]
+        while(1):
+            general_menu(menu)
+            choice = input("Please Select: ")
+            if(choice == '1' or choice == '2'):
+                break
+        
+        if(choice == '1'):
+            data_clients.append(data)
+            print(data)
+            with open("./data/clients.csv", mode = 'w', newline = "") as clients_file:
+                write = csv.writer(clients_file)
+                write.writerows(data_clients)
+            
+            print_title("Registeration information has successfuly recorded.")
+            for remaining in range(5, -1, -1):
+                sys.stdout.write("\r")
+                sys.stdout.write("Will be directed in {:2d}......".format(remaining)) 
+                sys.stdout.flush()
+                time.sleep(1)
+            sys.stdout.write("\n")
+            return
+        
+        if(choice == '2'):
+            return                
 
             
             
     
 
-def enquiry_interface():
-    pass
-            
-def startup_interface(main_title, data_clients, data_carlist):
+def startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients):
     
     while(1):
-        choice = startup_menu(main_title)
-        if(choice == '1' or choice == '2' or choice == '3'):
-            break  
+        while(1):
+            choice = startup_menu(main_title)
+            if(choice == '1' or choice == '2' or choice == '3' or choice == '4'):
+                break  
                      
-    if(choice == '1'):
-        login_index = login_interface(main_title, data_clients, data_carlist)
-        return login_index
+        if(choice == '1'):
+            login_index = login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
+            return login_index
     
-    elif(choice == '2'):
-        unregistered_interface(main_title, data_clients, data_carlist)
-    elif(choice == '3'):
-        enquiry_interface()
+        elif(choice == '2'):
+            unregistered_interface(data_clients, data_carlist, space_cars, space_clients)
+
+        elif(choice == '3'):
+            for remaining in range(5, 0, -1):
+                sys.stdout.write("\r")
+                sys.stdout.write("System will exit in {:2d}.............".format(remaining)) 
+                sys.stdout.flush()
+                time.sleep(1)
+        
+            exit()
     
 def print_table(data, mode, space, login_name = ""):
     rows = len(data)
@@ -239,7 +337,7 @@ def print_table(data, mode, space, login_name = ""):
         #space = space_clients
         columns = 11
         start = 2
-        blanks = 176
+        blanks = 180
         
     elif(mode == 2):
         #space = space_cars
@@ -258,7 +356,7 @@ def print_table(data, mode, space, login_name = ""):
     
     elif(mode == 6):
         #space = space_cars
-        columns = 3
+        columns = 4
         blanks = 61
     
     elif(mode == 7 or mode == 8):
@@ -271,7 +369,7 @@ def print_table(data, mode, space, login_name = ""):
         if(mode == 4 and (i == "Total Quantity" or i == "Available" or i == "Unavailable" or i == "In Service" or i == "Status" )):
             k = k + 1
             continue
-        if(mode == 6 and (k >= 4 and k <= 9)):
+        if(mode == 6 and (k >= 4 and k <= 12)):
             k = k + 1
             continue
         
@@ -320,7 +418,7 @@ def print_sorttable(data, mode, sequence, space):
     if(mode == 1):
         #space = space_clients
         columns = 11
-        blanks = 167
+        blanks = 180
         
     elif(mode == 2):
         #space = space_cars
@@ -449,7 +547,7 @@ def search_data(data, keyword, attribute, mode):
 def validation_length(length):
     length = int(length)
     while(1):
-        temp = input("What do you want to change to ? : ")
+        temp = input("Please enter : ")
         if(len(temp) <=length):
             return temp
         else:
@@ -459,7 +557,7 @@ def validation_length(length):
 def validation_number(length):
     length = int(length)
     while(1):
-        temp = input("Please Enter :: ")
+        temp = input("Please Enter : ")
         
         if temp.isdecimal() == True and len(temp) <= length:
             return temp
@@ -470,7 +568,7 @@ def validation_number(length):
 def validation_email(length):
     length = int(length)
     while(1):
-        temp = input("Please Enter :: ")
+        temp = input("Please Enter : ")
         
         if "@" in temp and ".com" in temp:
             break
@@ -484,14 +582,14 @@ def validation_email(length):
         else:
             print("You cannot exceed " + str(length) + " characters" )
             print("")
-            temp = input("Please Enter :: ")
+            temp = input("Please Enter : ")
             
     return temp
 def validation_date():
     
     while(1):
         print("Please enter date in DD-MM-YYYY")
-        temp = input("Please Enter ::")
+        temp = input("Please Enter : ")
         try:
             date = datetime.datetime.strptime(temp, "%d-%m-%Y")
             birth = date.strftime("%d-%m-%Y")
