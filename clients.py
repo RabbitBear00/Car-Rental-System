@@ -535,6 +535,9 @@ def bookcar_menu(user_data, data_carlist, data_transactions):
             data.append(str(total_price))
             booking_id = int(data_transactions[-1][-1]) + 1
             data.append(str(booking_id))
+            data.append("Rented")
+            data.append("0")
+            data.append("-")
             choice = confirm_booking(data_transactions[0], data)
             if(choice == 1):
                 data_transactions.append(data)

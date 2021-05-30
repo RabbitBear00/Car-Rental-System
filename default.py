@@ -246,19 +246,15 @@ def print_table(data, mode, space, login_name = ""):
         columns = 13
         blanks = 183
         
-    elif(mode == 3):
+    elif(mode == 3 or mode == 5):
         #space = space_transactions
-        columns = 16
-        blanks = 247
+        columns = 19
+        blanks = 302
         
     elif(mode == 4):
         #space = space_cars
         columns = 13
         blanks = 143
-    
-    elif(mode == 5):
-        columns = 16
-        blanks = 234
     
     elif(mode == 6):
         #space = space_cars
@@ -267,8 +263,8 @@ def print_table(data, mode, space, login_name = ""):
     
     elif(mode == 7 or mode == 8):
         #space = space_transactions
-        columns = 16
-        blanks = 247
+        columns = 19
+        blanks = 302
         
     k = 0 
     for i in data[0]:
@@ -333,8 +329,8 @@ def print_sorttable(data, mode, sequence, space):
         
     elif(mode == 3):
         #space = space_transactions
-        columns = 16
-        blanks = 247
+        columns = 19
+        blanks = 302
         
     elif(mode == 4):
         #space = space_cars

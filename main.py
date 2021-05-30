@@ -25,7 +25,7 @@ def main():
     #Spaces for the table
     space_clients = [11, 6, 20, 20, 13, 15, 13, 35, 16, 8, 10]
     space_cars = [7, 10, 20, 13, 10, 15, 15, 15, 15, 15, 10, 20, 12]
-    space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10]
+    space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10, 10, 12, 21]
 
     data_clients = default.input_dataclients()
     data_carlist = default.input_datacars()
@@ -42,5 +42,4 @@ def main():
     #clients.bookcar_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)   
 
 
-    
 main()

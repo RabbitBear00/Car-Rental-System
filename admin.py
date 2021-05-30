@@ -535,7 +535,7 @@ def filter_menu(data_transactions, space_transactions):
                     i = 0 
                     key = 0
                     for i in range(len(data_transactions)):
-                        if(temp == data_transactions[i][-1]):
+                        if(temp == data_transactions[i][-4]):
                             key = 1
                             index = i
                             break
@@ -620,6 +620,119 @@ def transaction_interface(data_transactions, space_transactions):
             
 def returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
     while(1):
-        pass
+        while(1):
+            key = 0
+            default.print_title("Return a car here")
+            booking_id = input("Please enter booking id: ")
+            for i in range(len(data_transactions)):
+                if(booking_id == data_transactions[i][-4]):
+                    key = 1
+                
+                if(booking_id == data_transactions[i][-4] and data_transactions[i][-3] == "Rented"):
+                    key = 2
+                    index = i
+                    break
+                
+            if(key == 2):
+                break
+            elif(key == 1):
+                print("This car has already been returned. ")
+                print("")
+                return
+            else:
+                print("Booking ID doesn't exists. ")
+                print("")
+                return
+        
+        data = data_transactions[index]
+        while(1):
+            return_date = clients.select_date("Return Date: ", data[1])
+            print("")
+            if(return_date == 1):
+                continue
+            elif(return_date == 2):
+                return 0
+            else:
+                break
+            
+        while(1):
+            return_time = clients.select_time("Return Time: ")
+            print("")
+            if(return_time == 1):
+                continue
+            elif(return_time == 2):
+                return 0
+            else:
+                break
+        from_date = data[7]
+        from_time = data[8]
+        to_date = data[9]
+        to_time = data[10]
+        return_datetime = datetime.datetime.strptime(return_date + " " + return_time, "%d-%m-%Y %H:%M")
+        from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M:%S")
+        to_datetime = datetime.datetime.strptime(to_date + " " +to_time, "%d-%m-%Y %H:%M:%S")
+        if(return_datetime <= to_datetime):
+            print(data[1] + ", you have successfully return the car")
+            data[-3] = "Returned"
+            data[-2] = 0
+            data[-1] = '-'
+        
+        if(return_datetime > to_datetime):
+            total_hours = return_datetime - to_datetime
+            total_hours = round(total_hours.total_seconds() / 3600, 2)
+            total_price = round(total_hours * int(data[6]) * 1.5, 2)
+            data[-2] = total_price
+            
+            print("")
+            print("You have returned your car late. \nPenalty = delayed hours * price per hour * 1.5 ")
+            default.print_title("Penalty Payment Details")
+            for i in range(7):
+                print(data_transactions[0][i] + ": " + data[i])
+                
+            print("Booking ID: " + data[-4])
+            print("Delayed hours: " + str(total_hours))
+            print("Penalty: " + str(data[-2]))
+            
+            while(1):
+                menu = ["Confirm","Return"]
+                default.general_menu(menu)
+                choice = input("Please select: ")
+                if(choice == '1' or choice == '2'):
+                    break
+            
+            
+            
+            if(choice == '1'):
+                print("Payment is successful!")
+                for remaining in range(5, -1, -1):
+                    sys.stdout.write("\r")
+                    sys.stdout.write("Will be directed in {:2d}......".format(remaining)) 
+                    sys.stdout.flush()
+                    time.sleep(1)
+                sys.stdout.write("\n")
+                
+            if(choice == '2'):
+                return
+            
+        data[-3] = "Returned"
+        data[-1] = str(return_datetime)
+        data_transactions[index] = data
+        with open("./data/transactions.csv", mode = "w", newline = "") as transactions_file:
+            write = csv.writer(transactions_file)
+            write.writerows(data_transactions)
+                
+            return
+            
+                
+            
+            
+            
+                
+            
+        
+        
+            
+        
+        
 
     
