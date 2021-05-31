@@ -42,7 +42,7 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
 def profile_menu(user_data, data_clients, login_index, space_clients):
     while(1):    
         print("\n")
-        for i in range(2,9):
+        for i in range(11):
             if(i ==3):
                 continue
             print(data_clients[0][i] + ": " + user_data[i])
@@ -517,6 +517,12 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
         #print(to_date)
         
         if(from_datetime < to_datetime and now_datetime < from_datetime):
+            result = compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
+            if(result == 0):
+                print("This model of car have all been rent out.")
+                print("Please try again")
+                return
+            
             total_hours = to_datetime - from_datetime
             #print(total_hours)
             total_hours = round(total_hours.total_seconds() / 3600, 2)
@@ -537,9 +543,13 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                     print("The rebate will automatically be deducted in your transactions")
                     print("If you cancel the current payment, no points will be deducted")
                     print("")
-                    count = int(input("How many RM5 vouchers do you want to exchange? "))
+                    try:
+                        count = int(input("How many RM5 vouchers do you want to exchange? "))
+                    except ValueError:
+                        print("Error input")
+                        continue
                     if((int(user_data[-1])/100) >= count):
-                        print("Eligible. Do you want to exchange " + str(count) + "RM5 voucher ?")
+                        print("Eligible. Do you want to exchange " + str(count) + " RM5 voucher ?")
                         while(1):
                             menu = ["Confirm", "Return"]
                             default.general_menu(menu)
@@ -555,7 +565,6 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                         
                         if(choice == '2'):
                             print("Exchange has been cancelled.")
-                
                         
                         break
                     else:
@@ -644,6 +653,31 @@ def confirm_booking(headers, data):
         
     if(choice == '2'):
         return 2
+    
+def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist):
+    count = 0
+    for i in range(len(data_transactions)):
+        if(car_id == data_transactions[i][2]):
+            origin_fromtime = datetime.datetime.strptime(data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
+            origin_totime = datetime.datetime.strptime(data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
+            
+            if((origin_fromtime <= from_datetime <= origin_totime) or (origin_fromtime <= to_datetime <= origin_totime) or (from_datetime <= origin_fromtime <= to_datetime) or (from_datetime <= origin_totime <= to_datetime)):
+                count += 1
+                
+    for i in range(len(data_carlist)):
+        if(data_carlist[i][0] == car_id):
+            available_quantity = data_carlist[i][6]
+            break
+    
+
+    if(int(available_quantity) == count):
+        #Cannot rent
+        return 0
+    
+    else:
+        return 1
+            
+        
 
         
         
