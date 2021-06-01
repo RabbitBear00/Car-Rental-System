@@ -318,13 +318,13 @@ def print_table(data, mode, space, login_name = ""):
     elif(mode == 2):
         #mode 2: admin view cars table(all columns can be viewed)
         columns = 13
-        blanks = 183
+        blanks = 214
         
     elif(mode == 3 or mode == 5):
         #mode 3: admin view transactions table(all columns can be viewed)
         #mode 5: client view transactions table(view their own transactions only)
         columns = 19
-        blanks = 302
+        blanks = 299
         
     elif(mode == 4):
         #mode 4: client view cars table(four columns of quantity and columis not included)
@@ -340,7 +340,7 @@ def print_table(data, mode, space, login_name = ""):
         #mode 7: admin wanted to filter transactions details using specific client ID 
         #mode 8: admin wanted to filter transactions details using specific client name 
         columns = 19
-        blanks = 302
+        blanks = 299
     
     #Section for printing headers
     k = 0 
@@ -442,7 +442,7 @@ def print_sorttable(data, mode, sequence, space):
             print("")
             print("-" * blanks, end = "")
                 
-            print("")
+        print("")
 
 #sorting data according to target, with ascending(order == 1) & descending(order == 0)           
 def sort_data(data, target, order, mode):
