@@ -5,6 +5,7 @@ import csv
 import sys
 import time
 
+#This is the main menu for admins
 def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
     title = user_data[2] + ", welcome back"
     menu = ["View All Clients", "View All Cars", "View All Transactions", "Car Return","Log Out"]
@@ -29,7 +30,7 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
             
         
         elif(choice == '4'):
-            returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            returncar_interface(data_transactions)
             pass
         
         elif(choice == '5'):
@@ -37,7 +38,8 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
             default.print_title(title)
             print("")
             return 
-        
+
+#A menu for admin to view/sort/search all clients data       
 def client_interface(user_data, data_clients, login_index, space_clients):
     while(1):    
         menu = ["Sort", "Search", "Return"]
@@ -207,6 +209,7 @@ def edit_carprofile(user_data, data_clients, login_index, space_clients):
         
     return
 
+#A menu for admin to view/sort/search/add all cars data  
 def car_interface(user_data, data_carlist, login_index, space_cars):
     while(1):    
         menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
@@ -478,6 +481,7 @@ def addcar_menu(data_carlist, space_cars):
         if(choice == '2'):
             return
         
+#A menu to filter transactions according to client id/client name/date/booking id
 def filter_menu(data_transactions, space_transactions):
     while(1):
         title = "You can filter transactions here"
@@ -493,7 +497,7 @@ def filter_menu(data_transactions, space_transactions):
         
             if(choice == '1'):
                 while(1):
-                    temp = input("Enter the ID: ")
+                    temp = input("Enter the Client ID: ")
                     i = 0 
                     key = 0
                     for i in range(len(data_transactions)):
@@ -510,7 +514,7 @@ def filter_menu(data_transactions, space_transactions):
         
             if(choice == '2'):
                 while(1):
-                    temp = input("Enter the ID: ")
+                    temp = input("Enter the Client username: ")
                     i = 0 
                     key = 0
                     for i in range(len(data_transactions)):
@@ -525,13 +529,19 @@ def filter_menu(data_transactions, space_transactions):
                     print("Either client doesn't exists/Client has no transaction records before.")
         
             if(choice == '3'):
-                sequence = sub_filter_date(data_transactions, space_transactions)
-                if(sequence != 0):
+                sequence = sub_filter_date(data_transactions)
+                if(sequence == 3):
+                    print("There's no transactions between these dates. ")
+                    print("")
+                elif(sequence == 0):
+                    print("")
+                    return
+                else:
                     default.print_sorttable(data_transactions, 3, sequence, space_transactions)
             
             if(choice == '4'):
                 while(1):
-                    temp = input("Enter the ID: ")
+                    temp = input("Enter the Booking ID: ")
                     i = 0 
                     key = 0
                     for i in range(len(data_transactions)):
@@ -552,7 +562,8 @@ def filter_menu(data_transactions, space_transactions):
 
             return
         
-def sub_filter_date(data_transactions, space_transactions):
+#Filter certain time period within transactions
+def sub_filter_date(data_transactions):
     sequence = []
     while(1):
         from_date = clients.select_date("From: ", "admin001")
@@ -574,18 +585,19 @@ def sub_filter_date(data_transactions, space_transactions):
         else:
             break   
         
-      
+    #Convert string dates to datetime objects
     #print(type(from_date))
     from_date = datetime.datetime.strptime(from_date, "%d-%m-%Y")
     to_date = datetime.datetime.strptime(to_date, "%d-%m-%Y")
     #print(type(from_date))
+    
+    #Checking if the transactions dates are inside the input dates
     if from_date < to_date:
         for index in range(1, len(data_transactions)):
             temp_from = data_transactions[index][7]
-            
             temp_from = datetime.datetime.strptime(temp_from, "%d-%m-%Y")
-            temp_to = data_transactions[index][9]
             
+            temp_to = data_transactions[index][9]
             temp_to = datetime.datetime.strptime(temp_to, "%d-%m-%Y")
             if(from_date <= temp_from and to_date >= temp_to):
                 sequence.append(index)
@@ -598,7 +610,7 @@ def sub_filter_date(data_transactions, space_transactions):
     else:
         print("You can only book a date for a period in the future.")
     
-    return
+    return 3
 
             
 
@@ -618,7 +630,7 @@ def transaction_interface(data_transactions, space_transactions):
         if(choice == '2'):
             return
             
-def returncar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+def returncar_interface(data_transactions):
     while(1):
         while(1):
             key = 0
@@ -654,7 +666,7 @@ def returncar_interface(user_data, data_clients, data_carlist, data_transactions
                 return 0
             else:
                 break
-            
+        #Pick a return time    
         while(1):
             return_time = clients.select_time("Return Time: ")
             print("")
@@ -664,19 +676,22 @@ def returncar_interface(user_data, data_clients, data_carlist, data_transactions
                 return 0
             else:
                 break
-        from_date = data[7]
-        from_time = data[8]
+        #from_date = data[7]
+        #from_time = data[8]
         to_date = data[9]
         to_time = data[10]
         return_datetime = datetime.datetime.strptime(return_date + " " + return_time, "%d-%m-%Y %H:%M")
-        from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M:%S")
+        #from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M:%S")
         to_datetime = datetime.datetime.strptime(to_date + " " +to_time, "%d-%m-%Y %H:%M:%S")
+        
+        #Return within the to_datetime
         if(return_datetime <= to_datetime):
             print(data[1] + ", you have successfully return the car")
             data[-3] = "Returned"
             data[-2] = 0
             data[-1] = '-'
         
+        #if exceeded the time, there will be penalty
         if(return_datetime > to_datetime):
             total_hours = return_datetime - to_datetime
             total_hours = round(total_hours.total_seconds() / 3600, 2)

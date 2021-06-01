@@ -1,12 +1,11 @@
 import csv
-from os import write
 import default
 import datetime
 import time
 import sys
 import hashlib
-#import main
 
+#First menu of client
 def client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
     
     #user_data = data_clients[login_index]
@@ -39,6 +38,7 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
             print("")
             return 
 
+#Menu shown before directed to editting
 def profile_menu(user_data, data_clients, login_index, space_clients):
     while(1):    
         print("\n")
@@ -63,7 +63,8 @@ def profile_menu(user_data, data_clients, login_index, space_clients):
         
         elif(choice == '2'):
             return
-        
+
+#Client can edit certain clients data       
 def edit_profile(user_data, data_clients, login_index, space_clients):
     print("\nWhat do you want to edit?")
     menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
@@ -73,6 +74,7 @@ def edit_profile(user_data, data_clients, login_index, space_clients):
         choice = input("Please Select: ")
         if(choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7'):
             break
+        
     if(choice == '7'):
         return
     
@@ -102,7 +104,7 @@ def edit_profile(user_data, data_clients, login_index, space_clients):
         user_data[8] = temp
     
     
-        
+    #Replace the row with the newest alterations    
     data_clients[login_index] = user_data
     
     #print(data_clients)
@@ -112,7 +114,7 @@ def edit_profile(user_data, data_clients, login_index, space_clients):
         write.writerows(data_clients)
         
     return
-        
+       
 def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars):
     while(1):    
         menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
@@ -142,6 +144,7 @@ def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, 
         if(choice == '4'):
             return
 
+#view and sorting cars lists
 def view_allcars(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Sort the List", "Return"]
@@ -156,7 +159,8 @@ def view_allcars(user_data, data_carlist, space_cars):
             
         elif(choice == '2'):
             return
-        
+
+#sort car according to certain headers        
 def sortcar_menu(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
@@ -206,7 +210,7 @@ def sortcar_menu(user_data, data_carlist, space_cars):
         
             
         
-    
+ #sort ascending or descending   
 def sub_sort_menu(header, data, mode):
     sub_menu = ["Ascending", "Descending"]
     title = "You have chosen " + header + ": "
@@ -224,7 +228,7 @@ def sub_sort_menu(header, data, mode):
         sequence = default.sort_data(data, header, 0, mode)
         
     return sequence
-            
+           
 def searchcar_menu(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity","Weight Load","Return"]
@@ -269,7 +273,7 @@ def searchcar_menu(user_data, data_carlist, space_cars):
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         print("")
     
-        
+#search a keyword within header and return the sequence of the searched rows        
 def sub_search_menu(header, data, mode):
     title = "You have chosen " + header + ": "     
     
@@ -280,6 +284,7 @@ def sub_search_menu(header, data, mode):
     
     return sequence
 
+#view individual history for clients
 def view_indhistory(user_data,data_transactions,space_transactions):
     title = user_data[2] + ", view your rental history here"
     default.print_table(data_transactions, 5, space_transactions, user_data[0])
@@ -307,8 +312,10 @@ def update_password(user_data, data_clients, login_index, space_clients):
         return
     
     i = 0
+    #if tries more than 3 times, exit to previous menu
     while(i < 3):
         old_password = input("Please enter your old password: ")
+        #password md5 encryption
         hash_object = hashlib.md5(old_password.encode())
         md5_hash = hash_object.hexdigest()
         old_password = md5_hash
@@ -323,7 +330,7 @@ def update_password(user_data, data_clients, login_index, space_clients):
     if(i == 3):
         return
         
-    
+    #sending the encrypted password to the csv files
     new_password = default.validation_length(space_clients[3])
     hash_object = hashlib.md5(new_password.encode())
     md5_hash = hash_object.hexdigest()
@@ -334,7 +341,8 @@ def update_password(user_data, data_clients, login_index, space_clients):
     with open("./data/clients.csv",  mode = 'w', newline = '') as clients_file:
         write = csv.writer(clients_file)
         write.writerows(data_clients)
-        
+
+       
 def bookcar_interface(user_data, data_clients, data_carlist, data_transactions):
     while(1):
         title = user_data[2] + ", you can book a car here"
@@ -410,7 +418,8 @@ def select_time(title):
     
     return temp
     #print(from_time)
-        
+
+#book a car: will check car availability once key in booking date, will check if car id exist       
 def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     data = []
     time = []
@@ -420,6 +429,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     while(1):
         car_id = input("Please input the car ID: ")
         
+        #check if car id exists
         for i in range(len(data_carlist)):
             if(car_id == data_carlist[i][0]):
                 index = i
@@ -429,6 +439,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             break
         print("Car ID doesn't exists!")
         k = k + 1
+        #more than 4 times offer chance to return to previous menu
         if(k > 4):
             menu = ["Continue","Return"]
             while(1):
@@ -477,7 +488,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     
         #print(from_time)
  
-#GEtting to time
+#Getting to time
 
     
         while(1):
@@ -506,6 +517,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     
         #print(data)
         
+        #Converting inputed time from string to datetime objects
         from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M")
         to_datetime = datetime.datetime.strptime(to_date + " " + to_time, "%d-%m-%Y %H:%M")
         from_date = from_datetime.strftime("%d-%m-%Y")
@@ -520,6 +532,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
         #print(from_date)
         #print(to_date)
         
+        #ensuring clients books in a period where date(frow < from < to)
         if(from_datetime < to_datetime and now_datetime < from_datetime):
             result = compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
             if(result == 0):
@@ -532,6 +545,8 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             total_hours = round(total_hours.total_seconds() / 3600, 2)
             
             total_price = round(total_hours * int(data[6]), 2)
+            
+            #check if the user is VIP, VIP discounts 10%
             if(user_data[1] == "VIP"):
                 temp = total_price
                 print("We dected you are a VIP member, you will get a 10% discount")
@@ -539,6 +554,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                 print("RM" + str(temp) + " * 90% = " + "RM" + str(total_price))
             
             voucher = 0
+            #Check if customer elisgable to exchange for vouchers, and can exchange vouchers
             if(int(user_data[-1]) > 100):
                 
                 while(1):
@@ -590,6 +606,8 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             data.append("0")
             data.append("-")
             choice = confirm_booking(data_transactions[0], data)
+            
+            #if confirm booking write inside the files
             if(choice == 1):
                 
                 data_transactions.append(data)
@@ -624,6 +642,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             print("You can only book a date for a period in the future.")
     return
             
+#Confirming a booking
 def confirm_booking(headers, data):
     title = "Booking Details"
     print("")
@@ -657,9 +676,11 @@ def confirm_booking(headers, data):
         
     if(choice == '2'):
         return 2
-    
+
+#Checking if a certain date is available
 def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist):
     count = 0
+    #if the car id in the transaction is the same then compare the dates, if previous transactions of this car exists in a date the the clients wants to book, count++
     for i in range(len(data_transactions)):
         if(car_id == data_transactions[i][2]):
             origin_fromtime = datetime.datetime.strptime(data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
@@ -667,13 +688,14 @@ def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data
             
             if((origin_fromtime <= from_datetime <= origin_totime) or (origin_fromtime <= to_datetime <= origin_totime) or (from_datetime <= origin_fromtime <= to_datetime) or (from_datetime <= origin_totime <= to_datetime)):
                 count += 1
-                
+    
+    #check the total quantity of the car with car_id            
     for i in range(len(data_carlist)):
         if(data_carlist[i][0] == car_id):
             available_quantity = data_carlist[i][6]
             break
     
-
+    #this means the quantity is full, as count == available quantity
     if(int(available_quantity) == count):
         #Cannot rent
         return 0

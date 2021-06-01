@@ -180,7 +180,8 @@ def unregistered_interface(data_clients, data_carlist, space_cars,space_clients)
             
     if(choice == '3'):
         return
-            
+
+# register interface is for the unregister clients
 def register_interface(data_clients, space_clients):
     print_title("You can register here")
     prev_id = data_clients[-1][0]
@@ -279,7 +280,7 @@ def register_interface(data_clients, space_clients):
             
             
     
-
+#It is a menu to direct into login/unregister and exit
 def startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients):
     
     while(1):
@@ -303,121 +304,134 @@ def startup_interface(main_title, data_clients, data_carlist, space_cars, space_
                 time.sleep(1)
         
             exit()
-    
+
+#Use to print all the tables
 def print_table(data, mode, space, login_name = ""):
     rows = len(data)
     start = 1
     if(mode == 1):
-        #space = space_clients
+        #mode 1: admin view clients table(all columns can be viewed)
         columns = 11
         start = 2
         blanks = 180
         
     elif(mode == 2):
-        #space = space_cars
+        #mode 2: admin view cars table(all columns can be viewed)
         columns = 13
         blanks = 183
         
     elif(mode == 3 or mode == 5):
-        #space = space_transactions
+        #mode 3: admin view transactions table(all columns can be viewed)
+        #mode 5: client view transactions table(view their own transactions only)
         columns = 19
         blanks = 302
         
     elif(mode == 4):
-        #space = space_cars
+        #mode 4: client view cars table(four columns of quantity and columis not included)
         columns = 13
         blanks = 143
     
     elif(mode == 6):
-        #space = space_cars
+        #mode 6: unregistered client view car table(Car ID, Car type, Car Brand, Car Model)
         columns = 4
         blanks = 61
     
     elif(mode == 7 or mode == 8):
-        #space = space_transactions
+        #mode 7: admin wanted to filter transactions details using specific client ID 
+        #mode 8: admin wanted to filter transactions details using specific client name 
         columns = 19
         blanks = 302
-        
+    
+    #Section for printing headers
     k = 0 
     for i in data[0]:
-        if(mode == 4 and (i == "Total Quantity" or i == "Available" or i == "Unavailable" or i == "In Service" or i == "Status" )):
+        #skip four columns of quantity
+        if(mode == 4 and (i == "Total Quantity" or i == "Available" or i == "Unavailable" or i == "In Service" )):
             k = k + 1
             continue
+        #skip the fourth column till the last column
         if(mode == 6 and (k >= 4 and k <= 12)):
             k = k + 1
             continue
-        
+        #skip password column
         if(mode == 1 and k == 3):
             k = k + 1
             continue
         
         print(i + " " * (int(space[k]) - int(len(i))) + " | ", end = "")
         k = k + 1
-        
+    
+    #printing the "-----------" line seperator between headers and data    
     print("")
     print("-" * blanks)
     
     
-  
-    for i in range(start,rows):
+    #printting the data
+    for i in range(start,rows):#user variable start to skip clients.csv first row of admin data
+        
         for k in range(columns):
+            
+        #Skipping columns
+            #skip four columns of quantity
             if(mode == 4 and (k == 5 or k == 6 or k ==7 or k == 8)):
                 continue
-            if(mode == 4 and data[i][8] == "Unavailable"):
-                continue
             
+            #skip transactions for others
             if(mode == 5 and data[i][0] != login_name):
                 continue
             
+            #skip transactions for other client ID
             if(mode == 7 and data[i][0] != login_name):
                 continue
+            
+            #skip transaction for other client names
             if(mode == 8 and data[i][1] != login_name):
                 continue
             
+            #skip password column for admin
             if(mode == 1 and k == 3):
                 continue
 
             print(str(data[i][k]) + " " * (int(space[k]) - int(len(str(data[i][k])))) + " | ", end = "")
         
-        #if(i == 0):
-        #    print("")
-        #    print("-" * blanks, end = "")
-        if((mode == 4 and data[i][8] == "Unavailable") or (mode == 5 and data[i][0] != login_name) or (mode == 7 and data[i][0] != login_name) or (mode == 8 and data[i][1] != login_name)):
+        #skipping rows
+        if((mode == 5 and data[i][0] != login_name) or (mode == 7 and data[i][0] != login_name) or (mode == 8 and data[i][1] != login_name)):
             pass
         else:
             print("")
-                
+
+#print tables according to a given sequence
 def print_sorttable(data, mode, sequence, space):
     
     if(mode == 1):
-        #space = space_clients
+        #mode 1: admin sort list of clients
         columns = 11
         blanks = 180
         
     elif(mode == 2):
-        #space = space_cars
+        #mode 2: admin sort list of cars(include all columns)
         columns = 13
         blanks = 180
         
     elif(mode == 3):
-        #space = space_transactions
+        #mode 3: admin filter certain dates of transactions
         columns = 19
         blanks = 302
         
     elif(mode == 4):
-        #space = space_cars
+        #mode 4: client sort list of cars(exclude four columns of quantity)
         columns = 13
         blanks = 143
     
-                   
+    #insert headers row inside the sequence               
     sequence.insert(0, 0)
     
     for i in sequence:
         for k in range(columns):
+            #skipping columns
             if(mode == 4 and (k == 5 or k == 6 or k ==7 or k == 8 )):
                 continue
-            if(mode == 4 and data[i][8] == "Unavailable"):
-                continue
+
             if(mode == 1 and k == 3):
                 continue
             
@@ -428,39 +442,43 @@ def print_sorttable(data, mode, sequence, space):
             print("")
             print("-" * blanks, end = "")
                 
-        if(mode == 4 and data[i][8] == "Unavailable"):
-            pass
-        else:
             print("")
-            
+
+#sorting data according to target, with ascending(order == 1) & descending(order == 0)           
 def sort_data(data, target, order, mode):
+    #skipping headers line in data
     start = 1
     count = 1    
 
+    #mode 1: skipping the header and admin line in clients.csv
+    #mode 2: mainly for car lists
     if(mode == 1):
         start = 2
         count = 2
     sample = []
     index = 0
-    columns = len(data[0])
     rows = len(data)
+    #finding certain column equals to target
     for i in data[0]:
         if(i == target):
             break
         index = index + 1
      
+     #append the whole column(target column) inside sample
     for i in range(start, rows):
         sample.append(data[i][index])
         
     len_sample = len(sample)
     
+    #giving values to sequence accordance to the row number
     sequence = [*range(start, len_sample+count, 1)]
     
+    #if the values in the column, turns out to be numbers, it must be converted to integers to compare the sizes
     if(mode == 2 and ((index >=5 and index <=9) or index == 12 or index == 13)):
         for i in range(len(sample)):
             sample[i] = int(sample[i])
         
-    
+    #Changing sequence and sample at the same time, so when it's done we know the ascending/descending sequence with the variable 'sequence'
     #Descending
     if(order == 0):
         for i in range(len_sample -1):
@@ -476,32 +494,38 @@ def sort_data(data, target, order, mode):
                 if (sample[k] > sample[k+1]):
                     sample[k], sample[k+1] = sample[k+1], sample[k]
                     sequence[k], sequence[k+1] = sequence[k+1], sequence[k]
-                
+    
+    #return the sequence of how it sorts and later printed via print_sorttabble           
     return sequence
 
+#searching "keyword" in "data" list of "attribute" column
 def search_data(data, keyword, attribute, mode):
     start = 1
+    #skipping the admin line if want to search for clients
     if(mode == 1):
         start = 2
     sequence = []
     sample = []
     rows = len(data)
-    columns = len(data[0])
+    #convert keyword to lower case so the search is not case sensitive
     keyword = keyword.lower()
+    
+    #fingding the respective index of attribute
     k = 0
     for i in data[0]:
         if attribute == i :
             index = k
         k = k + 1        
-             
+    
+    #append everything in the attribute column into sample         
     for i in range(start, rows):
         sample.append(data[i][index])
         
-    #print(index)
+    #turning every element in sample to lower case
     for i in range(len(sample)):
         sample[i] = sample[i].lower()
     
-    
+    #checking if it matches with the sequence
     i = 0
     for i in range(len(sample)):
         if keyword in sample[i]:
@@ -509,9 +533,10 @@ def search_data(data, keyword, attribute, mode):
     
 
     
-    #print(sample)    
+    #mode 1: everything have to add 2 to make the row number exact to how it shows in clients list    
     if(mode == 1):
         sequence = [x + 2 for x in sequence]
+    #mode 2: add 1 to skip headers
     else:
          sequence = [x + 1 for x in sequence]
     #print(sequence)
@@ -636,7 +661,7 @@ def validation_totalquantity(data_carlist, car_data, mode = 1):
         
             
             
-        
+ #If total quantity is different than previous      
  #order == 1, larger than previours; order ==0, smaller than previous   
 def sub_total_quantity_menu1(temp, car_data, order):
     count = abs(temp - int(car_data[5]))
@@ -734,6 +759,7 @@ def sub_total_quantity_menu1(temp, car_data, order):
                     
     return car_data
                 
+#If total quantity is the same as previous
 def sub_total_quantity_menu2(temp, car_data):
     count = int(temp)
     while(1):
@@ -838,6 +864,7 @@ def validation_cartypes():
     temp = temp[0].upper() + temp[1:len(temp)]
     return temp          
 
+#Ensuring the temp return is capitalised in the first alphabet and small for the rest
 def validation_carnormal(target):
     
     temp = input("Please enter " + str(target) +": ")
