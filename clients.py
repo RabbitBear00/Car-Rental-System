@@ -126,10 +126,14 @@ def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, 
                 break
         
         if(choice == '1'):
+            default.print_title("Please remember the Car ID to book a car. ")
+            print("")
             default.print_table(data_carlist, 4, space_cars, login_index)
             view_allcars(user_data, data_carlist, space_cars)
         
         if(choice == '2'):
+            default.print_title("Please remember the Car ID to book a car. ")
+            print("")
             searchcar_menu(user_data, data_carlist, space_cars)
         
         if(choice == '3'):
@@ -599,7 +603,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                 
                 if(int(float(user_data[-2])) > 2000 and user_data[1] == "Normal"):
                     default.print_title("You have become our VIP member")
-                    print("Congratulations " + str(user_data[1] +",\nYou will get 10% discount for every payment"))
+                    print("Congratulations " + str(user_data[2] +",\nYou will get 10% discount for every payment"))
                     user_data[1] = "VIP"
                     print("")
                     

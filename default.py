@@ -1,31 +1,12 @@
-from array import array
 import csv
 import datetime
 import hashlib
-from io import IncrementalNewlineDecoder 
 import time 
 import sys
 import clients
 
-username_key = 0
-password_key = 0
-choice = 0
-
-#Initiate the titles in the csv files
-def init():
-    with open("./data/clients.csv", mode = 'w') as clients_file:
-        write = csv.writer(clients_file)
-        write.writerow(["User ID", "Status", "Name", "Password", "Date of Birth", "License", "Phone Number", "Email", "Card", "Penalty"])
         
-    with open("./data/cars_lists.csv", mode = 'w') as cars_file:
-        write = csv.writer(cars_file)
-        write.writerow(["Car ID", "Car Types", "Car Brand", "Car Model", "Model Year", "Price per Hour", "Fuel Type", "Status", "Passenger Capacity"])
-
-    with open("./data/transactions.csv", mode = 'w') as transactions_file:
-        write = csv.writer(transactions_file)
-        write.writerow(["Client_ID", "Name", "Car_ID", "Type", "Brand", "Model", "From_Date", "From_Time", "To_Date", "To_Time", "Total Hours"])
-        
-#Startup menu 
+#First menu -startup menu
 def startup_menu(main_title):
     print_title(main_title)
     menu = ["Registered", "Unregistered","Exit"]
@@ -35,7 +16,7 @@ def startup_menu(main_title):
     return choice
     
 
-#login menu for existing users
+#login menu for existing users, returning username and password for checking later
 def login_menu(main_title):
     lists = []
     print_title(main_title)
@@ -80,9 +61,11 @@ def input_datatransactions():
 #Check password if it is correct
 def check_password(data, username, password):
     rows = len(data)
+    #MD5 hash encoding
     hash_object = hashlib.md5(password.encode())
     md5_hash = hash_object.hexdigest()
     password = md5_hash
+    #loop to see if it matches username/id and password 
     for i in range(1, rows):
         if(username == data[i][0]):
             if(password == data[i][3]):
@@ -110,13 +93,13 @@ def check_usernameID(data, username):
     
     return 0 
 
-#print title for super car
+#print all major titles for super car rental system
 def print_title(title):
     print("================================================================")
     print(" " * int((64-len(title))/2) + title)
     print("================================================================")
 
-#input list, and then this function will generate a list accordingly with numbers 1-xxx,2-xxx,3-xxx
+#Widely use function, input list, and then this function will generate a list accordingly with numbers 1-xxx,2-xxx,3-xxx
 def general_menu(list):
     length = len(list)
     for i in range(length):
@@ -124,18 +107,7 @@ def general_menu(list):
         
     print("\n")
 
-#Create a clock that you can self defined time / according to the time now
-def current_time():
-    now = time.localtime()
-    clock_time = time.strftime("%H:%M:%S", now)
-    return clock_time
-        
-  
-def current_date():
-    now = time.localtime()
-    clock_date = time.strftime("%d-%m-%Y", now)
-    return clock_date
-
+#The login interface that checks and hints of a user login in
 def login_interface(main_title, data_clients, data_carlist, space_cars, space_clients):
     
     i = 0 
@@ -158,6 +130,7 @@ def login_interface(main_title, data_clients, data_carlist, space_cars, space_cl
         if(i > 4):
             break
         
+    #If tried for 5 times, this will appear and offer a route to escape the current page and return to startup_interface
     if(i > 4):
         menu = ["Continue","Return"]
             
@@ -167,6 +140,7 @@ def login_interface(main_title, data_clients, data_carlist, space_cars, space_cl
             if(choice == '1' or choice == '2'):
                 break
             
+        #If continue, recursion
         if(choice == '1'):
             password_key = login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return password_key
@@ -178,7 +152,7 @@ def login_interface(main_title, data_clients, data_carlist, space_cars, space_cl
     return password_key
                         
                     
-
+#Interface for the unregistered to register as clients
 def unregistered_interface(data_clients, data_carlist, space_cars,space_clients):
     title = "Guest, Welcome to Super Car Rental System"
     menu = ["Register", "View Available Cars", "Return"]
@@ -216,7 +190,7 @@ def register_interface(data_clients, space_clients):
         id = int(prev_id) + 1
         data.append(id)
         data.append("Normal")
-        print("Plase enter your name")
+        print("Plase enter your Username")
         name = validation_length(space_clients[2])
         print("")
         data.append(name)
@@ -285,7 +259,7 @@ def register_interface(data_clients, space_clients):
         
         if(choice == '1'):
             data_clients.append(data)
-            print(data)
+            #print(data)
             with open("./data/clients.csv", mode = 'w', newline = "") as clients_file:
                 write = csv.writer(clients_file)
                 write.writerows(data_clients)
