@@ -1,0 +1,840 @@
+import default
+import clients
+import datetime
+import csv
+import sys
+import time
+
+
+FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+    title = user_data[2] + ", welcome back"
+    menu = ["View All Clients", "View All Cars", "View All Transactions", "Car Return","Log Out"]
+
+    DOWHILE(1):
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
+                BREAK
+            ENDIF
+        
+        IF (choice == '1') THEN
+            client_interface(user_data, data_clients, login_index, space_clients)
+            
+            
+        ELSE IF (choice == '2') THEN
+            car_interface(user_data, data_carlist, login_index, space_cars)
+            
+        ELSE IF (choice == '3') THEN
+            transaction_interface(data_transactions, space_transactions)
+            
+        
+        ELSE IF (choice == '4') THEN
+            returncar_interface(data_transactions)
+            pass
+        
+        ELSE IF (choice == '5') THEN
+            title = user_data[2] + ", you have successfully log out."
+            default.print_title(title)
+            PRINT("")
+            RETURN 
+        ENDIF
+
+FUNCTION client_interface(user_data, data_clients, login_index, space_clients):
+    DOWHILE(1):    
+        menu = ["Sort", "Search", "Return"]
+        title = user_data[2] + ", what do you want to do?"
+    
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice == '2' or choice == '3') THEN
+                BREAK
+            ENDIF
+        
+        IF (choice == '1') THEN
+            default.print_table(data_clients, 1, space_clients, login_index)
+            sortclient_menu(user_data, data_clients, space_clients)
+        ENDIF
+            
+        IF (choice == '2') THEN
+            searchclient_menu(user_data, data_clients, space_clients)
+        ENDIF    
+
+        IF (choice == '3') THEN
+            RETURN
+        ENDIF
+
+FUNCTION sortclient_menu(user_data, data_clients, space_clients):
+    DOWHILE(1):
+        menu = ["User ID", "Status", "Name", "Email", "Points","Return"]
+        title = user_data[2] + ", you can sort the list here"
+
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6') THEN
+                BREAK
+            ENDIF
+
+        
+        IF (choice == '1') THEN
+            header = "User ID"
+            sequence = clients.sub_sort_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '2') THEN
+            header = "Status"
+            sequence = clients.sub_sort_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '3') THEN
+            header = "Name"
+            sequence = clients.sub_sort_menu(header, data_clients, 1)
+        ENDIF
+    
+        IF (choice == '4') THEN
+            header = "Email"
+            sequence = clients.sub_sort_menu(header, data_clients, 1)
+        ENDIF
+    
+        IF (choice == '5') THEN
+            header = "Points"
+            sequence = clients.sub_sort_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '6') THEN
+            RETURN
+        ENDIF
+    
+        
+        default.print_sorttable(data_clients, 1, sequence, space_clients)
+        PRINT("")
+        
+FUNCTION searchclient_menu(user_data, data_clients, space_clients):
+    DOWHILE(1):
+        menu = ["User ID", "Status", "Name", "License", "Phone Number", "Email", "Return"]
+        title = user_data[2] + ", you can search a client here"
+        sequence = []
+    
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
+                BREAK   
+            ENDIF
+        
+        IF (choice == '1') THEN
+            header = "User ID"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '2') THEN
+            header = "Status"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '3') THEN
+            header = "Name"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+    
+        IF (choice == '4') THEN
+            header = "License"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+    
+        IF (choice == '5') THEN
+            header = "Phone Number"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '6') THEN
+            header = "Email"
+            sequence = clients.sub_search_menu(header, data_clients, 1)
+        ENDIF
+        
+        IF (choice == '7') THEN
+            RETURN
+        ENDIF
+        
+        
+        default.print_sorttable(data_clients, 1, sequence, space_clients)
+        PRINT("")
+        
+FUNCTION edit_carprofile(user_data, data_clients, login_index, space_clients):
+    PRINT("\nWhat do you want to edit?")
+    menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Total Quantity", "Available", "Unavailable", "In Service", "Price per Hour", "Fuel Type", "Return"]
+    
+    DOWHILE(1):
+        default.general_menu(menu)
+        choice = input("Please Select: ")
+        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10' or choice == '11') THEN
+            BREAK
+        ENDIF
+    IF (choice == '11') THEN
+        RETURN
+    ENDIF
+    
+    
+    IF (choice == '1') THEN
+        temp = default.validation_length(space_clients[2])
+        user_data[2] = temp
+    
+    ELSE IF (choice == '2') THEN
+        temp = default.validation_date()
+        user_data[4] = temp
+       
+    ELSE IF (choice == '3') THEN
+        temp = default.validation_length(space_clients[5])
+        user_data[5] = temp    
+    
+    ELSE IF (choice == '4') THEN
+        temp = default.validation_number(space_clients[6])
+        user_data[6] = temp
+    
+    ELSE IF (choice == '5') THEN
+        temp = default.validation_email(space_clients[7])
+        user_data[7] = temp
+
+    ELSE IF (choice == '6') THEN
+        temp = default.validation_number(16)
+        user_data[8] = temp
+    
+    ELSE IF (choice == '7') THEN
+        temp = default.validation_email(space_clients[7])
+        user_data[7] = temp
+
+    ELSE IF (choice == '8') THEN
+        temp = default.validation_number(16)
+        user_data[8] = temp
+        
+    ELSE IF (choice == '9') THEN
+        temp = default.validation_email(space_clients[7])
+        user_data[7] = temp
+
+    ELSE IF (choice == '10') THEN
+        temp = default.validation_number(16)
+        user_data[8] = temp   
+    ENDIF
+        
+    data_clients[login_index] = user_data
+    
+
+    
+    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file:
+        write = csv.writer(clients_file)
+        write.writerows(data_clients)
+        
+    RETURN
+
+
+FUNCTION car_interface(user_data, data_carlist, login_index, space_cars):
+    DOWHILE(1):    
+        menu = ["Sort All Cars", "Search FOR a  Car", "Edit Car Details","Add a car", "Return"]
+        title = user_data[2] + ", what would you like to do"
+    
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
+                BREAK
+            ENDIF
+        
+        IF (choice == '1') THEN
+            default.print_table(data_carlist, 2, space_cars, login_index)
+            sort_cars(user_data, data_carlist, space_cars)
+        ENDIF
+        
+        IF (choice == '2') THEN
+            clients.searchcar_menu(user_data, data_carlist, space_cars)
+        ENDIF
+
+        IF (choice == '3') THEN
+            carprofile_menu(data_carlist, space_cars)
+            pass  
+        ENDIF
+
+        IF (choice == '4') THEN
+            addcar_menu(data_carlist, space_cars)
+            pass
+        ENDIF
+
+        IF (choice == '5') THEN
+            RETURN
+        ENDIF
+    
+FUNCTION sort_cars(user_data, data_carlist, space_cars):
+    DOWHILE(1):
+        menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
+        title = user_data[2] + ", you can sort the list here"
+    
+        DOWHILE(1):
+            default.print_title(title)
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8') THEN
+                BREAK
+            ENDIF
+    
+        
+        IF (choice == '1') THEN
+            header = "Car ID"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+
+        IF (choice == '2') THEN
+            header = "Car Types"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+        
+        IF (choice == '3') THEN
+            header = "Car Brand"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+    
+        IF (choice == '4') THEN
+            header = "Model Year"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+    
+        IF (choice == '5') THEN
+            header = "Price per Hour"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+        
+        IF (choice == '6') THEN
+            header = "Passenger Capacity"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+        
+        IF (choice == '7') THEN
+            header = "Weight Load"
+            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+        ENDIF
+        
+        IF (choice == '8') THEN
+            RETURN
+        ENDIF
+        
+        
+        default.print_sorttable(data_carlist, 2, sequence, space_cars)
+        PRINT("")    
+
+FUNCTION carprofile_menu(data_carlist, space_cars):
+    
+    
+    DOWHILE(1):
+        k = 0
+        DOWHILE(1):
+            index = 0
+            car_id = input("Please input the car ID: ")
+        
+            FOR i IN range(1, len(data_carlist)):
+                IF (car_id == data_carlist[i][0]) THEN
+                    index = i
+                    BREAK
+                ENDIF
+        
+            IF (index == i) THEN
+                BREAK
+            ENDIF
+            PRINT("Car ID doesn't exists!")
+            k = k + 1
+            IF (k > 4) THEN
+                menu = ["Continue","Return"]
+                DOWHILE(1):
+                    default.general_menu(menu)
+                    choice = input("Please Select: ")
+                    IF (choice == '1' or choice == '2') THEN
+                        BREAK
+                    ENDIF
+                    
+                IF (choice == '1') THEN
+                    carprofile_menu(data_carlist, space_cars)
+                ENDIF
+                    
+                                
+                IF (choice == '2') THEN
+                    RETURN
+                ENDIF
+            ENDIF
+            
+        
+        car_data = data_carlist[index]
+        FOR i IN range(0,13):
+            PRINT(data_carlist[0][i] + ": " + car_data[i])    
+            
+        menu = ["Edit", "Return"]
+    
+        DOWHILE(1): 
+            PRINT("\n")   
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice == '2') THEN
+                BREAK
+            ENDIF
+                
+            PRINT("Error!")
+    
+        IF (choice == '1') THEN
+            edit_carprofile(index, car_data, data_carlist, space_cars)
+            RETURN
+        
+        ELSE IF (choice == '2') THEN
+            RETURN
+        ENDIF
+              
+FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars):
+    PRINT("\nWhat do you want to edit?")
+    menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
+    
+    DOWHILE(1):
+        default.general_menu(menu)
+        choice = input("Please Select: ")
+        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10'or choice == '11' or choice == '12') THEN
+            BREAK
+        ENDIF
+    IF (choice == '10') THEN
+        RETURN
+    ENDIF
+    
+    IF (choice == '1') THEN
+        temp = default.validation_length(space_cars[1])
+        car_data[1] = temp
+    ENDIF
+    
+    IF (choice == '2') THEN
+        temp = default.validation_length(space_cars[2])
+        car_data[2] = temp
+    ENDIF
+       
+    IF (choice == '3') THEN
+        temp = default.validation_length(space_cars[3])
+        car_data[3] = temp 
+    ENDIF   
+    
+    IF (choice == '4') THEN
+        temp = default.validation_number(4)
+        car_data[4] = temp
+    ENDIF
+    
+    IF (choice == '5') THEN
+        car_data = default.validation_totalquantity(data_carlist, car_data)
+    ENDIF
+
+    IF (choice == '6') THEN
+        temp = default.validation_number(4)
+        car_data[9] = temp
+    ENDIF
+        
+    IF (choice == '7') THEN
+        temp = default.validation_length(space_cars[10])
+        car_data[10] = temp
+    ENDIF
+    
+    IF (choice == '8') THEN
+        temp = default.validation_number(3)
+        car_data[11] = temp
+    ENDIF
+        
+    IF (choice == '9') THEN
+        temp = default.validation_number(10)
+        car_data[12] = temp
+    ENDIF
+       
+
+    
+        
+    data_carlist[index] = car_data
+    PRINT(index)
+    PRINT(car_data)
+    
+
+    
+    WITH OPEN("./data/cars_lists.csv",  mode = 'w', newline = '') AS cars_file:
+        write = csv.writer(cars_file)
+        write.writerows(data_carlist)
+        
+    RETURN   
+
+FUNCTION addcar_menu(data_carlist, space_cars):
+    default.print_title("You can add a car here")
+    prev_id = data_carlist[-1][0]
+   
+    DOWHILE(1):
+        data = []
+        id = int(prev_id) + 1
+        APPEND data TO id
+        type = default.validation_cartypes()
+        PRINT("")
+        APPEND data TO type
+        brand = default.validation_carnormal("car brand")
+        PRINT("")
+        APPEND data TO brand
+        model = default.validation_carnormal("car model")
+        PRINT("")
+        APPEND data TO model
+        PRINT("Please enter model year: ")
+        year = default.validation_number(4)
+        PRINT("")
+        APPEND data TO year
+        FOR i IN range(4):
+            APPEND data TO 0
+        data = default.validation_totalquantity(data_carlist, data, 2)
+
+      
+        PRINT("")
+        PRINT("Please enter price per hour: ")
+        price = default.validation_number(4)
+        APPEND data TO price
+        PRINT("")
+        PRINT("Please enter fuel type: ")
+        fuel = default.validation_length(space_cars[10])
+        APPEND data TO fuel
+        PRINT("")
+        PRINT("Please enter passenger number: ")
+        passenger = default.validation_number(3)
+        APPEND data TO passenger
+        PRINT("")
+        PRINT("Please enter price weight load: ")
+        weight = default.validation_number(10)
+        APPEND data TO weight
+        PRINT("")
+        
+        default.print_title("Confirm Car Details")
+        k = 0
+        FOR i IN data:
+            PRINT(data_carlist[0][k] + ": " + str(i))
+            k += 1
+            
+        menu = ["Confirm", "Return"]
+        DOWHILE(1):
+            default.general_menu(menu)
+            choice = input("Please Select: ")
+            IF (choice == '1' or choice == '2') THEN
+                BREAK
+            ENDIF
+        
+        IF (choice == '1') THEN
+            APPEND data_carlist TO data
+            PRINT(data)
+            WITH OPEN("./data/cars_lists.csv", mode = 'w', newline = "") AS cars_file:
+                write = csv.writer(cars_file)
+                write.writerows(data_carlist)
+            
+            default.print_title("Car Information has successfuly recorded.")
+            FOR remaining IN range(5, -1, -1):
+                sys.stdout.write("\r")
+                sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
+                sys.stdout.flush()
+                time.sleep(1)
+            sys.stdout.write("\n")
+            RETURN
+        ENDIF
+        
+        IF (choice == '2') THEN
+            RETURN
+        ENDIF
+        
+
+FUNCTION filter_menu(data_transactions, space_transactions):
+    DOWHILE(1):
+        title = "You can filter transactions here"
+        menu = ["Client ID", "Name", "Date","Booking ID","Return"]
+        DOWHILE(1):
+            default.print_title(title)
+            DOWHILE(1):
+                default.general_menu(menu)
+                choice = input("Please select: ")
+                IF choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5':
+                    BREAK
+                ENDIF
+        
+        
+            IF (choice == '1') THEN
+                DOWHILE(1):
+                    temp = input("Enter the Client ID: ")
+                    i = 0 
+                    key = 0
+                    FOR i IN range(len(data_transactions)):
+                        IF (temp == data_transactions[i][0]) THEN
+                            key = 1
+                            BREAK
+                        ENDIF
+                    BREAK
+            
+                IF (key == 1) THEN
+                    default.print_table(data_transactions, 7, space_transactions, temp)
+                ELSE
+                    PRINT("Either client doesn't exists/Client has no transaction records before.")
+                    RETURN
+                ENDIF
+            ENDIF
+        
+            IF (choice == '2') THEN
+                DOWHILE(1):
+                    temp = input("Enter the Client username: ")
+                    i = 0 
+                    key = 0
+                    FOR i IN range(len(data_transactions)):
+                        IF (temp == data_transactions[i][1]) THEN
+                            key = 1
+                            BREAK
+                        ENDIF
+                    BREAK
+            
+                IF (key == 1) THEN
+                    default.print_table(data_transactions, 8, space_transactions, temp)
+                ELSE
+                    PRINT("Either client doesn't exists/Client has no transaction records before.")
+                ENDIF
+        
+            IF (choice == '3') THEN
+                sequence = sub_filter_date(data_transactions)
+                IF (sequence == 3) THEN
+                    PRINT("There's no transactions between these dates. ")
+                    PRINT("")
+
+                ELSE IF (sequence == 0) THEN
+                    PRINT("")
+                    RETURN
+                ELSE
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)
+                ENDIF
+            ENDIF
+            IF (choice == '4') THEN
+                DOWHILE(1):
+                    temp = input("Enter the Booking ID: ")
+                    i = 0 
+                    key = 0
+                    FOR i IN range(len(data_transactions)):
+                        IF (temp == data_transactions[i][-4]) THEN
+                            key = 1
+                            index = i
+                            BREAK
+                        ENDIF
+                    BREAK
+                IF (key == 0) THEN
+                    PRINT("Booking ID does not exist.")
+                ELSE
+                    sequence = []
+                    APPEND sequence TO index
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)   
+                ENDIF
+            ENDIF                 
+        
+            IF (choice == '5') THEN
+                RETURN
+            ENDIF
+
+            RETURN
+        
+
+FUNCTION sub_filter_date(data_transactions):
+    sequence = []
+    DOWHILE(1):
+        from_date = clients.select_date("From: ", "admin001")
+        PRINT("")
+        IF (from_date == 1) THEN
+            CONTINUE
+        ELSE IF (from_date == 2) THEN
+            RETURN 0
+        ELSE
+            BREAK
+        ENDIF
+ 
+    DOWHILE(1):
+        to_date = clients.select_date("To: ", "admin001")
+        PRINT("")
+        IF (to_date == 1) THEN
+            continue
+        ELSE IF (to_date == 2) THEN
+            RETURN 0
+        ELSE
+            BREAK   
+        ENDIF
+        
+
+
+    from_date = datetime.datetime.strptime(from_date, "%d-%m-%Y")
+    to_date = datetime.datetime.strptime(to_date, "%d-%m-%Y")
+
+    
+
+    IF from_date < to_date:
+        FOR index IN range(1, len(data_transactions)):
+            temp_from = data_transactions[index][7]
+            temp_from = datetime.datetime.strptime(temp_from, "%d-%m-%Y")
+            
+            temp_to = data_transactions[index][9]
+            temp_to = datetime.datetime.strptime(temp_to, "%d-%m-%Y")
+            IF (from_date <= temp_from and to_date >= temp_to) THEN
+                APPEND sequence TO index
+            ENDIF
+                
+
+        
+        RETURN sequence
+                
+        
+    ELSE
+        PRINT("You can only book a date FOR a period IN the future.")
+    ENDIF
+    RETURN 3
+
+            
+
+
+FUNCTION transaction_interface(data_transactions, space_transactions):
+    default.print_table(data_transactions, 3, space_transactions)
+    DOWHILE(1):
+        DOWHILE(1):
+            menu = ["Filter", "Return"]
+            default.general_menu(menu)
+            choice = input("Please select: ")
+            IF choice == '1' or choice == '2':
+                BREAK
+            ENDIF
+        IF (choice == '1') THEN
+            filter_menu(data_transactions, space_transactions)
+        ENDIF
+        
+        IF (choice == '2') THEN
+            RETURN
+        ENDIF
+            
+FUNCTION returncar_interface(data_transactions):
+    DOWHILE(1):
+        DOWHILE(1):
+            key = 0
+            default.print_title("Return a car here")
+            booking_id = input("Please enter booking id: ")
+            FOR i IN range(len(data_transactions)):
+                IF (booking_id == data_transactions[i][-4]) THEN
+                    key = 1
+                ENDIF
+                
+                IF (booking_id == data_transactions[i][-4] and data_transactions[i][-3] == "Rented") THEN
+                    key = 2
+                    index = i
+                    BREAK
+                ENDIF
+                
+            IF (key == 2) THEN
+                BREAK
+            ELSE IF (key == 1) THEN
+                PRINT("This car has already been returned. ")
+                PRINT("")
+                RETURN
+            ELSE
+                PRINT("Booking ID doesn't exists. ")
+                PRINT("")
+                RETURN
+            ENDIF
+        
+        data = data_transactions[index]
+        DOWHILE(1):
+            return_date = clients.select_date("Return Date: ", data[1])
+            PRINT("")
+            IF (return_date == 1) THEN
+                continue
+            ELSE IF (return_date == 2) THEN
+                RETURN 0
+            ELSE
+                BREAK
+            ENDIF
+
+        DOWHILE(1):
+            return_time = clients.select_time("Return Time: ")
+            PRINT("")
+            IF (return_time == 1) THEN
+                continue
+            ELSE IF (return_time == 2) THEN
+                RETURN 0
+            ELSE
+                BREAK
+            ENDIF
+
+
+        to_date = data[9]
+        to_time = data[10]
+        return_datetime = datetime.datetime.strptime(return_date + " " + return_time, "%d-%m-%Y %H:%M")
+
+        to_datetime = datetime.datetime.strptime(to_date + " " +to_time, "%d-%m-%Y %H:%M:%S")
+        
+
+        IF (return_datetime <= to_datetime) THEN
+            PRINT(data[1] + ", you have successfully RETURN the car")
+            data[-3] = "Returned"
+            data[-2] = 0
+            data[-1] = '-'
+        ENDIF
+
+        IF (return_datetime > to_datetime) THEN
+            total_hours = return_datetime - to_datetime
+            total_hours = round(total_hours.total_seconds() / 3600, 2)
+            total_price = round(total_hours * int(data[6]) * 1.5, 2)
+            data[-2] = total_price
+            
+            PRINT("")
+            PRINT("You have returned your car late. \nPenalty = delayed hours * price per hour * 1.5 ")
+            default.print_title("Penalty Payment Details")
+            FOR i IN range(7):
+                PRINT(data_transactions[0][i] + ": " + data[i])
+                
+            PRINT("Booking ID: " + data[-4])
+            PRINT("Delayed hours: " + str(total_hours))
+            PRINT("Penalty: " + str(data[-2]))
+            
+            DOWHILE(1):
+                menu = ["Confirm","Return"]
+                default.general_menu(menu)
+                choice = input("Please select: ")
+                IF (choice == '1' or choice == '2') THEN
+                    BREAK
+                ENDIF
+            
+            
+            
+            IF (choice == '1') THEN
+                PRINT("Payment is successful!")
+                FOR remaining IN range(5, -1, -1):
+                    sys.stdout.write("\r")
+                    sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
+                    sys.stdout.flush()
+                    time.sleep(1)
+                sys.stdout.write("\n")
+            ENDIF
+                
+            IF (choice == '2') THEN
+                RETURN
+            ENDIF
+        ENDIF    
+        data[-3] = "Returned"
+        data[-1] = str(return_datetime)
+        data_transactions[index] = data
+        WITH OPEN("./data/transactions.csv", mode = "w", newline = "") AS transactions_file:
+            write = csv.writer(transactions_file)
+            write.writerows(data_transactions)
+                
+            RETURN
+            
+                
+            
+            
+            
+                
+            
+        
+        
+            
+        
+        
+
+    
