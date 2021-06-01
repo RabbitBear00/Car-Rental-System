@@ -3,7 +3,7 @@ import default
 import clients 
 import datetime 
 
-main
+main()
     data_clients = []
 
     data_carlist = []
@@ -22,14 +22,14 @@ main
     data_carlist = default.input_datacars()
     data_transactions = default.input_datatransactions()
     
-    DOWHILE(1):
+    DOWHILE(1)
         login_index = default.startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
         user_data = data_clients[login_index]
         
         IF(login_index == 1) THEN
             admin.admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
 
-        ELSE:
+        ELSE
             clients.client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
 
         ENDIF
@@ -38,5 +38,5 @@ main
 END
 
 BEGIN
-    main
+    main()
 END
