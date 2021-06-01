@@ -139,11 +139,11 @@ login_interface(main_title, data_clients, data_carlist, space_cars, space_client
         username_key = check_usernameID(data_clients, login_details[0])
         password_key = check_password(data_clients, login_details[0], login_details[1])
     
-        IF(username_key == 1 and password_key >= 1)THEN
+        IF(username_key == 1 AND password_key >= 1)THEN
             PRINT("You have successfully login!")
             BREAK
     
-        ELSE IF(username_key == 1 and password_key == 0)
+        ELSE IF(username_key == 1 AND password_key == 0)
             PRINT("Wrong password. Failed to login.")
 
         ELSE
@@ -162,7 +162,7 @@ login_interface(main_title, data_clients, data_carlist, space_cars, space_client
         DOWHILE(True)
             general_menu(menu)
             choice = input("Please Select: ")
-            IF(choice == '1' or choice == '2')THEN
+            IF(choice == '1' OR choice == '2')THEN
                 BREAK
             ENDIF
         ENDDO
@@ -191,7 +191,7 @@ unregistered_interface(data_clients, data_carlist, space_cars,space_clients)
         PRINT_title(title)
         general_menu(menu)
         choice = input("Please Select: ")
-        IF(choice == '1' or choice == '2' or choice == '3')THEN
+        IF(choice == '1' OR choice == '2' OR choice == '3')THEN
             BREAK
         ENDIF
     ENDDO
@@ -297,7 +297,7 @@ register_interface(data_clients, space_clients)
         DOWHILE(True)
             general_menu(menu)
             choice = input("Please Select: ")
-            IF(choice == '1' or choice == '2')THEN
+            IF(choice == '1' OR choice == '2')THEN
                 BREAK
             ENDIF
         ENDDO
@@ -337,7 +337,7 @@ startup_interface(main_title, data_clients, data_carlist, space_cars, space_clie
     DOWHILE(True)
         DOWHILE(True)
             choice = startup_menu(main_title)
-            IF(choice == '1' or choice == '2' or choice == '3' or choice == '4')THEN
+            IF(choice == '1' OR choice == '2' OR choice == '3' OR choice == '4')THEN
                 BREAK  
             ENDIF         
         ENDDO
@@ -378,7 +378,7 @@ PRINT_table(data, mode, space, login_name = "")
         columns = 13
         blanks = 183
         
-    ELSE IF(mode == 3 or mode == 5)
+    ELSE IF(mode == 3 OR mode == 5)
         #mode 3: admin view transactions table(all columns can be viewed)
         #mode 5: client view transactions table(view their own transactions only)
         columns = 19
@@ -394,7 +394,7 @@ PRINT_table(data, mode, space, login_name = "")
         columns = 4
         blanks = 61
     
-    ELSE IF(mode == 7 or mode == 8)
+    ELSE IF(mode == 7 OR mode == 8)
         #mode 7: admin wanted to filter transactions details using specific client ID 
         #mode 8: admin wanted to filter transactions details using specific client name 
         columns = 19
@@ -406,17 +406,17 @@ PRINT_table(data, mode, space, login_name = "")
     k = 0 
     FOR i IN data[0]:
         #skip four columns of quantity
-        IF(mode == 4 and (i == "Total Quantity" or i == "Available" or i == "Unavailable" or i == "In Service" ))THEN
+        IF(mode == 4 AND (i == "Total Quantity" OR i == "Available" OR i == "Unavailable" OR i == "In Service" ))THEN
             k = k + 1
             CONTINUE
         ENDIF
         #skip the fourth column till the last column
-        IF(mode == 6 and (k >= 4 and k <= 12))THEN
+        IF(mode == 6 AND (k >= 4 AND k <= 12))THEN
             k = k + 1
             CONTINUE
         ENDIF
         #skip password column
-        IF(mode == 1 and k == 3)THEN
+        IF(mode == 1 AND k == 3)THEN
             k = k + 1
             CONTINUE
         ENDIF
@@ -435,27 +435,27 @@ PRINT_table(data, mode, space, login_name = "")
             
         #Skipping columns
             #skip four columns of quantity
-            IF(mode == 4 and (k == 5 or k == 6 or k ==7 or k == 8))THEN
+            IF(mode == 4 AND (k == 5 OR k == 6 OR k ==7 OR k == 8))THEN
                 CONTINUE
             ENDIF
             
             #skip transactions for others
-            IF(mode == 5 and data[i][0] != login_name)THEN
+            IF(mode == 5 AND data[i][0] != login_name)THEN
                 CONTINUE
             ENDIF
             
             #skip transactions for other client ID
-            IF(mode == 7 and data[i][0] != login_name)THEN
+            IF(mode == 7 AND data[i][0] != login_name)THEN
                 CONTINUE
             ENDIF
             
             #skip transaction for other client names
-            IF(mode == 8 and data[i][1] != login_name)THEN
+            IF(mode == 8 AND data[i][1] != login_name)THEN
                 CONTINUE
             ENDIF
             
             #skip password column for admin
-            IF(mode == 1 and k == 3)THEN
+            IF(mode == 1 AND k == 3)THEN
                 CONTINU
             ENDIF
 
@@ -465,7 +465,7 @@ PRINT_table(data, mode, space, login_name = "")
         ENDLOOP
         
         #skipping rows
-        IF((mode == 5 and data[i][0] != login_name) or (mode == 7 and data[i][0] != login_name) or (mode == 8 and data[i][1] != login_name))THEN
+        IF((mode == 5 AND data[i][0] != login_name) OR (mode == 7 AND data[i][0] != login_name) OR (mode == 8 AND data[i][1] != login_name))THEN
             PASS
         ELSE
             PRINT("")
@@ -505,11 +505,11 @@ PRINT_sorttable(data, mode, sequence, space)
     FOR i IN sequence:
         LOOP k FROM 0 TO <columns STEP +1 
             #skipping columns
-            IF(mode == 4 and (k == 5 or k == 6 or k ==7 or k == 8 ))THEN
+            IF(mode == 4 AND (k == 5 OR k == 6 OR k ==7 OR k == 8 ))THEN
                 CONTINUE
             ENDIF
 
-            IF(mode == 1 and k == 3)THEN
+            IF(mode == 1 AND k == 3)THEN
                 CONTINUE
             ENDIF
             
@@ -560,7 +560,7 @@ sort_data(data, target, order, mode)
     sequence = [*range(start, LEN_sample+count, 1)]
     
     #if the values in the column, turns out to be numbers, it must be converted to integers to compare the sizes
-    IF(mode == 2 and ((index >=5 and index <=9) or index == 12 or index == 13))THEN
+    IF(mode == 2 AND ((index >=5 AND index <=9) OR index == 12 OR index == 13))THEN
         LOOP i FROM start TO <len_sample STEP +1
             sample[i] = int(sample[i])
             NEXT i
@@ -672,7 +672,7 @@ validation_number(length)
     DOWHILE(True)
         temp = input(" ")
         
-        IF temp.isdecimal() == True and LEN(temp) <= Length THEN
+        IF temp.isdecimal() == True AND LEN(temp) <= Length THEN
             RETURN temp
         ELSE
             PRINT("You can only enter " + str(length) +" digit of numbers" )
@@ -686,7 +686,7 @@ validation_email(length)
     DOWHILE(True)
         temp = input(" ")
         
-        IF "@"INtemp and ".com"INtemp THEN
+        IF "@"INtemp AND ".com"INtemp THEN
             BREAK
         ELSE
             PRINT("Email format not correct" )
@@ -778,7 +778,7 @@ validation_totalquantity(data_carlist, car_data, mode = 1)
             DOWHILE(True)
                 general_menu(menu)
                 choice = input("Please Select: ")
-                IF(choice == '1' or choice == '2')
+                IF(choice == '1' OR choice == '2')
                     BREAK
             ENDDO
             
@@ -823,7 +823,7 @@ sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE
             
-        IF(LEN(str(num1)) <= 4 and num1 >=0 and num1 <= count) THEN
+        IF(LEN(str(num1)) <= 4 AND num1 >=0 AND num1 <= count) THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -840,7 +840,7 @@ sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE
         
-        IF(LEN(str(num2)) <= 4 and num2 >=0 and num2 <= count) THEN
+        IF(LEN(str(num2)) <= 4 AND num2 >=0 AND num2 <= count) THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -865,7 +865,7 @@ sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE
         
-        IF(LEN(str(num3)) <= 4 and num3 >=0 and num3 <= count) THEN
+        IF(LEN(str(num3)) <= 4 AND num3 >=0 AND num3 <= count) THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -893,7 +893,7 @@ sub_total_quantity_menu1(temp, car_data, order)
         menu = ["Confirm", "Return"]
         general_menu(menu)
         choice = input("Please select: ")
-        IF(choice == '1' or choice == '2') THEN
+        IF(choice == '1' OR choice == '2') THEN
             BREAK
         ENDIF
     ENDDO
@@ -923,7 +923,7 @@ sub_total_quantity_menu2(temp, car_data)
             PRINT("")
             CONTINUE
             
-        IF(LEN(str(num1)) <= 4 and num1 >=0 and num1 <= count) THEN
+        IF(LEN(str(num1)) <= 4 AND num1 >=0 AND num1 <= count) THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -939,7 +939,7 @@ sub_total_quantity_menu2(temp, car_data)
             PRINT("")
             CONTINUE
         
-        IF(LEN(str(num2)) <= 4 and num2 >=0 and num2 <= count)THEN
+        IF(LEN(str(num2)) <= 4 AND num2 >=0 AND num2 <= count)THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -964,7 +964,7 @@ sub_total_quantity_menu2(temp, car_data)
             PRINT("")
             CONTINUE
         
-        IF(LEN(str(num3)) <= 4 and num3 >=0 and num3 <= count)THEN
+        IF(LEN(str(num3)) <= 4 AND num3 >=0 AND num3 <= count)THEN
             PASS
         ELSE
             PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
@@ -993,7 +993,7 @@ sub_total_quantity_menu2(temp, car_data)
         menu = ["Confirm", "Return"]
         general_menu(menu)
         choice = input("Please select: ")
-        IF(choice == '1' or choice == '2')THEN
+        IF(choice == '1' OR choice == '2')THEN
             BREAK
         ENDIF
     ENDDO
@@ -1015,7 +1015,7 @@ validation_cartypes()
         PRINT("")
         temp = input("Please enter car type: ")
         temp.lower()
-        IF temp == 'city' or temp == 'electric' or temp == 'prestige' or temp == 'van' or temp == 'truck' THEN:
+        IF temp == 'city' OR temp == 'electric' OR temp == 'prestige' OR temp == 'van' OR temp == 'truck' THEN:
             BREAK
         ENDIF    
     ENDDO        
