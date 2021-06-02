@@ -416,7 +416,6 @@ def select_time(title):
             
     return temp
     
-    return temp
     #print(from_time)
 
 #book a car: will check car availability once key in booking date, will check if car id exist       
