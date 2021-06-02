@@ -6,20 +6,21 @@ import sys
 import hashlib
 
 
-FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
+FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
     
 
     title = user_data[2] + ", welcome back"
     menu = ["Profile Settings", "Rent a car", "View Personal Rental History", "Update Password","Exit"]
 
-    DOWHILE(1):
-        DOWHILE(1):
+    DOWHILE(1)
+        DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
             choice = input("Please Select: ")
             IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
                 BREAK
             ENDIF
+        ENDDO
 
         
         IF (choice == '1') THEN
@@ -40,12 +41,14 @@ FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, l
             PRINT("")
             RETURN 
         ENDIF
+    ENDDO
+ENDFUNCTION
 
 
-FUNCTION profile_menu(user_data, data_clients, login_index, space_clients):
+FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
     DOWHILE(1):    
         PRINT("\n")
-        FOR i IN range(11):
+        LOOP i FROM 0 TO <range(11) STEP +1
             IF (i ==3) THEN
                 CONTINUE
             ENDIF
@@ -60,6 +63,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients):
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
+        ENDDO
                 
             PRINT("Error!")
     
@@ -69,18 +73,21 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients):
         ELSE IF (choice == '2') THEN
             RETURN
         ENDIF
+    ENDDO
+ENDFUNCTION
 
 
-FUNCTION edit_profile(user_data, data_clients, login_index, space_clients):
+FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
     PRINT("\nWhat do you want to edit?")
     menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
     
-    DOWHILE(1):
+    DOWHILE(1)
         default.general_menu(menu)
         choice = input("Please Select: ")
         IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
             BREAK
         ENDIF
+    ENDDO
         
     IF (choice == '7') THEN
         RETURN
@@ -118,25 +125,26 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients):
     
 
     
-    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file:
+    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file
         write = csv.writer(clients_file)
         write.writerows(data_clients)
         
     RETURN
+ENDFUNCTION
        
-FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars):
+FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
     DOWHILE(1):    
-        menu = ["View All Available Cars", "Search FOR a  Car", "Book a Car","Return"]
+        menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
         title = user_data[2] + ", do you want to rent a car?"
     
-        DOWHILE(1):
+        DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
             choice = input("Please Select: ")
             IF (choice == '1' or choice == '2' or choice == '3' or choice == '4') THEN
                 BREAK
             ENDIF
-
+        ENDDO
         
         IF (choice == '1') THEN
             default.print_title("Please remember the Car ID to book a car. ")
@@ -158,18 +166,21 @@ FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transacti
         IF (choice == '4') THEN
             RETURN
         ENDIF
+    ENDDO
+ENDFUNCTION
 
 
 
-FUNCTION view_allcars(user_data, data_carlist, space_cars):
-    DOWHILE(1):
+FUNCTION view_allcars(user_data, data_carlist, space_cars)
+    DOWHILE(1)
         menu = ["Sort the List", "Return"]
-        DOWHILE(1):
+        DOWHILE(1)
             default.general_menu(menu)
             choice = input("Please Select: ")
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
+        ENDDO
 
     
         IF (choice == '1') THEN
@@ -178,20 +189,23 @@ FUNCTION view_allcars(user_data, data_carlist, space_cars):
         ELSE IF (choice == '2') THEN
             RETURN
         ENDIF
+    ENDDO
+ENDFUNCTION
 
 
-FUNCTION sortcar_menu(user_data, data_carlist, space_cars):
-    DOWHILE(1):
+FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
+    DOWHILE(1)
         menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can sort the list here"
     
-        DOWHILE(1):
+        DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
             choice = input("Please Select: ")
             IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8') THEN
                 BREAK
             ENDIF
+        ENDDO
     
         IF (choice == '8') THEN
             RETURN
@@ -236,20 +250,21 @@ FUNCTION sortcar_menu(user_data, data_carlist, space_cars):
         
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
-        
-            
+    ENDDO
+ENDFUNCTION
         
 
-FUNCTION sub_sort_menu(header, data, mode):
+FUNCTION sub_sort_menu(header, data, mode)
     sub_menu = ["Ascending", "Descending"]
     title = "You have chosen " + header + ": "
-    DOWHILE(1):
+    DOWHILE(1)
         default.print_title(title)
         default.general_menu(sub_menu)
         choice = input("Please Select: ")
         IF (choice == '1' or choice == '2') THEN
             BREAK
         ENDIF
+    ENDDO
 
         
     IF (choice == '1') THEN
@@ -260,20 +275,22 @@ FUNCTION sub_sort_menu(header, data, mode):
     ENDIF
         
     RETURN sequence
+ENDFUNCTION
            
-FUNCTION searchcar_menu(user_data, data_carlist, space_cars):
-    DOWHILE(1):
+FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
+    DOWHILE(1)
         menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can search a car here"
         sequence = []
     
-        DOWHILE(1):
+        DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
             choice = input("Please Select: ")
             IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
                 BREAK   
             ENDIF
+        ENDDO
         
         IF (choice == '1') THEN
             header = "Car ID"
@@ -312,9 +329,11 @@ FUNCTION searchcar_menu(user_data, data_carlist, space_cars):
         
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
+    ENDDO
+ENDFUNCTION
     
 
-FUNCTION sub_search_menu(header, data, mode):
+FUNCTION sub_search_menu(header, data, mode)
     title = "You have chosen " + header + ": "     
     
     default.print_title(title)
@@ -323,33 +342,37 @@ FUNCTION sub_search_menu(header, data, mode):
     sequence = default.search_data(data, keyword, header, mode)
     
     RETURN sequence
+ENDFUNCTION
 
 
-FUNCTION view_indhistory(user_data,data_transactions,space_transactions):
+FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
     title = user_data[2] + ", view your rental history here"
     default.print_table(data_transactions, 5, space_transactions, user_data[0])
     PRINT("")
     menu = ["Return"]
-    DOWHILE(1):
+    DOWHILE(1)
         default.general_menu(menu)
         choice = input("Please Select: ")
         IF (choice == '1') THEN
             BREAK
         ENDIF
+    ENDDO
     
     IF (choice == '1') THEN
         RETURN
     ENDIF
+ENDFUNCTION
     
-FUNCTION update_password(user_data, data_clients, login_index, space_clients):
+FUNCTION update_password(user_data, data_clients, login_index, space_clients)
     title = user_data[2] + ", change your password here."
     menu = ["Change My Password", "Return"]
-    DOWHILE(1):
+    DOWHILE(1)
         default.general_menu(menu)
         choice = input("Please Select: ")
         IF (choice == '1' or choice == '2') THEN
             BREAK
         ENDIF
+    ENDDO
     
     IF (choice == '2') THEN
         RETURN
@@ -357,7 +380,7 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients):
     
     i = 0
 
-    DOWHILE(i < 3):
+    DOWHILE(i < 3)
         old_password = input("Please enter your old password: ")
 
         hash_object = hashlib.md5(old_password.encode())
@@ -371,7 +394,8 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients):
             PRINT(str(3-i-1) + " attempts are left.")
         i = i + 1
         PRINT("")
-            
+    ENDDO
+
     IF (i == 3) THEN
         RETURN
     ENDIF
@@ -384,23 +408,25 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients):
     user_data[3] = new_password
     data_clients[login_index] = user_data
     
-    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file:
+    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file
         write = csv.writer(clients_file)
         write.writerows(data_clients)
+ENDFUNCTION
 
        
-FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transactions):
-    DOWHILE(1):
+FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
+    DOWHILE(1)
         title = user_data[2] + ", you can book a car here"
         menu = ["Book with Car ID", "Return"]
-        DOWHILE(1):
+        DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
             choice = input("Please select: ")
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
-    
+        ENDDO
+
         IF (choice == '1') THEN
             bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
         ENDIF
@@ -408,29 +434,32 @@ FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transacti
         IF (choice == '2') THEN
             RETURN
         ENDIF
+    ENDDO
+ENDFUNCTION
 
 
-FUNCTION select_date(header, user_data):
+FUNCTION select_date(header, user_data)
     title = user_data[2] + ", select your time here"
     i = 0
-    DOWHILE(1):
+    DOWHILE(1)
         PRINT(header)
         PRINT("Please enter date IN DD-MM-YYYY")
         temp = input("Date: ")
-        try:
+        try
             datetime.datetime.strptime(temp, "%d-%m-%Y")
             BREAK
-        except ValueError:
+        except ValueError
              PRINT("Error! Incorrect date format.")
              i = i + 1
         IF (i > 4) THEN
             menu = ["Continue", "Return"]
-            DOWHILE(1):
+            DOWHILE(1)
                 default.general_menu(menu)
                 choice = input("Please Select: ")
                 IF (choice == '1' or choice == '2') THEN
                     BREAK
                 ENDIF
+            ENDDO
             IF (choice == '1') THEN
                 RETURN 1
             ENDIF
@@ -438,32 +467,33 @@ FUNCTION select_date(header, user_data):
                 RETURN 2
             ENDIF
         ENDIF
-                   
-            
+    ENDDO
 
     RETURN temp
+ENDFUNCTION
         
-FUNCTION select_time(title):
+FUNCTION select_time(title)
     i = 0
-    DOWHILE(1):
+    DOWHILE(1)
         PRINT(title)
         PRINT("Please enter time IN HH:MM")
         temp = input("Time: ")
-        try:
+        try
             datetime.datetime.strptime(temp, "%H:%M")
             BREAK
-        except ValueError:
+        except ValueError
              PRINT("Error!")
              i = i + 1
                
         IF (i > 4) THEN
             menu = ["Continue", "Return"]
-            DOWHILE(1):
+            DOWHILE(1)
                 default.general_menu(menu)
                 choice = input("Please Select: ")
                 IF (choice == '1' or choice == '2') THEN
                     BREAK
                 ENDIF
+            ENDDO
             IF (choice == '1') THEN
                 RETURN 1
             ENDIF
@@ -471,24 +501,25 @@ FUNCTION select_time(title):
                 RETURN 2
             ENDIF
         ENDIF
+    ENDDO
             
     RETURN temp
     
-    RETURN temp
+ENDFUNCTION
 
 
 
-FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
+FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     data = []
     time = []
     index = -2
     sum = 0
     k = 0
-    DOWHILE(1):
+    DOWHILE(1)
         car_id = input("Please input the car ID: ")
         
 
-        FOR i IN range(len(data_carlist)):
+        LOOP i FROM 0 TO <range(len(data_carlist)) STEP +1
             IF (car_id == data_carlist[i][0]) THEN
                 index = i
                 BREAK
@@ -502,12 +533,13 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
 
         IF (k > 4) THEN
             menu = ["Continue","Return"]
-            DOWHILE(1):
+            DOWHILE(1)
                 default.general_menu(menu)
                 choice = input("Please Select: ")
                 IF (choice == '1' or choice == '2') THEN
                     BREAK
                 ENDIF
+            ENDDO
             
             IF (choice == '1') THEN
                 bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
@@ -518,16 +550,17 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             ENDIF
         
         ENDIF
+    ENDDO
             
         
     APPEND data TO user_data[0]
     APPEND data TO user_data[2]
-    FOR i IN range(4):
+    LOOP i FROM 0 TO <range(4) STEP +1
         APPEND data TO data_carlist[index][i]
     APPEND data TO data_carlist[index][9]
     
     DOWHILE(1):   
-        DOWHILE(1):
+        DOWHILE(1)
             from_date = select_date("From: ", user_data)
             PRINT("")
             IF (from_date == 1) THEN
@@ -537,10 +570,11 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             ELSE
                 BREAK
             ENDIF
+        ENDDO
     
 
     
-        DOWHILE(1):
+        DOWHILE(1)
             from_time = select_time("From: ")
             PRINT("")
             IF (from_time == 1) THEN
@@ -550,9 +584,10 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             ELSE
                 BREAK
             ENDIF
+        ENDDO
 
     
-        DOWHILE(1):
+        DOWHILE(1)
             to_date = select_date("To: ", user_data)
             PRINT("")
             IF (to_date == 1) THEN
@@ -562,10 +597,11 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             ELSE
                 BREAK
             ENDIF
+        ENDDO
     
 
     
-        DOWHILE(1):
+        DOWHILE(1)
             to_time = select_time("To: ")
             PRINT("")
             IF (to_time == 1) THEN
@@ -575,6 +611,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             ELSE
                 BREAK
             ENDIF
+        ENDDO
     
 
         from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M")
@@ -618,26 +655,27 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
 
             IF (int(user_data[-1]) > 100) THEN
                 
-                DOWHILE(1):
+                DOWHILE(1)
                     PRINT("Points currently: " + str(user_data[-1]))
                     PRINT("100 points = RM5 voucher")
                     PRINT("The rebate will automatically be deducted IN your transactions")
                     PRINT("If you cancel the current payment, no points will be deducted")
                     PRINT("")
-                    try:
+                    try
                         count = int(input("How many RM5 vouchers do you want to exchange? "))
-                    except ValueError:
+                    except ValueError
                         PRINT("Error input")
                         CONTINUE
                     IF ((int(user_data[-1])/100) >= count) THEN
                         PRINT("Eligible. Do you want to exchange " + str(count) + " RM5 voucher ?")
-                        DOWHILE(1):
+                        DOWHILE(1)
                             menu = ["Confirm", "Return"]
                             default.general_menu(menu)
                             choice = input("Please select: ")
                             IF (choice == '1' or choice == '2') THEN
                                 BREAK
                             ENDIF
+                        ENDDO
                         IF (choice == '1') THEN
                             PRINT("You have successfully exchange " + str(count) + " RM5 vouchers")
                             voucher = count
@@ -654,6 +692,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                     ELSE
                         CONTINUE
                     ENDIF
+                ENDDO
             ENDIF
 
 
@@ -676,7 +715,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             IF (choice == 1) THEN
                 
                 APPEND data_transactions TO data
-                WITH OPEN("./data/transactions.csv", mode = "w", newline = "") AS transactions_file:
+                WITH OPEN("./data/transactions.csv", mode = "w", newline = "") AS transactions_file
                     write = csv.writer(transactions_file)
                     write.writerows(data_transactions)
 
@@ -686,18 +725,18 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                 
                 IF (int(float(user_data[-2])) > 2000 and user_data[1] == "Normal") THEN
                     default.print_title("You have become our VIP member")
-                    PRINT("Congratulations " + str(user_data[2] +",\nYou will get 10% discount FOR every payment"))
+                    PRINT("Congratulations " + str(user_data[2] +",\nYou will get 10% discount for every payment"))
                     user_data[1] = "VIP"
                     PRINT("")
                 ENDIF
                     
-                FOR i IN range(len(data_clients)):
+                LOOP i FROM 0 TO <range(len(data_clients)) STEP +1
                     IF (user_data[0] == data_clients[i][0]) THEN
                         data_clients[i] = user_data
                         BREAK
                     ENDIF
                     
-                WITH OPEN("./data/clients.csv", mode = "w", newline = "") AS clients_file:
+                WITH OPEN("./data/clients.csv", mode = "w", newline = "") AS clients_file
                     write = csv.writer(clients_file)
                     write.writerows(data_clients)
             ENDIF
@@ -709,21 +748,23 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
         
         
         ELSE
-            PRINT("You can only book a date FOR a period IN the future.")
+            PRINT("You can only book a date for a period IN the future.")
         ENDIF
+    ENDDO
     RETURN
+ENDFUNCTION
             
 
-FUNCTION confirm_booking(headers, data):
+FUNCTION confirm_booking(headers, data)
     title = "Booking Details"
     PRINT("")
     
     menu = ["Confirm Booking", "Return"]
-    DOWHILE(1):
+    DOWHILE(1)
         default.print_title(title)
         PRINT("")
         
-        FOR i IN range(16):
+        LOOP i FROM 0 TO <range(16) STEP +1
             PRINT(headers[i] + ": " + str(data[i]))
             
         PRINT("")
@@ -735,10 +776,11 @@ FUNCTION confirm_booking(headers, data):
         IF (choice == '1' or choice == '2') THEN
             BREAK
         ENDIF
+    ENDDO
             
     IF (choice == '1') THEN
         PRINT("Payment is successful!")
-        FOR remaining IN range(5, -1, -1):
+        LOOP remaining FROM 5 TO > -1 STEP  -1
             sys.stdout.write("\r")
             sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
             sys.stdout.flush()
@@ -750,12 +792,13 @@ FUNCTION confirm_booking(headers, data):
     IF (choice == '2') THEN
         RETURN 2
     ENDIF
+ENDFUNCTION
 
 
-FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist):
+FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
     count = 0
 
-    FOR i IN range(len(data_transactions)):
+    LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
         IF (car_id == data_transactions[i][2]) THEN
             origin_fromtime = datetime.datetime.strptime(data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
             origin_totime = datetime.datetime.strptime(data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
@@ -766,7 +809,7 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
         ENDIF
     
 
-    FOR i IN range(len(data_carlist)):
+    LOOP i FROM 0 TO <range(len(data_carlist)) STEP +1
         IF (data_carlist[i][0] == car_id) THEN
             available_quantity = data_carlist[i][6]
             BREAK
@@ -781,6 +824,7 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
         RETURN 1
     
     ENDIF
+ENDFUNCTION
             
         
 
