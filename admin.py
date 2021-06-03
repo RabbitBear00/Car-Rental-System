@@ -1,7 +1,6 @@
 import default
 import clients
 import datetime
-import csv
 import sys
 import time
 
@@ -146,68 +145,7 @@ def searchclient_menu(user_data, data_clients, space_clients):
         default.print_sorttable(data_clients, 1, sequence, space_clients)
         print("")
         
-def edit_carprofile(user_data, data_clients, login_index, space_clients):
-    print("\nWhat do you want to edit?")
-    menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Total Quantity", "Available", "Unavailable", "In Service", "Price per Hour", "Fuel Type", "Return"]
-    
-    while(1):
-        default.general_menu(menu)
-        choice = input("Please Select: ")
-        if(choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10' or choice == '11'):
-            break
-    if(choice == '11'):
-        return
-    
-    
-    if(choice == '1'):
-        temp = default.validation_length(space_clients[2])
-        user_data[2] = temp
-    
-    elif(choice == '2'):
-        temp = default.validation_date()
-        user_data[4] = temp
-       
-    elif(choice == '3'):
-        temp = default.validation_length(space_clients[5])
-        user_data[5] = temp    
-    
-    elif(choice == '4'):
-        temp = default.validation_number(space_clients[6])
-        user_data[6] = temp
-    
-    elif(choice == '5'):
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
 
-    elif(choice == '6'):
-        temp = default.validation_number(16)
-        user_data[8] = temp
-    
-    elif(choice == '7'):
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
-
-    elif(choice == '8'):
-        temp = default.validation_number(16)
-        user_data[8] = temp
-        
-    elif(choice == '9'):
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
-
-    elif(choice == '10'):
-        temp = default.validation_number(16)
-        user_data[8] = temp   
-        
-    data_clients[login_index] = user_data
-    
-    #print(data_clients)
-    
-    with open("./data/clients.csv",  mode = 'w', newline = '') as clients_file:
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
-        
-    return
 
 #A menu for admin to view/sort/search/add all cars data  
 def car_interface(user_data, data_carlist, login_index, space_cars):
@@ -350,7 +288,7 @@ def edit_carprofile(index, car_data, data_carlist, space_cars):
     while(1):
         default.general_menu(menu)
         choice = input("Please Select: ")
-        if(choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10'or choice == '11' or choice == '12'):
+        if(choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10'):
             break
     if(choice == '10'):
         return
@@ -398,11 +336,11 @@ def edit_carprofile(index, car_data, data_carlist, space_cars):
     print(car_data)
     
     #print(data_clients)
-    
-    with open("./data/cars_lists.csv",  mode = 'w', newline = '') as cars_file:
-        write = csv.writer(cars_file)
-        write.writerows(data_carlist)
-        
+    with open("./data/cars_lists.txt",  mode = 'w') as cars_file:
+        for line in data_carlist:
+            temp = ",".join(line)
+            cars_file.write(temp + '\n')
+
     return   
 
 def addcar_menu(data_carlist, space_cars):
@@ -463,11 +401,17 @@ def addcar_menu(data_carlist, space_cars):
                 break
         
         if(choice == '1'):
+            k = 0
+            for i in data:
+                data[k] = str(i)
+                k += 1
+                
             data_carlist.append(data)
-            print(data)
-            with open("./data/cars_lists.csv", mode = 'w', newline = "") as cars_file:
-                write = csv.writer(cars_file)
-                write.writerows(data_carlist)
+            #print(data_carlist)
+            with open("./data/cars_lists.txt",  mode = 'w') as cars_file:
+                for line in data_carlist:
+                    temp = ",".join(line)
+                    cars_file.write(temp + '\n')           
             
             default.print_title("Car Information has successfuly recorded.")
             for remaining in range(5, -1, -1):
@@ -731,10 +675,16 @@ def returncar_interface(data_transactions):
             
         data[-3] = "Returned"
         data[-1] = str(return_datetime)
+        k = 0 
+        for i in data:
+            data[k] = str(i)
+            k += 1
         data_transactions[index] = data
-        with open("./data/transactions.csv", mode = "w", newline = "") as transactions_file:
-            write = csv.writer(transactions_file)
-            write.writerows(data_transactions)
+        
+        with open("./data/transactions.txt",  mode = 'w') as transactions_file:
+            for line in data_transactions:
+                temp = ",".join(line)
+                transactions_file.write(temp + '\n')
                 
             return
             

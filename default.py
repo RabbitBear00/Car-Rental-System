@@ -1,9 +1,7 @@
-import csv
 import datetime
 import hashlib
 import time 
 import sys
-import clients
 
         
 #First menu -startup menu
@@ -30,10 +28,10 @@ def login_menu(main_title):
 #Reading datas from file and storing it in an array
 def input_dataclients():
     data = []
-    with open("./data/clients.csv") as csv_file:
-        read = csv.reader(csv_file, delimiter = ',')
-        for row in read:
-            data.append(row)
+    with open("./data/clients.txt") as csv_file:
+        for line in csv_file:
+            temp = line.strip().split(",")
+            data.append(temp)
             
     return data
         
@@ -41,21 +39,22 @@ def input_dataclients():
 #Reading datas from file and storing it in an array
 def input_datacars():
     data_cars = []
-    with open("./data/cars_lists.csv") as csv_file:
-        read = csv.reader(csv_file, delimiter = ',')
-        for row in read:
-            data_cars.append(row)
+    with open("./data/cars_lists.txt") as csv_file:
+        for line in csv_file:
+            temp = line.strip().split(",")
+            data_cars.append(temp)
+            
         
     return data_cars
 
 #Reading datas from file and storing it in an array
 def input_datatransactions():
     data = []
-    with open("./data/transactions.csv") as csv_file:
-        read = csv.reader(csv_file, delimiter = ',')
-        for row in read:
-            data.append(row)
-        
+    with open("./data/transactions.txt") as csv_file:
+        for line in csv_file:
+            temp = line.strip().split(",")
+            data.append(temp)
+            
     return data 
     
 #Check password if it is correct
@@ -187,12 +186,23 @@ def register_interface(data_clients, space_clients):
     prev_id = data_clients[-1][0]
    
     while(1):
+        sign = 0
         data = []
         id = int(prev_id) + 1
         data.append(id)
         data.append("Normal")
         print("Plase enter your Username")
         name = validation_length(space_clients[2])
+        
+        i = 0
+        for i in range(len(data_clients)):
+            if(name == data_clients[i][2]):
+                print("This username has been used. ")
+                print("")
+                sign = 1
+                break
+        if(sign == 1):
+            continue
         print("")
         data.append(name)
         while(1):
@@ -259,11 +269,16 @@ def register_interface(data_clients, space_clients):
                 break
         
         if(choice == '1'):
+            k = 0 
+            for i in data:
+                data[k] = str(i)
+                k = k + 1
             data_clients.append(data)
             #print(data)
-            with open("./data/clients.csv", mode = 'w', newline = "") as clients_file:
-                write = csv.writer(clients_file)
-                write.writerows(data_clients)
+            with open("./data/clients.txt", mode = 'w') as clients_file:
+                for line in data_clients:
+                    temp = ",".join(line)
+                    clients_file.write(temp + '\n')
             
             print_title("Registeration information has successfuly recorded.")
             for remaining in range(5, -1, -1):
@@ -561,7 +576,7 @@ def validation_number(length):
         if temp.isdecimal() == True and len(temp) <= length:
             return temp
         else:
-            print("You can only enter " + str(length) +" digit of numbers" )
+            print("You can only enter " + "at most " + str(length) +" digit of numbers" )
             print("")
 
 def validation_email(length):

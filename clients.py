@@ -1,4 +1,3 @@
-import csv
 import default
 import datetime
 import time
@@ -109,11 +108,13 @@ def edit_profile(user_data, data_clients, login_index, space_clients):
     
     #print(data_clients)
     
-    with open("./data/clients.csv",  mode = 'w', newline = '') as clients_file:
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
+    with open("./data/clients.txt",  mode = 'w') as clients_file:
+        for line in data_clients:
+            temp = ",".join(line)
+            clients_file.write(temp + '\n')
         
     return
+
        
 def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars):
     while(1):    
@@ -338,10 +339,13 @@ def update_password(user_data, data_clients, login_index, space_clients):
     user_data[3] = new_password
     data_clients[login_index] = user_data
     
-    with open("./data/clients.csv",  mode = 'w', newline = '') as clients_file:
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
+    with open("./data/clients.txt",  mode = 'w') as clients_file:
+        for line in data_clients:
+            temp = ",".join(line)
+            clients_file.write(temp + '\n')
 
+    return   
+    
        
 def bookcar_interface(user_data, data_clients, data_carlist, data_transactions):
     while(1):
@@ -610,9 +614,11 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
             if(choice == 1):
                 
                 data_transactions.append(data)
-                with open("./data/transactions.csv", mode = "w", newline = "") as transactions_file:
-                    write = csv.writer(transactions_file)
-                    write.writerows(data_transactions)
+                
+                with open("./data/transactions.txt",  mode = 'w') as transactions_file:
+                    for line in data_transactions:
+                        temp = ",".join(line)
+                        transactions_file.write(temp + '\n')
 
                 user_data[-1] = str(int(user_data[-1]) - int(voucher) * 100)
                 user_data[-2] = str(float(user_data[-2]) + total_price)
@@ -623,15 +629,20 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                     print("Congratulations " + str(user_data[2] +",\nYou will get 10% discount for every payment"))
                     user_data[1] = "VIP"
                     print("")
+                
+                k = 0 
+                for i in user_data:
+                    user_data[k] = str(i)
                     
                 for i in range(len(data_clients)):
                     if(user_data[0] == data_clients[i][0]):
                         data_clients[i] = user_data
                         break
                     
-                with open("./data/clients.csv", mode = "w", newline = "") as clients_file:
-                    write = csv.writer(clients_file)
-                    write.writerows(data_clients)
+                with open("./data/clients.txt", mode = "w") as clients_file:
+                    for line in data_clients:
+                        temp = ",".join(line)
+                        clients_file.write(temp + '\n')
                     
             if(choice == 2):
                 return
