@@ -13,7 +13,8 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
                 BREAK
             ENDIF
@@ -51,7 +52,8 @@ FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice == '2' or choice == '3') THEN
                 BREAK
             ENDIF
@@ -80,7 +82,8 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6') THEN
                 BREAK
             ENDIF
@@ -131,7 +134,8 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
                 BREAK   
             ENDIF
@@ -187,7 +191,8 @@ FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
                 BREAK
             ENDIF
@@ -226,7 +231,8 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8') THEN
                 BREAK
             ENDIF
@@ -285,7 +291,8 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         k = 0
         DOWHILE(1)
             index = 0
-            car_id = input("Please input the car ID: ")
+            PRINT("Please input the car ID: ")
+            READ car_id
         
             LOOP i FROM 1 TO < len(data_carlist) STEP +1
                 IF (car_id == data_carlist[i][0]) THEN
@@ -303,7 +310,8 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
                 menu = ["Continue","Return"]
                 DOWHILE(1)
                     default.general_menu(menu)
-                    choice = input("Please Select: ")
+                    PRINT("Please Select: ")
+                    READ choice
                     IF (choice == '1' or choice == '2') THEN
                         BREAK
                     ENDIF
@@ -331,7 +339,8 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         DOWHILE(1): 
             PRINT("\n")   
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
@@ -356,7 +365,8 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     
     DOWHILE(1)
         default.general_menu(menu)
-        choice = input("Please Select: ")
+        PRINT("Please Select: ")
+        READ choice
         IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10') THEN
             BREAK
         ENDIF
@@ -482,7 +492,8 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         menu = ["Confirm", "Return"]
         DOWHILE(1)
             default.general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
@@ -527,7 +538,8 @@ FUNCTION filter_menu(data_transactions, space_transactions)
             default.print_title(title)
             DOWHILE(1)
                 default.general_menu(menu)
-                choice = input("Please select: ")
+                PRINT("Please select: ")
+                READ choice
                 IF choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5'
                     BREAK
                 ENDIF
@@ -536,7 +548,8 @@ FUNCTION filter_menu(data_transactions, space_transactions)
         
             IF (choice == '1') THEN
                 DOWHILE(1)
-                    temp = input("Enter the Client ID: ")
+                    PRINT("Enter the Client ID: ")
+                    READ temp
                     i = 0 
                     key = 0
                     LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
@@ -558,7 +571,8 @@ FUNCTION filter_menu(data_transactions, space_transactions)
         
             IF (choice == '2') THEN
                 DOWHILE(1)
-                    temp = input("Enter the Client username: ")
+                    PRINT("Enter the Client username: ")
+                    READ temp
                     i = 0 
                     key = 0
                     LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
@@ -591,7 +605,8 @@ FUNCTION filter_menu(data_transactions, space_transactions)
             ENDIF
             IF (choice == '4') THEN
                 DOWHILE(1)
-                    temp = input("Enter the Booking ID: ")
+                    PRINT("Enter the Booking ID: ")
+                    READ temp
                     i = 0 
                     key = 0
                     LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
@@ -681,7 +696,8 @@ FUNCTION transaction_interface(data_transactions, space_transactions)
         DOWHILE(1)
             menu = ["Filter", "Return"]
             default.general_menu(menu)
-            choice = input("Please select: ")
+            PRINT("Please select: ")
+            READ choice
             IF choice == '1' or choice == '2'
                 BREAK
             ENDIF
@@ -701,7 +717,8 @@ FUNCTION returncar_interface(data_transactions)
         DOWHILE(1)
             key = 0
             default.print_title("Return a car here")
-            booking_id = input("Please enter booking id: ")
+            PRINT("Please enter booking id: ")
+            READ booking_id
             LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
                 IF (booking_id == data_transactions[i][-4]) THEN
                     key = 1
@@ -787,7 +804,8 @@ FUNCTION returncar_interface(data_transactions)
             DOWHILE(1)
                 menu = ["Confirm","Return"]
                 default.general_menu(menu)
-                choice = input("Please select: ")
+                PRINT("Please select: ")
+                READ choice
                 IF (choice == '1' or choice == '2') THEN
                     BREAK
                 ENDIF

@@ -155,7 +155,8 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
             
         DOWHILE(True)
             general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF(choice == '1' OR choice == '2')THEN
                 BREAK
             ENDIF
@@ -183,7 +184,8 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
     DOWHILE(True)
         PRINT_title(title)
         general_menu(menu)
-        choice = input("Please Select: ")
+        PRINT("Please Select: ")
+        READ choice
         IF(choice == '1' OR choice == '2' OR choice == '3')THEN
             BREAK
         ENDIF
@@ -198,7 +200,8 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
         DOWHILE(True)
             menu = ["Return"]
             general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF(choice == '1')THEN
                 BREAK
             ENDIF
@@ -302,7 +305,8 @@ FUNCTION register_interface(data_clients, space_clients)
         menu = ["Confirm", "Return"]
         DOWHILE(True)
             general_menu(menu)
-            choice = input("Please Select: ")
+            PRINT("Please Select: ")
+            READ choice
             IF(choice == '1' OR choice == '2')THEN
                 BREAK
             ENDIF
@@ -626,7 +630,8 @@ ENDFUNCTION
 FUNCTION validation_length(length)
     length = int(length)
     DOWHILE(True)
-        temp = input(" ")
+        PRINT(" ")
+        READ temp
         IF(LEN(temp) <=length)THEN
             RETURN temp
         ELSE
@@ -639,7 +644,8 @@ ENDFUNCTION
 FUNCTION alidation_number(length)
     length = int(length)
     DOWHILE(True)
-        temp = input(" ")
+        PRINT(" ")
+        READ temp
         
         IF temp.isdecimal() == True AND LEN(temp) <= Length THEN
             RETURN temp
@@ -653,7 +659,8 @@ ENDFUNCTION
 FUNCTION validation_email(length)
     length = int(length)
     DOWHILE(True)
-        temp = input(" ")
+        PRINT(" ")
+        READ temp
         
         IF "@"INtemp AND ".com"INtemp THEN
             BREAK
@@ -669,7 +676,8 @@ FUNCTION validation_email(length)
         ELSE
             PRINT("You cannot exceed " + str(length) + " characters" )
             PRINT("")
-            temp = input(" ")
+            PRINT(" ")
+            READ temp
         ENDIF
     
     ENDDO
@@ -680,7 +688,8 @@ FUNCTION validation_date()
     
     DOWHILE(True)
         PRINT("Please enter date in DD-MM-YYYY")
-        temp = input(" ")
+        PRINT(" ")
+        READ temp
         TRY
             date = datetime.datetime.strptime(temp, "%d-%m-%Y")
             birth = date.strftime("%d-%m-%Y")
@@ -746,7 +755,8 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             menu = ["Yes", "Return"]
             DOWHILE(True)
                 general_menu(menu)
-                choice = input("Please Select: ")
+                PRINT("Please Select: ")
+                READ choice
                 IF(choice == '1' OR choice == '2')
                     BREAK
             ENDDO
@@ -860,7 +870,8 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
                 
         menu = ["Confirm", "Return"]
         general_menu(menu)
-        choice = input("Please select: ")
+        PRINT("Please select: ")
+        READ choice
         IF(choice == '1' OR choice == '2') THEN
             BREAK
         ENDIF
@@ -960,7 +971,8 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
                 
         menu = ["Confirm", "Return"]
         general_menu(menu)
-        choice = input("Please select: ")
+        PRINT("Please select: ")
+        READ choice
         IF(choice == '1' OR choice == '2')THEN
             BREAK
         ENDIF
@@ -981,7 +993,8 @@ FUNCTION validation_cartypes()
     DOWHILE(True)
         PRINT("You can only enter: City, Electric, Prestige, Van, Truck")    
         PRINT("")
-        temp = input("Please enter car type: ")
+        PRINT("Please enter car type: ")
+        READ temp
         temp.lower()
         IF temp == 'city' OR temp == 'electric' OR temp == 'prestige' OR temp == 'van' OR temp == 'truck' THEN:
             BREAK
@@ -994,7 +1007,8 @@ ENDFUNCTION
 
 FUNCTION validation_carnormal(target)
     
-    temp = input("Please enter " + str(target) +": ")
+    PRINT("Please enter " + str(target) +": ")
+    READ temp
     
     temp = temp[0].upper() + temp[1:LEN(temp)].lower()
     RETURN temp
