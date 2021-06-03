@@ -52,6 +52,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             IF (i ==3) THEN
                 CONTINUE
             ENDIF
+            NEXT i
             PRINT(data_clients[0][i] + ": " + user_data[i])
     
         menu = ["Edit", "Return"]
@@ -64,9 +65,9 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             IF (choice == '1' or choice == '2') THEN
                 BREAK
             ENDIF
-        ENDDO
                 
             PRINT("Error!")
+        ENDDO
     
         IF (choice == '1') THEN
             edit_profile(user_data, data_clients, login_index, space_clients)
