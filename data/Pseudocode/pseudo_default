@@ -1,10 +1,7 @@
-import csv
 import datetime
 import hashlib
 import time 
 import sys
-import clients
-
         
 
 FUNCTION startup_menu(main_title)
@@ -35,12 +32,11 @@ ENDFUNCTION
 
 FUNCTION input_dataclients()
     data = []
-    WITH OPEN ("./data/clients.csv") AS csv_file:
-        read = csv.reader(csv_file, delimiter = ',')
-        FOR row IN read
-            APPEND row TO data
-        ENDFOR
-            
+    WITH OPEN("./data/clients.txt") AS csv_file:
+        LOOP line IN csv_file:
+            temp = line.strip().split(",")
+            data.append(temp)
+        ENDLOOP    
     RETURN data
 ENDFUNCTION
         
@@ -48,23 +44,22 @@ ENDFUNCTION
 
 FUNCTION input_datacars()
     data_cars = []
-    WITH OPEN("./data/cars_lists.csv") AS csv_file
-        read = csv.reader(csv_file, delimiter = ',')
-        FOR row IN read
-            APPEND row TO data_cars
-        ENDFOR
-        
+    WITH OPEN("./data/cars_lists.txt") AS csv_file:
+        LOOP line IN csv_file:
+            temp = line.strip().split(",")
+            data_cars.append(temp)
+        ENDLOOP
     RETURN data_cars
 ENDFUNCTION
 
 
 FUNCTION input_datatransactions()
     data = []
-    WITH OPEN("./data/transactions.csv") AS csv_file
-        read = csv.reader(csv_file, delimiter = ',')
-        FOR row IN read
-            APPEND row TO data
-        ENDFOR
+    WITH OPEN("./data/transactions.txt") AS csv_file:
+        LOOP line IN csv_file:
+            temp = line.strip().split(",")
+            data.append(temp)
+        ENDLOOP
         
     RETURN data 
 ENDFUNCTION
@@ -223,12 +218,24 @@ FUNCTION register_interface(data_clients, space_clients)
     prev_id = data_clients[-1][0]
    
     DOWHILE(True)
+        sign = 0
         data = []
         id = int(prev_id) + 1
         APPEND id TO data
         APPEND "Normal" TO data
         PRINT("Plase enter your Username")
-        name = validation_length(space_clients[2])
+        name = validation_length(space_clients[2])        
+        i = 0
+        LOOP i FROM 0 TO range(len(data_clients)) STEP +1
+            IF(name == data_clients[i][2]) THEN
+                PRINT("This username has been used. ")
+                PRINT("")
+                sign = 1
+                break
+            ENDIF
+        ENDLOOP
+        if(sign == 1):
+            continue
         PRINT("")
         APPEND name TO data
         DOWHILE(True)
@@ -281,7 +288,7 @@ FUNCTION register_interface(data_clients, space_clients)
         
         PRINT_title("Confirm Registeration Details")
         k = 0
-        FOR i IN data:
+        LOOP i IN data:
             IF(k == 3)THEN
                 k += 1
                 CONTINUE
@@ -289,7 +296,7 @@ FUNCTION register_interface(data_clients, space_clients)
 
             PRINT(data_clients[0][k] + ": " + str(i))
             k += 1
-        ENDFOR
+        ENDLOOP
             
             
         menu = ["Confirm", "Return"]
@@ -302,10 +309,17 @@ FUNCTION register_interface(data_clients, space_clients)
         ENDDO
 
         IF(choice == '1')THEN
+            k = 0 
+            LOOP i IN data:
+                data[k] = str(i)
+                k = k + 1
+            ENDLOOP
             APPEND data TO data_clients
-            with open("./data/clients.csv", mode = 'w', newline = "") as clients_file:
-                write = csv.writer(clients_file)
-                write.writerows(data_clients)
+            WITH OPEN("./data/clients.txt", mode = 'w') AS clients_file:
+                LOOP line IN data_clients:
+                    temp = ",".join(line)
+                    clients_file.write(temp + '\n')
+                ENDLOOP
         
             PRINT_title("Registeration information has successfuly recorded.")
             LOOP remaining FROM 5 TO >-1 STEP -1
@@ -393,7 +407,7 @@ FUNCTION PRINT_table(data, mode, space, login_name = "")
     ENDIF
 
     k = 0 
-    FOR i IN data[0]:
+    LOOP i IN data[0]:
         IF(mode == 4 AND (i == "Total Quantity" OR i == "Available" OR i == "Unavailable" OR i == "In Service" ))THEN
             k = k + 1
             CONTINUE
@@ -409,7 +423,7 @@ FUNCTION PRINT_table(data, mode, space, login_name = "")
 
         PRINT(i + " " * (int(space[k]) - int(LEN(i))) + " | ", end = "")
         k = k + 1
-    ENDFOR
+    ENDLOOP
     
     PRINT("")
     PRINT("-" * blanks)
@@ -474,7 +488,7 @@ FUNCTION PRINT_sorttable(data, mode, sequence, space)
     
     sequence.insert(0, 0)
     
-    FOR i IN sequence:
+    LOOP i IN sequence:
         LOOP k FROM 0 TO <columns STEP +1 
             IF(mode == 4 AND (k == 5 OR k == 6 OR k ==7 OR k == 8 ))THEN
                 CONTINUE
@@ -495,7 +509,7 @@ FUNCTION PRINT_sorttable(data, mode, sequence, space)
         ENDIF
 
         PRINT("")
-    ENDFOR
+    ENDLOOP
 ENDFUNCTION
 
 
@@ -510,12 +524,12 @@ FUNCTION sort_data(data, target, order, mode)
     sample = []
     index = 0
     rows = LEN(data)
-    FOR i IN data[0]:
+    LOOP i IN data[0]:
         IF(i == target)THEN
             BREAK
         ENDIF
         index = index + 1
-    ENDFOR
+    ENDLOOP
      
     LOOP i FROM start TO <rows STEP +1
         APPEND data[i][index] TO sample
@@ -572,12 +586,12 @@ FUNCTION search_data(data, keyword, attribute, mode)
     keyword = keyword.lower()
     
     k = 0
-    FOR i IN data[0]:
+    LOOP i IN data[0]:
         IF attribute == i THEN
             index = k
         ENDIF
         k = k + 1  
-    ENDFOR      
+    ENDLOOP      
     
     LOOP i FROM start TO <rows STEP +1
         APPEND data[i][index] TO sample
@@ -601,9 +615,9 @@ FUNCTION search_data(data, keyword, attribute, mode)
 
     
     IF(mode == 1)THEN
-        sequence = [x + 2 FOR x IN sequence]
+        sequence = [x + 2 LOOP x IN sequence]
     ELSE
-         sequence = [x + 1 FOR x IN sequence]
+         sequence = [x + 1 LOOP x IN sequence]
     ENDIF
     RETURN sequence
 

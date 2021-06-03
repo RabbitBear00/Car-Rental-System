@@ -1,7 +1,6 @@
 import default
 import clients
 import datetime
-import csv
 import sys
 import time
 
@@ -178,78 +177,11 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
     ENDDO
 ENDFUNCTION
         
-FUNCTION edit_carprofile(user_data, data_clients, login_index, space_clients)
-    PRINT("\nWhat do you want to edit?")
-    menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Total Quantity", "Available", "Unavailable", "In Service", "Price per Hour", "Fuel Type", "Return"]
-    
-    DOWHILE(1)
-        default.general_menu(menu)
-        choice = input("Please Select: ")
-        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10' or choice == '11') THEN
-            BREAK
-        ENDIF
-    ENDDO
-    IF (choice == '11') THEN
-        RETURN
-    ENDIF
-    
-    
-    IF (choice == '1') THEN
-        temp = default.validation_length(space_clients[2])
-        user_data[2] = temp
-    
-    ELSE IF (choice == '2') THEN
-        temp = default.validation_date()
-        user_data[4] = temp
-       
-    ELSE IF (choice == '3') THEN
-        temp = default.validation_length(space_clients[5])
-        user_data[5] = temp    
-    
-    ELSE IF (choice == '4') THEN
-        temp = default.validation_number(space_clients[6])
-        user_data[6] = temp
-    
-    ELSE IF (choice == '5') THEN
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
-
-    ELSE IF (choice == '6') THEN
-        temp = default.validation_number(16)
-        user_data[8] = temp
-    
-    ELSE IF (choice == '7') THEN
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
-
-    ELSE IF (choice == '8') THEN
-        temp = default.validation_number(16)
-        user_data[8] = temp
-        
-    ELSE IF (choice == '9') THEN
-        temp = default.validation_email(space_clients[7])
-        user_data[7] = temp
-
-    ELSE IF (choice == '10') THEN
-        temp = default.validation_number(16)
-        user_data[8] = temp   
-    ENDIF
-        
-    data_clients[login_index] = user_data
-    
-
-    
-    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
-        
-    RETURN
-ENDFUNCTION
 
 
 FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
     DOWHILE(1):    
-        menu = ["Sort All Cars", "Search FOR a  Car", "Edit Car Details","Add a car", "Return"]
+        menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
         title = user_data[2] + ", what would you like to do"
     
         DOWHILE(1)
@@ -425,7 +357,7 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     DOWHILE(1)
         default.general_menu(menu)
         choice = input("Please Select: ")
-        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10'or choice == '11' or choice == '12') THEN
+        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8' or choice == '9' or choice == '10') THEN
             BREAK
         ENDIF
     ENDDO
@@ -486,10 +418,12 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     
 
     
-    WITH OPEN("./data/cars_lists.csv",  mode = 'w', newline = '') AS cars_file
-        write = csv.writer(cars_file)
-        write.writerows(data_carlist)
-        
+    WITH OPEN("./data/cars_lists.txt",  mode = 'w') AS cars_file:
+        LOOP line IN data_carlist:
+            temp = ",".join(line)
+            cars_file.write(temp + '\n')
+        ENDLOOP
+
     RETURN   
 ENDFUNCTION
 
@@ -540,9 +474,10 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         
         default.print_title("Confirm Car Details")
         k = 0
-        FOR i IN data
+        LOOP i IN data
             PRINT(data_carlist[0][k] + ": " + str(i))
             k += 1
+        ENDLOOP
             
         menu = ["Confirm", "Return"]
         DOWHILE(1)
@@ -554,12 +489,18 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         ENDDO
         
         IF (choice == '1') THEN
+            k = 0
+            LOOP i IN data:
+                data[k] = str(i)
+                k += 1
+            ENDLOOP
             APPEND data_carlist TO data
-            PRINT(data)
-            WITH OPEN("./data/cars_lists.csv", mode = 'w', newline = "") AS cars_file
-                write = csv.writer(cars_file)
-                write.writerows(data_carlist)
+            WITH OPEN("./data/cars_lists.txt",  mode = 'w') AS cars_file:
+                LOOP line IN data_carlist:
+                    temp = ",".join(line)
+                    cars_file.write(temp + '\n')   
             
+                ENDLOOP
             default.print_title("Car Information has successfuly recorded.")
             LOOP remaining FROM 5 TO > -1 STEP  -1
                 sys.stdout.write("\r")
@@ -872,10 +813,11 @@ FUNCTION returncar_interface(data_transactions)
         data[-3] = "Returned"
         data[-1] = str(return_datetime)
         data_transactions[index] = data
-        WITH OPEN("./data/transactions.csv", mode = "w", newline = "") AS transactions_file
-            write = csv.writer(transactions_file)
-            write.writerows(data_transactions)
-                
+        WITH OPEN("./data/transactions.txt",  mode = 'w') AS transactions_file:
+            LOOP line IN data_transactions:
+                temp = ",".join(line)
+                transactions_file.write(temp + '\n')
+            ENDLOOP    
             RETURN
     ENDDO
 ENDFUNCTION

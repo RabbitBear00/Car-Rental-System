@@ -1,4 +1,3 @@
-import csv
 import default
 import datetime
 import time
@@ -125,9 +124,11 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
     
 
     
-    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
+    WITH OPEN("./data/clients.txt",  mode = 'w') AS clients_file:
+        LOOP line IN data_clients:
+            temp = ",".join(line)
+            clients_file.write(temp + '\n')
+        ENDLOOP
         
     RETURN
 ENDFUNCTION
@@ -408,9 +409,13 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients)
     user_data[3] = new_password
     data_clients[login_index] = user_data
     
-    WITH OPEN("./data/clients.csv",  mode = 'w', newline = '') AS clients_file
-        write = csv.writer(clients_file)
-        write.writerows(data_clients)
+    WITH OPEN("./data/clients.txt",  mode = 'w') AS clients_file:
+        LOOP line IN data_clients:
+            temp = ",".join(line)
+            clients_file.write(temp + '\n')
+        ENDLOOP
+    
+    RETURN
 ENDFUNCTION
 
        
@@ -715,9 +720,11 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
             IF (choice == 1) THEN
                 
                 APPEND data_transactions TO data
-                WITH OPEN("./data/transactions.csv", mode = "w", newline = "") AS transactions_file
-                    write = csv.writer(transactions_file)
-                    write.writerows(data_transactions)
+                WITH OPEN("./data/transactions.txt",  mode = 'w') AS transactions_file:
+                    LOOP line IN data_transactions:
+                        temp = ",".join(line)
+                        transactions_file.write(temp + '\n')
+                    ENDLOOP
 
                 user_data[-1] = str(int(user_data[-1]) - int(voucher) * 100)
                 user_data[-2] = str(float(user_data[-2]) + total_price)
@@ -729,16 +736,23 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     user_data[1] = "VIP"
                     PRINT("")
                 ENDIF
+       k = 0 
+                LOOP i IN user_data:
+                    user_data[k] = str(i)
+                ENDLOOP
                     
                 LOOP i FROM 0 TO <range(len(data_clients)) STEP +1
                     IF (user_data[0] == data_clients[i][0]) THEN
                         data_clients[i] = user_data
                         BREAK
                     ENDIF
+                ENDLOOP
                     
-                WITH OPEN("./data/clients.csv", mode = "w", newline = "") AS clients_file
-                    write = csv.writer(clients_file)
-                    write.writerows(data_clients)
+                WITH OPEN("./data/clients.txt", mode = "w") AS clients_file:
+                    LOOP line IN data_clients:
+                        temp = ",".join(line)
+                        clients_file.write(temp + '\n')
+                    ENDLOOP
             ENDIF
                     
             IF (choice == 2) THEN
