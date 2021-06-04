@@ -500,7 +500,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         IF (choice == '1') THEN
             k = 0
             LOOP i IN data:
-                data[k] = str(i)
+                ASSIGN STRING i TO data[k]
                 k += 1
             ENDLOOP
             APPEND data_carlist TO data
@@ -827,7 +827,7 @@ FUNCTION returncar_interface(data_transactions)
             ENDIF
         ENDIF    
         data[-3] = "Returned"
-        data[-1] = str(return_datetime)
+        ASSIGN STRING return_datetime TO data[-1]
         data_transactions[index] = data
         WITH OPEN("./data/transactions.txt",  mode = 'w') AS transactions_file:
             LOOP line IN data_transactions:

@@ -315,7 +315,7 @@ FUNCTION register_interface(data_clients, space_clients)
         IF(choice == '1')THEN
             k = 0 
             LOOP i IN data:
-                data[k] = str(i)
+                ASSIGN STRING i TO data[k]
                 k = k + 1
             ENDLOOP
             APPEND data TO data_clients

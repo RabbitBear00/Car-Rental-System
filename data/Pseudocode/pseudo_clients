@@ -748,9 +748,9 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                         transactions_file.write(temp + '\n')
                     ENDLOOP
 
-                user_data[-1] = str(int(user_data[-1]) - int(voucher) * 100)
-                user_data[-2] = str(float(user_data[-2]) + total_price)
-                user_data[-1] = str(int(total_price) + int(user_data[-1]))
+                ASSIGN STRING int(user_data[-1]) - int(voucher) * 100 TO user_data[-1]
+                ASSIGN STRING float(user_data[-2]) + total_price TO user_data[-2]
+                ASSIGN STRING int(total_price) + int(user_data[-1]) TO user_data[-1]
                 
                 IF (int(float(user_data[-2])) > 2000 AND user_data[1] == "Normal") THEN
                     default.print_title("You have become our VIP member")
@@ -760,7 +760,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 ENDIF
                 k = 0 
                 LOOP i IN user_data:
-                    user_data[k] = str(i)
+                    ASSIGN STRING i TO user_data[k]
                 ENDLOOP
                     
                 LOOP i FROM 0 TO <range(len(data_clients)) STEP +1
