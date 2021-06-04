@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-06-04T14:40:21.432Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="QeS1EU1ijTY-QuHa4MsT" version="14.7.5" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-04T15:50:58.077Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="MPVhIkp6dmDl1Yr9ZQzZ" version="14.7.5" type="github">
   <diagram id="stMOM8MZkhm3I2FkZBAt" name="Page-1">
-    <mxGraphModel dx="1460" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
+    <mxGraphModel dx="1241" dy="745" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,7 +10,7 @@
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-3" value="DECLARE menu = [&quot;Car ID&quot;, &quot;Car Types&quot;, &quot;Car Brand&quot;, &quot;Model Year&quot;, &quot;Price per Hour&quot;, &quot;Passenger Capacity&quot;,&quot;Weight Load&quot;,&quot;Return&quot;]" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1100" y="360" width="230" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="tDoSEgJGVIdHTAE-tRr5-7" target="jYxVAj6mPKwVwiyU1axc-3">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" parent="1" source="tDoSEgJGVIdHTAE-tRr5-7" target="jYxVAj6mPKwVwiyU1axc-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-7" value="title = user_data[2] + &quot;, you can sort the list here&quot;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;" parent="1" vertex="1">
@@ -28,9 +28,6 @@
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-15" value="READ choice" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
           <mxGeometry x="1101" y="1010" width="229" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tDoSEgJGVIdHTAE-tRr5-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="tDoSEgJGVIdHTAE-tRr5-17" target="tDoSEgJGVIdHTAE-tRr5-26" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="tDoSEgJGVIdHTAE-tRr5-17" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -39,6 +36,9 @@
             </Array>
             <mxPoint x="1216" y="580" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="ndIdiJiDJ2a2T0hdf-0Y-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="tDoSEgJGVIdHTAE-tRr5-17" target="ndIdiJiDJ2a2T0hdf-0Y-1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-17" value="choice == &#39;1&#39; or choice ==&#39;2&#39; or choice == &#39;3&#39; or choice == &#39;4&#39; or choice == &#39;5&#39; or choice == &#39;6&#39; or choice == &#39;7&#39; or choice == &#39;8&#39;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="845.5" y="1140" width="740" height="170" as="geometry" />
@@ -297,47 +297,53 @@
         <mxCell id="tDoSEgJGVIdHTAE-tRr5-100" value="False" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="1995.5" y="1390" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="jYxVAj6mPKwVwiyU1axc-1" target="tDoSEgJGVIdHTAE-tRr5-3">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" parent="1" source="jYxVAj6mPKwVwiyU1axc-1" target="tDoSEgJGVIdHTAE-tRr5-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-1" value="FUNCTION sortcar_menu(user_data, data_carlist, space_cars)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-1" value="FUNCTION sortcar_menu(user_data, data_carlist, space_cars)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1095" y="210" width="240" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="jYxVAj6mPKwVwiyU1axc-3" target="jYxVAj6mPKwVwiyU1axc-4">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" parent="1" source="jYxVAj6mPKwVwiyU1axc-3" target="jYxVAj6mPKwVwiyU1axc-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-3" value="default.print_title(title)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-3" value="default.print_title(title)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1095" y="630" width="240" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" edge="1" parent="1" source="jYxVAj6mPKwVwiyU1axc-4" target="tDoSEgJGVIdHTAE-tRr5-13">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;" parent="1" source="jYxVAj6mPKwVwiyU1axc-4" target="tDoSEgJGVIdHTAE-tRr5-13" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-4" value="default.general_menu(menu)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-4" value="default.general_menu(menu)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1095" y="760" width="240" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-8" value="default.print_sorttable(data_carlist, 4, sequence, space_cars)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-8" value="default.print_sorttable(data_carlist, 4, sequence, space_cars)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1110" y="2010" width="250" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-10" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-10" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="355" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-11" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-11" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="655" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-12" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-12" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="950" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-13" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-13" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1250" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-14" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-14" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1520" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-15" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-15" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="1810.5" y="1640" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="jYxVAj6mPKwVwiyU1axc-17" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="jYxVAj6mPKwVwiyU1axc-17" value="&#xa;&#xa;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: helvetica; font-size: 12px; font-style: normal; font-weight: 400; letter-spacing: normal; text-align: center; text-indent: 0px; text-transform: none; word-spacing: 0px; background-color: rgb(248, 249, 250); display: inline; float: none;&quot;&gt;sequence = sub_sort_menu(header, data_carlist, 2)&lt;/span&gt;&#xa;&#xa;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
           <mxGeometry x="2100.5" y="1640" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ndIdiJiDJ2a2T0hdf-0Y-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ndIdiJiDJ2a2T0hdf-0Y-1" target="tDoSEgJGVIdHTAE-tRr5-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ndIdiJiDJ2a2T0hdf-0Y-1" value="BREAK" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="438" y="1205" width="145" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
