@@ -687,7 +687,8 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     PRINT("If you cancel the current payment, no points will be deducted")
                     PRINT("")
                     try
-                        count = int(input("How many RM5 vouchers do you want to exchange? "))
+                        PROMPT "How many RM5 vouchers do you want to exchange? "
+                        GET count AS INTEGER
                     except ValueError
                         PRINT("Error input")
                         CONTINUE
@@ -757,7 +758,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     user_data[1] = "VIP"
                     PRINT("")
                 ENDIF
-       k = 0 
+                k = 0 
                 LOOP i IN user_data:
                     user_data[k] = str(i)
                 ENDLOOP

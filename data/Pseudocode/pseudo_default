@@ -709,7 +709,8 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
         PRINT("You can only input upto 4 positive digits")
         PRINT("")
         TRY
-            temp = int(input("What is the total quantity now? :"))
+            PROMPT "What is the total quantity now? :"
+            GET temp AS INTEGER
             IF temp < 0 THEN
                 PRINT("You cannot enter negative digits")
                 PRINT("Please enter again!")
@@ -794,7 +795,8 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         PRINT("")
         
         TRY
-            num1 = int(input("Available  : ")) 
+            PROMPT "Available  : "
+            GET num1 AS INTEGER 
         EXCEPT ValueError:
             PRINT("You can only enter integers")
             PRINT("Please enter again")
@@ -811,7 +813,8 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         ENDIF 
                 
         TRY
-            num2 = int(input("Unavailable: ")) 
+            PROMPT "Unavailable: "
+            GET num2 AS INTEGER 
         EXCEPT ValueError:
             PRINT("You can only enter integers")
             PRINT("Please enter again")
@@ -835,7 +838,8 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         ENDIF
                         
         TRY
-            num3 = int(input("In Service : ")) 
+            PROMPT "In Service : "
+            GET num3 AS INTEGER 
             
         EXCEPT ValueError:
             PRINT("You can only enter integers")
@@ -895,7 +899,8 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         PRINT("The total quantity now is: " + str(temp))
         
         TRY
-            num1 = int(input("Available  : ")) 
+            PROMPT "Available  : "
+            GET num1 AS INTEGER 
         EXCEPT ValueError:
             PRINT("You can only enter integers")
             PRINT("Please enter again")
@@ -911,7 +916,8 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
             CONTINUE    
         ENDIF        
         TRY
-            num2 = int(input("Unavailable: ")) 
+            PROMPT "Unavailable: "
+            GET num2 AS INTEGER 
         EXCEPT ValueError:
             PRINT("You can only enter integers")
             PRINT("Please enter again")
@@ -935,7 +941,8 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         ENDIF           
 
         TRY
-            num3 = int(input("In Service : ")) 
+            PROMPT "In Service : "
+            GET num3 AS INTEGER 
             
         EXCEPT ValueError:
             PRINT("You can only enter integers")

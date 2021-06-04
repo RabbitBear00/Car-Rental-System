@@ -3,7 +3,7 @@ IMPORT default
 IMPORT clients 
 IMPORT datetime 
 
-main()
+FUNCTION main()
     DECLARE data_clients = []
 
     DECLARE data_carlist = []
