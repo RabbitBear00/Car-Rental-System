@@ -54,6 +54,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             ENDIF
             NEXT i
             PRINT(data_clients[0][i] + ": " + user_data[i])
+        ENDLOOP
     
         DECLARE menu = ["Edit", "Return"]
     
@@ -132,6 +133,7 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
         LOOP line IN data_clients:
             temp = ",".join(line)
             clients_file.write(temp + '\n')
+            NEXT line
         ENDLOOP
         
     RETURN
@@ -548,6 +550,8 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 index = i
                 BREAK
             ENDIF
+            NEXT i
+        ENDLOOP
         
         IF (index == i) THEN
             BREAK
@@ -582,6 +586,8 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     APPEND data TO user_data[2]
     LOOP i FROM 0 TO <range(4) STEP +1
         APPEND data TO data_carlist[index][i]
+        NEXT i
+    ENDLOOP
     APPEND data TO data_carlist[index][9]
     
     DOWHILE(1):   
@@ -761,6 +767,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 k = 0 
                 LOOP i IN user_data:
                     ASSIGN STRING i TO user_data[k]
+                    NEXT i
                 ENDLOOP
                     
                 LOOP i FROM 0 TO <range(len(data_clients)) STEP +1
@@ -768,12 +775,14 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                         data_clients[i] = user_data
                         BREAK
                     ENDIF
+                    NEXT i
                 ENDLOOP
                     
                 WITH OPEN("./data/clients.txt", mode = "w") AS clients_file:
                     LOOP line IN data_clients:
                         temp = ",".join(line)
                         clients_file.write(temp + '\n')
+                        NEXT line
                     ENDLOOP
             ENDIF
                     
@@ -802,6 +811,8 @@ FUNCTION confirm_booking(headers, data)
         
         LOOP i FROM 0 TO <range(16) STEP +1
             PRINT(headers[i] + ": " + str(data[i]))
+            NEXT i
+        ENDLOOP
             
         PRINT("")
         PRINT("The total amount to pay is: RM" + data[14])
@@ -822,7 +833,10 @@ FUNCTION confirm_booking(headers, data)
             sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
             sys.stdout.flush()
             time.sleep(1)
+            NEXT remaining
+        ENDLOOP
         sys.stdout.write("\n")
+
         RETURN 1
     ENDIF
         
@@ -844,6 +858,8 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
                 count += 1
             ENDIF
         ENDIF
+        NEXT i
+    ENDLOOP
     
 
     LOOP i FROM 0 TO <range(len(data_carlist)) STEP +1
@@ -851,6 +867,8 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
             available_quantity = data_carlist[i][6]
             BREAK
         ENDIF
+        NEXT i
+    ENDLOOP
     
 
     IF (int(available_quantity) == count) THEN

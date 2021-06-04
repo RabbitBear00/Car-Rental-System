@@ -297,6 +297,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
                     index = i
                     BREAK
                 ENDIF
+                NEXT i
             ENDLOOP
         
             IF (index == i) THEN
@@ -330,6 +331,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         car_data = data_carlist[index]
         LOOP i FROM 0 TO <13 STEP +1
             PRINT(data_carlist[0][i] + ": " + car_data[i])  
+            NEXT i 
         ENDLOOP  
             
         DECLARE menu = ["Edit", "Return"]
@@ -430,6 +432,7 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
         LOOP line IN data_carlist:
             temp = ",".join(line)
             cars_file.write(temp + '\n')
+            NEXT line 
         ENDLOOP
 
     RETURN   
@@ -458,6 +461,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         APPEND data TO year
         LOOP i FROM 0 TO <range(4) STEP +1
             APPEND data TO 0
+            NEXT i 
         ENDLOOP
         data = default.validation_totalquantity(data_carlist, data, 2)
 
@@ -485,6 +489,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         LOOP i IN data
             PRINT(data_carlist[0][k] + ": " + str(i))
             k += 1
+            NEXT i 
         ENDLOOP
             
         DECLARE menu = ["Confirm", "Return"]
@@ -502,13 +507,15 @@ FUNCTION addcar_menu(data_carlist, space_cars)
             LOOP i IN data:
                 ASSIGN STRING i TO data[k]
                 k += 1
+                NEXT i 
             ENDLOOP
             APPEND data_carlist TO data
             WITH OPEN("./data/cars_lists.txt",  mode = 'w') AS cars_file:
                 LOOP line IN data_carlist:
                     temp = ",".join(line)
                     cars_file.write(temp + '\n')   
-            
+                    NEXT line
+
                 ENDLOOP
             default.print_title("Car Information has successfuly recorded.")
             LOOP remaining FROM 5 TO > -1 STEP  -1
@@ -516,6 +523,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
                 sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
                 sys.stdout.flush()
                 time.sleep(1)
+                NEXT remaining
             ENDLOOP
             sys.stdout.write("\n")
             RETURN
@@ -555,6 +563,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                             key = 1
                             BREAK
                         ENDIF
+                        NEXT i 
                     ENDLOOP
                     BREAK
                 ENDDO
@@ -578,6 +587,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                             key = 1
                             BREAK
                         ENDIF
+                        NEXT i 
                     ENDLOOP
                     BREAK
                 ENDDO
@@ -613,6 +623,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                             index = i
                             BREAK
                         ENDIF
+                        NEXT i 
                     ENDLOOP
                     BREAK
                 ENDDO
@@ -676,6 +687,7 @@ FUNCTION sub_filter_date(data_transactions)
             IF (from_date <= temp_from AND to_date >= temp_to) THEN
                 APPEND sequence TO index
             ENDIF
+            NEXT index
         ENDLOOP
         
         RETURN sequence
@@ -727,6 +739,7 @@ FUNCTION returncar_interface(data_transactions)
                     index = i
                     BREAK
                 ENDIF
+                NEXT i 
             ENDLOOP
                 
             IF (key == 2) THEN
@@ -793,6 +806,7 @@ FUNCTION returncar_interface(data_transactions)
             default.print_title("Penalty Payment Details")
             LOOP i FROM 0 TO <range(7) STEP +1
                 PRINT(data_transactions[0][i] + ": " + data[i])
+                NEXT i 
             ENDLOOP
                 
             PRINT("Booking ID: " + data[-4])
@@ -818,6 +832,7 @@ FUNCTION returncar_interface(data_transactions)
                     sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
                     sys.stdout.flush()
                     time.sleep(1)
+                    NEXT remaining
                 ENDLOOP
                 sys.stdout.write("\n")
             ENDIF
@@ -833,6 +848,7 @@ FUNCTION returncar_interface(data_transactions)
             LOOP line IN data_transactions:
                 temp = ",".join(line)
                 transactions_file.write(temp + '\n')
+                NEXT line
             ENDLOOP    
             RETURN
     ENDDO

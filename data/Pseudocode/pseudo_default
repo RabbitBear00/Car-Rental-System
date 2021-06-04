@@ -36,6 +36,7 @@ FUNCTION input_dataclients()
         LOOP line IN csv_file:
             temp = line.strip().split(",")
             data.append(temp)
+            NEXT line
         ENDLOOP    
     RETURN data
 
@@ -48,6 +49,7 @@ FUNCTION input_datacars()
         LOOP line IN csv_file:
             temp = line.strip().split(",")
             data_cars.append(temp)
+            NEXT line
         ENDLOOP
     RETURN data_cars
 
@@ -59,6 +61,7 @@ FUNCTION input_datatransactions()
         LOOP line IN csv_file:
             temp = line.strip().split(",")
             data.append(temp)
+            NEXT line
         ENDLOOP
         
     RETURN data 
@@ -236,6 +239,7 @@ FUNCTION register_interface(data_clients, space_clients)
                 sign = 1
                 break
             ENDIF
+            NEXT i 
         ENDLOOP
         if(sign == 1):
             continue
@@ -299,6 +303,7 @@ FUNCTION register_interface(data_clients, space_clients)
 
             PRINT(data_clients[0][k] + ": " + str(i))
             k += 1
+            NEXT i 
         ENDLOOP
             
             
@@ -317,12 +322,14 @@ FUNCTION register_interface(data_clients, space_clients)
             LOOP i IN data:
                 ASSIGN STRING i TO data[k]
                 k = k + 1
+                NEXT i
             ENDLOOP
             APPEND data TO data_clients
             WITH OPEN("./data/clients.txt", mode = 'w') AS clients_file:
                 LOOP line IN data_clients:
                     temp = ",".join(line)
                     clients_file.write(temp + '\n')
+                    NEXT line 
                 ENDLOOP
         
             PRINT_title("Registeration information has successfuly recorded.")
@@ -427,6 +434,7 @@ FUNCTION PRINT_table(data, mode, space, login_name = "")
 
         PRINT(i + " " * (int(space[k]) - int(LEN(i))) + " | ", end = "")
         k = k + 1
+        NEXT i
     ENDLOOP
     
     PRINT("")
@@ -513,6 +521,7 @@ FUNCTION PRINT_sorttable(data, mode, sequence, space)
         ENDIF
 
         PRINT("")
+        NEXT i
     ENDLOOP
 
 
@@ -533,6 +542,7 @@ FUNCTION sort_data(data, target, order, mode)
             BREAK
         ENDIF
         index = index + 1
+        NEXT i
     ENDLOOP
      
     LOOP i FROM start TO <rows STEP +1
@@ -595,6 +605,7 @@ FUNCTION search_data(data, keyword, attribute, mode)
             index = k
         ENDIF
         k = k + 1  
+        NEXT i
     ENDLOOP      
     
     LOOP i FROM start TO <rows STEP +1
