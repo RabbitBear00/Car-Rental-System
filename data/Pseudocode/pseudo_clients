@@ -9,7 +9,7 @@ FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, l
     
 
     title = user_data[2] + ", welcome back"
-    menu = ["Profile Settings", "Rent a car", "View Personal Rental History", "Update Password","Exit"]
+    DECLARE menu = ["Profile Settings", "Rent a car", "View Personal Rental History", "Update Password","Exit"]
 
     DOWHILE(1)
         DOWHILE(1)
@@ -55,7 +55,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             NEXT i
             PRINT(data_clients[0][i] + ": " + user_data[i])
     
-        menu = ["Edit", "Return"]
+        DECLARE menu = ["Edit", "Return"]
     
         DOWHILE(1): 
             PRINT("\n")   
@@ -81,7 +81,7 @@ ENDFUNCTION
 
 FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
     PRINT("\nWhat do you want to edit?")
-    menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
+    DECLARE menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
     
     DOWHILE(1)
         default.general_menu(menu)
@@ -139,7 +139,7 @@ ENDFUNCTION
        
 FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
     DOWHILE(1):    
-        menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
+        DECLARE menu = ["View All Available Cars", "Search for a  Car", "Book a Car","Return"]
         title = user_data[2] + ", do you want to rent a car?"
     
         DOWHILE(1)
@@ -179,7 +179,7 @@ ENDFUNCTION
 
 FUNCTION view_allcars(user_data, data_carlist, space_cars)
     DOWHILE(1)
-        menu = ["Sort the List", "Return"]
+        DECLARE menu = ["Sort the List", "Return"]
         DOWHILE(1)
             default.general_menu(menu)
             PRINT("Please Select: ")
@@ -202,7 +202,7 @@ ENDFUNCTION
 
 FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
     DOWHILE(1)
-        menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
+        DECLARE menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can sort the list here"
     
         DOWHILE(1)
@@ -263,7 +263,7 @@ ENDFUNCTION
         
 
 FUNCTION sub_sort_menu(header, data, mode)
-    sub_menu = ["Ascending", "Descending"]
+    DECLARE sub_menu = ["Ascending", "Descending"]
     title = "You have chosen " + header + ": "
     DOWHILE(1)
         default.print_title(title)
@@ -288,9 +288,9 @@ ENDFUNCTION
            
 FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
     DOWHILE(1)
-        menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity","Weight Load","Return"]
+        DECLARE menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can search a car here"
-        sequence = []
+        DECLARE sequence = []
     
         DOWHILE(1)
             default.print_title(title)
@@ -360,7 +360,7 @@ FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
     title = user_data[2] + ", view your rental history here"
     default.print_table(data_transactions, 5, space_transactions, user_data[0])
     PRINT("")
-    menu = ["Return"]
+    DECLARE menu = ["Return"]
     DOWHILE(1)
         default.general_menu(menu)
         PRINT("Please Select: ")
@@ -377,7 +377,7 @@ ENDFUNCTION
     
 FUNCTION update_password(user_data, data_clients, login_index, space_clients)
     title = user_data[2] + ", change your password here."
-    menu = ["Change My Password", "Return"]
+    DECLARE menu = ["Change My Password", "Return"]
     DOWHILE(1)
         default.general_menu(menu)
         PRINT("Please Select: ")
@@ -435,7 +435,7 @@ ENDFUNCTION
 FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
     DOWHILE(1)
         title = user_data[2] + ", you can book a car here"
-        menu = ["Book with Car ID", "Return"]
+        DECLARE menu = ["Book with Car ID", "Return"]
         DOWHILE(1)
             default.print_title(title)
             default.general_menu(menu)
@@ -472,7 +472,7 @@ FUNCTION select_date(header, user_data)
              PRINT("Error! Incorrect date format.")
              i = i + 1
         IF (i > 4) THEN
-            menu = ["Continue", "Return"]
+            DECLARE menu = ["Continue", "Return"]
             DOWHILE(1)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
@@ -508,7 +508,7 @@ FUNCTION select_time(title)
              i = i + 1
                
         IF (i > 4) THEN
-            menu = ["Continue", "Return"]
+            DECLARE menu = ["Continue", "Return"]
             DOWHILE(1)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
@@ -533,8 +533,8 @@ ENDFUNCTION
 
 
 FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
-    data = []
-    time = []
+    DECLARE data = []
+    DECLARE time = []
     index = -2
     sum = 0
     k = 0
@@ -556,7 +556,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
         k = k + 1
 
         IF (k > 4) THEN
-            menu = ["Continue","Return"]
+            DECLARE menu = ["Continue","Return"]
             DOWHILE(1)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
@@ -694,7 +694,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     IF ((int(user_data[-1])/100) >= count) THEN
                         PRINT("Eligible. Do you want to exchange " + str(count) + " RM5 voucher ?")
                         DOWHILE(1)
-                            menu = ["Confirm", "Return"]
+                            DECLARE menu = ["Confirm", "Return"]
                             default.general_menu(menu)
                             PRINT("Please select: ")
                             READ choice
@@ -794,7 +794,7 @@ FUNCTION confirm_booking(headers, data)
     title = "Booking Details"
     PRINT("")
     
-    menu = ["Confirm Booking", "Return"]
+    DECLARE menu = ["Confirm Booking", "Return"]
     DOWHILE(1)
         default.print_title(title)
         PRINT("")

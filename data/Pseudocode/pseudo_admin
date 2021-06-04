@@ -4,10 +4,9 @@ import datetime
 import sys
 import time
 
-ENDDO
 FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
     title = user_data[2] + ", welcome back"
-    menu = ["View All Clients", "View All Cars", "View All Transactions", "Car Return","Log Out"]
+    DECLARE menu = ["View All Clients", "View All Cars", "View All Transactions", "Car Return","Log Out"]
 
     DOWHILE(1)
         DOWHILE(1)
@@ -33,7 +32,6 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
         
         ELSE IF (choice == '4') THEN
             returncar_interface(data_transactions)
-            pass
         
         ELSE IF (choice == '5') THEN
             title = user_data[2] + ", you have successfully log out."
@@ -46,7 +44,7 @@ ENDFUNCTION
 
 FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
     DOWHILE(1):    
-        menu = ["Sort", "Search", "Return"]
+        DECLARE menu = ["Sort", "Search", "Return"]
         title = user_data[2] + ", what do you want to do?"
     
         DOWHILE(1)
@@ -76,7 +74,7 @@ ENDFUNCTION
 
 FUNCTION sortclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
-        menu = ["User ID", "Status", "Name", "Email", "Points","Return"]
+        DECLARE menu = ["User ID", "Status", "Name", "Email", "Points","Return"]
         title = user_data[2] + ", you can sort the list here"
 
         DOWHILE(1)
@@ -127,9 +125,9 @@ ENDFUNCTION
         
 FUNCTION searchclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
-        menu = ["User ID", "Status", "Name", "License", "Phone Number", "Email", "Return"]
+        DECLARE menu = ["User ID", "Status", "Name", "License", "Phone Number", "Email", "Return"]
         title = user_data[2] + ", you can search a client here"
-        sequence = []
+        DECLARE sequence = []
     
         DOWHILE(1)
             default.print_title(title)
@@ -185,7 +183,7 @@ ENDFUNCTION
 
 FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
     DOWHILE(1):    
-        menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
+        DECLARE menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
         title = user_data[2] + ", what would you like to do"
     
         DOWHILE(1)
@@ -225,7 +223,7 @@ ENDFUNCTION
     
 FUNCTION sort_cars(user_data, data_carlist, space_cars)
     DOWHILE(1)
-        menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
+        DECLARE menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity","Weight Load","Return"]
         title = user_data[2] + ", you can sort the list here"
     
         DOWHILE(1)
@@ -307,7 +305,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
             PRINT("Car ID doesn't exists!")
             k = k + 1
             IF (k > 4) THEN
-                menu = ["Continue","Return"]
+                DECLARE menu = ["Continue","Return"]
                 DOWHILE(1)
                     default.general_menu(menu)
                     PRINT("Please Select: ")
@@ -334,7 +332,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
             PRINT(data_carlist[0][i] + ": " + car_data[i])  
         ENDLOOP  
             
-        menu = ["Edit", "Return"]
+        DECLARE menu = ["Edit", "Return"]
     
         DOWHILE(1): 
             PRINT("\n")   
@@ -361,7 +359,7 @@ ENDFUNCTION
               
 FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     PRINT("\nWhat do you want to edit?")
-    menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
+    DECLARE menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
     
     DOWHILE(1)
         default.general_menu(menu)
@@ -442,7 +440,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
     prev_id = data_carlist[-1][0]
    
     DOWHILE(1)
-        data = []
+        DECLARE data = []
         id = int(prev_id) + 1
         APPEND data TO id
         type = default.validation_cartypes()
@@ -489,7 +487,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
             k += 1
         ENDLOOP
             
-        menu = ["Confirm", "Return"]
+        DECLARE menu = ["Confirm", "Return"]
         DOWHILE(1)
             default.general_menu(menu)
             PRINT("Please Select: ")
@@ -533,7 +531,7 @@ ENDFUNCTION
 FUNCTION filter_menu(data_transactions, space_transactions)
     DOWHILE(1)
         title = "You can filter transactions here"
-        menu = ["Client ID", "Name", "Date","Booking ID","Return"]
+        DECLARE menu = ["Client ID", "Name", "Date","Booking ID","Return"]
         DOWHILE(1)
             default.print_title(title)
             DOWHILE(1)
@@ -621,7 +619,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                 IF (key == 0) THEN
                     PRINT("Booking ID does not exist.")
                 ELSE
-                    sequence = []
+                    DECLARE sequence = []
                     APPEND sequence TO index
                     default.print_sorttable(data_transactions, 3, sequence, space_transactions)   
                 ENDIF
@@ -638,7 +636,7 @@ ENDFUNCTION
         
 
 FUNCTION sub_filter_date(data_transactions)
-    sequence = []
+    DECLARE sequence = []
     DOWHILE(1)
         from_date = clients.select_date("From: ", "admin001")
         PRINT("")
@@ -694,7 +692,7 @@ FUNCTION transaction_interface(data_transactions, space_transactions)
     default.print_table(data_transactions, 3, space_transactions)
     DOWHILE(1)
         DOWHILE(1)
-            menu = ["Filter", "Return"]
+            DECLARE menu = ["Filter", "Return"]
             default.general_menu(menu)
             PRINT("Please select: ")
             READ choice
@@ -802,7 +800,7 @@ FUNCTION returncar_interface(data_transactions)
             PRINT("Penalty: " + str(data[-2]))
             
             DOWHILE(1)
-                menu = ["Confirm","Return"]
+                DECLARE menu = ["Confirm","Return"]
                 default.general_menu(menu)
                 PRINT("Please select: ")
                 READ choice

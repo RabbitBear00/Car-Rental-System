@@ -6,7 +6,7 @@ import sys
 
 FUNCTION startup_menu(main_title)
     PRINT_title(main_title)
-    menu = ["Registered", "Unregistered","Exit"]
+    DECLARE menu = ["Registered", "Unregistered","Exit"]
     general_menu(menu)
     PRINT("Please Select: ")
     READ choice
@@ -17,7 +17,7 @@ ENDFUNCTION
 
 
 FUNCTION login_menu(main_title)
-    lists = []
+    DECLARE lists = []
     PRINT_title(main_title)
     PRINT("Username/ID: ")
     INPUT username
@@ -31,7 +31,7 @@ ENDFUNCTION
 
 
 FUNCTION input_dataclients()
-    data = []
+    DECLARE data = []
     WITH OPEN("./data/clients.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
@@ -43,7 +43,7 @@ ENDFUNCTION
 
 
 FUNCTION input_datacars()
-    data_cars = []
+    DECLARE data_cars = []
     WITH OPEN("./data/cars_lists.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
@@ -54,7 +54,7 @@ ENDFUNCTION
 
 
 FUNCTION input_datatransactions()
-    data = []
+    DECLARE data = []
     WITH OPEN("./data/transactions.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
@@ -151,7 +151,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
         ENDIF
     ENDDO
     IF(i > 4)THEN
-        menu = ["Continue","Return"]
+        DECLARE menu = ["Continue","Return"]
             
         DOWHILE(True)
             general_menu(menu)
@@ -180,7 +180,7 @@ ENDFUNCTION
 
 FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_clients)
     title = "Guest, Welcome to Super Car Rental System"
-    menu = ["Register", "View Available Cars", "Return"]
+    DECLARE menu = ["Register", "View Available Cars", "Return"]
     DOWHILE(True)
         PRINT_title(title)
         general_menu(menu)
@@ -198,7 +198,7 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
         PRINT_table(data_carlist, 6, space_cars)
         PRINT("")
         DOWHILE(True)
-            menu = ["Return"]
+            DECLARE menu = ["Return"]
             general_menu(menu)
             PRINT("Please Select: ")
             READ choice
@@ -222,7 +222,7 @@ FUNCTION register_interface(data_clients, space_clients)
    
     DOWHILE(True)
         sign = 0
-        data = []
+        DECLARE DECLARE data = []
         id = int(prev_id) + 1
         APPEND id TO data
         APPEND "Normal" TO data
@@ -302,7 +302,7 @@ FUNCTION register_interface(data_clients, space_clients)
         ENDLOOP
             
             
-        menu = ["Confirm", "Return"]
+        DECLARE menu = ["Confirm", "Return"]
         DOWHILE(True)
             general_menu(menu)
             PRINT("Please Select: ")
@@ -525,7 +525,7 @@ FUNCTION sort_data(data, target, order, mode)
         start = 2
         count = 2
     ENDIF
-    sample = []
+    DECLARE sample = []
     index = 0
     rows = LEN(data)
     LOOP i IN data[0]:
@@ -542,7 +542,7 @@ FUNCTION sort_data(data, target, order, mode)
         
     len_sample = LEN(sample)
     
-    sequence = [*range(start, LEN_sample+count, 1)]
+    DECLARE sequence = [*range(start, LEN_sample+count, 1)]
     
     IF(mode == 2 AND ((index >=5 AND index <=9) OR index == 12 OR index == 13))THEN
         LOOP i FROM start TO <len_sample STEP +1
@@ -584,8 +584,8 @@ FUNCTION search_data(data, keyword, attribute, mode)
     IF(mode == 1)THEN
         start = 2
     ENDIF
-    sequence = []
-    sample = []
+    DECLARE sequence = []
+    DECLARE sample = []
     rows = LEN(data)
     keyword = keyword.lower()
     
@@ -752,7 +752,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
         ELSE
             PRINT("Total Quantity is the same as before")
             PRINT("Do you want to alter quantity for each section? ")
-            menu = ["Yes", "Return"]
+            DECLARE menu = ["Yes", "Return"]
             DOWHILE(True)
                 general_menu(menu)
                 PRINT("Please Select: ")
@@ -868,7 +868,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         PRINT("Unavailable   : " + str(num2))
         PRINT("In Service    : " + str(num3))
                 
-        menu = ["Confirm", "Return"]
+        DECLARE menu = ["Confirm", "Return"]
         general_menu(menu)
         PRINT("Please select: ")
         READ choice
@@ -969,7 +969,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         PRINT("Unavailable   : " + str(num2))
         PRINT("In Service    : " + str(num3))
                 
-        menu = ["Confirm", "Return"]
+        DECLARE menu = ["Confirm", "Return"]
         general_menu(menu)
         PRINT("Please select: ")
         READ choice

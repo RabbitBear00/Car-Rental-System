@@ -4,19 +4,19 @@ import clients
 import datetime 
 
 main()
-    data_clients = []
+    DECLARE data_clients = []
 
-    data_carlist = []
+    DECLARE data_carlist = []
 
-    data_transactions = []
+    DECLARE data_transactions = []
 
-    user_data = []
+    DECLARE user_data = []
 
     main_title = "Welcome to Super Car Rental System"
 
-    space_clients = [11, 6, 20, 20, 13, 15, 13, 35, 16, 12, 10]
-    space_cars = [7, 10, 20, 13, 10, 15, 15, 15, 15, 15, 10, 20, 12]
-    space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10, 10, 12, 21]
+    DECLARE space_clients = [11, 6, 20, 20, 13, 15, 13, 35, 16, 12, 10]
+    DECLARE space_cars = [7, 10, 20, 13, 10, 15, 15, 15, 15, 15, 10, 20, 12]
+    DECLARE space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10, 10, 12, 21]
 
     data_clients = default.input_dataclients()
     data_carlist = default.input_datacars()
