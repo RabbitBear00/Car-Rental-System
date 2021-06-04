@@ -1,7 +1,7 @@
-import admin
-import default 
-import clients 
-import datetime 
+IMPORT admin
+IMPORT default 
+IMPORT clients 
+IMPORT datetime 
 
 main()
     DECLARE data_clients = []

@@ -1,8 +1,8 @@
-import default
-import clients
-import datetime
-import sys
-import time
+IMPORT default
+IMPORT clients
+IMPORT datetime
+IMPORT sys
+IMPORT time
 
 FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
     title = user_data[2] + ", welcome back"
@@ -40,7 +40,7 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
             RETURN 
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
     DOWHILE(1):    
@@ -70,7 +70,7 @@ FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 FUNCTION sortclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
@@ -121,7 +121,7 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         default.print_sorttable(data_clients, 1, sequence, space_clients)
         PRINT("")
     ENDDO
-ENDFUNCTION
+
         
 FUNCTION searchclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
@@ -177,7 +177,7 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         default.print_sorttable(data_clients, 1, sequence, space_clients)
         PRINT("")
     ENDDO
-ENDFUNCTION
+
         
 
 
@@ -219,7 +219,7 @@ FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
     
 FUNCTION sort_cars(user_data, data_carlist, space_cars)
     DOWHILE(1)
@@ -280,7 +280,7 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         default.print_sorttable(data_carlist, 2, sequence, space_cars)
         PRINT("") 
     ENDDO 
-ENDFUNCTION  
+  
 
 FUNCTION carprofile_menu(data_carlist, space_cars)
     
@@ -355,7 +355,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         ENDIF
     ENDDO
     
-ENDFUNCTION
+
               
 FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     PRINT("\nWhat do you want to edit?")
@@ -433,7 +433,7 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
         ENDLOOP
 
     RETURN   
-ENDFUNCTION
+
 
 FUNCTION addcar_menu(data_carlist, space_cars)
     default.print_title("You can add a car here")
@@ -525,7 +525,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
         
 
 FUNCTION filter_menu(data_transactions, space_transactions)
@@ -632,7 +632,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
             RETURN
         ENDDO
     ENDDO
-ENDFUNCTION
+
         
 
 FUNCTION sub_filter_date(data_transactions)
@@ -685,7 +685,7 @@ FUNCTION sub_filter_date(data_transactions)
         PRINT("You can only book a date for a period IN the future.")
     ENDIF
     RETURN 3
-ENDFUNCTION
+
 
 
 FUNCTION transaction_interface(data_transactions, space_transactions)
@@ -708,7 +708,7 @@ FUNCTION transaction_interface(data_transactions, space_transactions)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
             
 FUNCTION returncar_interface(data_transactions)
     DOWHILE(1)
@@ -836,7 +836,7 @@ FUNCTION returncar_interface(data_transactions)
             ENDLOOP    
             RETURN
     ENDDO
-ENDFUNCTION
+
             
                 
             

@@ -1,8 +1,8 @@
-import default
-import datetime
-import time
-import sys
-import hashlib
+IMPORT default
+IMPORT datetime
+IMPORT time
+IMPORT sys
+IMPORT hashlib
 
 
 FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
@@ -42,7 +42,7 @@ FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, l
             RETURN 
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
@@ -76,7 +76,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
@@ -135,7 +135,7 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
         ENDLOOP
         
     RETURN
-ENDFUNCTION
+
        
 FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
     DOWHILE(1):    
@@ -173,7 +173,7 @@ FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transacti
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 
@@ -197,7 +197,7 @@ FUNCTION view_allcars(user_data, data_carlist, space_cars)
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
@@ -259,7 +259,7 @@ FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
     ENDDO
-ENDFUNCTION
+
         
 
 FUNCTION sub_sort_menu(header, data, mode)
@@ -284,7 +284,7 @@ FUNCTION sub_sort_menu(header, data, mode)
     ENDIF
         
     RETURN sequence
-ENDFUNCTION
+
            
 FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
     DOWHILE(1)
@@ -340,7 +340,7 @@ FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
     ENDDO
-ENDFUNCTION
+
     
 
 FUNCTION sub_search_menu(header, data, mode)
@@ -353,7 +353,7 @@ FUNCTION sub_search_menu(header, data, mode)
     sequence = default.search_data(data, keyword, header, mode)
     
     RETURN sequence
-ENDFUNCTION
+
 
 
 FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
@@ -373,7 +373,7 @@ FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
     IF (choice == '1') THEN
         RETURN
     ENDIF
-ENDFUNCTION
+
     
 FUNCTION update_password(user_data, data_clients, login_index, space_clients)
     title = user_data[2] + ", change your password here."
@@ -429,7 +429,7 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients)
         ENDLOOP
     
     RETURN
-ENDFUNCTION
+
 
        
 FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
@@ -454,7 +454,7 @@ FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transacti
             RETURN
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 FUNCTION select_date(header, user_data)
@@ -491,7 +491,7 @@ FUNCTION select_date(header, user_data)
     ENDDO
 
     RETURN temp
-ENDFUNCTION
+
         
 FUNCTION select_time(title)
     i = 0
@@ -528,7 +528,7 @@ FUNCTION select_time(title)
             
     RETURN temp
     
-ENDFUNCTION
+
 
 
 
@@ -787,7 +787,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
         ENDIF
     ENDDO
     RETURN
-ENDFUNCTION
+
             
 
 FUNCTION confirm_booking(headers, data)
@@ -828,7 +828,7 @@ FUNCTION confirm_booking(headers, data)
     IF (choice == '2') THEN
         RETURN 2
     ENDIF
-ENDFUNCTION
+
 
 
 FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
@@ -860,7 +860,7 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
         RETURN 1
     
     ENDIF
-ENDFUNCTION
+
             
         
 

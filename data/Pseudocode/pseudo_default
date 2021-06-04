@@ -1,7 +1,7 @@
-import datetime
-import hashlib
-import time 
-import sys
+IMPORT datetime
+IMPORT hashlib
+IMPORT time 
+IMPORT sys
         
 
 FUNCTION startup_menu(main_title)
@@ -12,7 +12,7 @@ FUNCTION startup_menu(main_title)
     READ choice
     
     RETURN choice
-ENDFUNCTION
+
     
 
 
@@ -27,7 +27,7 @@ FUNCTION login_menu(main_title)
     APPEND password TO lists
     
     RETURN lists
-ENDFUNCTION
+
 
 
 FUNCTION input_dataclients()
@@ -38,7 +38,7 @@ FUNCTION input_dataclients()
             data.append(temp)
         ENDLOOP    
     RETURN data
-ENDFUNCTION
+
         
 
 
@@ -50,7 +50,7 @@ FUNCTION input_datacars()
             data_cars.append(temp)
         ENDLOOP
     RETURN data_cars
-ENDFUNCTION
+
 
 
 FUNCTION input_datatransactions()
@@ -62,7 +62,7 @@ FUNCTION input_datatransactions()
         ENDLOOP
         
     RETURN data 
-ENDFUNCTION
+
     
 
 FUNCTION check_password(data, username, password)
@@ -87,7 +87,7 @@ FUNCTION check_password(data, username, password)
     ENDLOOP
         
     RETURN 0
-ENDFUNCTION
+
     
     
 
@@ -104,14 +104,14 @@ FUNCTION check_usernameID(data, username)
 
     ENDLOOP
     RETURN 0 
-ENDFUNCTION
+
 
 
 FUNCTION PRINT_title(title)
     PRINT("================================================================")
     PRINT(" " * int((64-LEN(title))/2) + title)
     PRINT("================================================================")
-ENDFUNCTION
+
 
 
 FUNCTION general_menu(list)
@@ -123,7 +123,7 @@ FUNCTION general_menu(list)
     ENDLOOP
         
     PRINT("\n")
-ENDFUNCTION
+
 
 
 FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
@@ -174,7 +174,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
     ENDIF
 
     RETURN password_key
-ENDFUNCTION
+
                         
                     
 
@@ -213,7 +213,7 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
     IF(choice == '3')THEN
         RETURN
     ENDIF
-ENDFUNCTION
+
 
 
 FUNCTION register_interface(data_clients, space_clients)
@@ -343,7 +343,7 @@ FUNCTION register_interface(data_clients, space_clients)
         ENDIF
         
     ENDDO
-ENDFUNCTION
+
             
             
     
@@ -376,7 +376,7 @@ FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, s
             EXIT()
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 
 
@@ -468,7 +468,7 @@ FUNCTION PRINT_table(data, mode, space, login_name = "")
 
         NEXT i
     ENDLOOP
-ENDFUNCTION
+
 
 
 FUNCTION PRINT_sorttable(data, mode, sequence, space)
@@ -514,7 +514,7 @@ FUNCTION PRINT_sorttable(data, mode, sequence, space)
 
         PRINT("")
     ENDLOOP
-ENDFUNCTION
+
 
 
 FUNCTION sort_data(data, target, order, mode)
@@ -576,7 +576,7 @@ FUNCTION sort_data(data, target, order, mode)
         ENDLOOP
     
     RETURN sequence
-ENDFUNCTION
+
 
 
 FUNCTION search_data(data, keyword, attribute, mode)
@@ -625,7 +625,7 @@ FUNCTION search_data(data, keyword, attribute, mode)
     ENDIF
     RETURN sequence
 
-ENDFUNCTION
+
 
 FUNCTION validation_length(length)
     length = int(length)
@@ -639,7 +639,7 @@ FUNCTION validation_length(length)
             PRINT("")
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 FUNCTION alidation_number(length)
     length = int(length)
@@ -654,7 +654,7 @@ FUNCTION alidation_number(length)
             PRINT("")
         ENDIF
     ENDDO
-ENDFUNCTION
+
 
 FUNCTION validation_email(length)
     length = int(length)
@@ -682,7 +682,7 @@ FUNCTION validation_email(length)
     
     ENDDO
     RETURN temp
-ENDFUNCTION
+
 
 FUNCTION validation_date()
     
@@ -700,7 +700,7 @@ FUNCTION validation_date()
             PRINT("Error! Incorrect date format")    
             PRINT("")
     ENDDO
-ENDFUNCTION
+
             
 FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
 
@@ -775,7 +775,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
        
     ENDDO
     RETURN car_data 
-ENDFUNCTION     
+     
             
             
 
@@ -884,7 +884,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         car_data[8] = int(car_data[8]) + num3          
     ENDIF                
     RETURN car_data
-ENDFUNCTION
+
                 
 
 FUNCTION sub_total_quantity_menu2(temp, car_data)
@@ -986,7 +986,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
     ENDIF
 
     RETURN car_data
-ENDFUNCTION
+
 
 FUNCTION validation_cartypes()
     
@@ -1002,7 +1002,7 @@ FUNCTION validation_cartypes()
     ENDDO        
     temp = temp[0].upper() + temp[1:LEN(temp)]
     RETURN temp 
-ENDFUNCTION     
+     
 
 
 FUNCTION validation_carnormal(target)
@@ -1012,4 +1012,3 @@ FUNCTION validation_carnormal(target)
     
     temp = temp[0].upper() + temp[1:LEN(temp)].lower()
     RETURN temp
-ENDFUNCTION
