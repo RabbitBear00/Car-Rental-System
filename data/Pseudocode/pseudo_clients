@@ -17,7 +17,7 @@ FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, l
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5') THEN
+            IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5') THEN
                 BREAK
             ENDIF
         ENDDO
@@ -62,7 +62,7 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice == '2') THEN
+            IF (choice == '1' OR choice == '2') THEN
                 BREAK
             ENDIF
                 
@@ -87,7 +87,7 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
         default.general_menu(menu)
         PRINT("Please Select: ")
         READ choice
-        IF (choice == '1' or choice == '2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
+        IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7') THEN
             BREAK
         ENDIF
     ENDDO
@@ -147,7 +147,7 @@ FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transacti
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice == '2' or choice == '3' or choice == '4') THEN
+            IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4') THEN
                 BREAK
             ENDIF
         ENDDO
@@ -184,7 +184,7 @@ FUNCTION view_allcars(user_data, data_carlist, space_cars)
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice == '2') THEN
+            IF (choice == '1' OR choice == '2') THEN
                 BREAK
             ENDIF
         ENDDO
@@ -210,7 +210,7 @@ FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7' or choice == '8') THEN
+            IF (choice == '1' OR choice =='2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7' OR choice == '8') THEN
                 BREAK
             ENDIF
         ENDDO
@@ -270,7 +270,7 @@ FUNCTION sub_sort_menu(header, data, mode)
         default.general_menu(sub_menu)
         PRINT("Please Select: ")
         READ choice
-        IF (choice == '1' or choice == '2') THEN
+        IF (choice == '1' OR choice == '2') THEN
             BREAK
         ENDIF
     ENDDO
@@ -297,7 +297,7 @@ FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
             default.general_menu(menu)
             PRINT("Please Select: ")
             READ choice
-            IF (choice == '1' or choice =='2' or choice == '3' or choice == '4' or choice == '5' or choice == '6' or choice == '7') THEN
+            IF (choice == '1' OR choice =='2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7') THEN
                 BREAK   
             ENDIF
         ENDDO
@@ -382,7 +382,7 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients)
         default.general_menu(menu)
         PRINT("Please Select: ")
         READ choice
-        IF (choice == '1' or choice == '2') THEN
+        IF (choice == '1' OR choice == '2') THEN
             BREAK
         ENDIF
     ENDDO
@@ -441,7 +441,7 @@ FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transacti
             default.general_menu(menu)
             PRINT("Please select: ")
             READ choice
-            IF (choice == '1' or choice == '2') THEN
+            IF (choice == '1' OR choice == '2') THEN
                 BREAK
             ENDIF
         ENDDO
@@ -477,7 +477,7 @@ FUNCTION select_date(header, user_data)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
                 READ choice
-                IF (choice == '1' or choice == '2') THEN
+                IF (choice == '1' OR choice == '2') THEN
                     BREAK
                 ENDIF
             ENDDO
@@ -513,7 +513,7 @@ FUNCTION select_time(title)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
                 READ choice
-                IF (choice == '1' or choice == '2') THEN
+                IF (choice == '1' OR choice == '2') THEN
                     BREAK
                 ENDIF
             ENDDO
@@ -561,7 +561,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 default.general_menu(menu)
                 PRINT("Please Select: ")
                 READ choice
-                IF (choice == '1' or choice == '2') THEN
+                IF (choice == '1' OR choice == '2') THEN
                     BREAK
                 ENDIF
             ENDDO
@@ -654,7 +654,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
 
         
 
-        IF (from_datetime < to_datetime and now_datetime < from_datetime) THEN
+        IF (from_datetime < to_datetime AND now_datetime < from_datetime) THEN
             result = compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
             IF (result == 0) THEN
                 PRINT("This model of car have all been rent out.")
@@ -698,7 +698,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                             default.general_menu(menu)
                             PRINT("Please select: ")
                             READ choice
-                            IF (choice == '1' or choice == '2') THEN
+                            IF (choice == '1' OR choice == '2') THEN
                                 BREAK
                             ENDIF
                         ENDDO
@@ -751,7 +751,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 user_data[-2] = str(float(user_data[-2]) + total_price)
                 user_data[-1] = str(int(total_price) + int(user_data[-1]))
                 
-                IF (int(float(user_data[-2])) > 2000 and user_data[1] == "Normal") THEN
+                IF (int(float(user_data[-2])) > 2000 AND user_data[1] == "Normal") THEN
                     default.print_title("You have become our VIP member")
                     PRINT("Congratulations " + str(user_data[2] +",\nYou will get 10% discount for every payment"))
                     user_data[1] = "VIP"
@@ -809,7 +809,7 @@ FUNCTION confirm_booking(headers, data)
         default.general_menu(menu)
         PRINT("Please Select: ")
         READ choice
-        IF (choice == '1' or choice == '2') THEN
+        IF (choice == '1' OR choice == '2') THEN
             BREAK
         ENDIF
     ENDDO
@@ -839,7 +839,7 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
             origin_fromtime = datetime.datetime.strptime(data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
             origin_totime = datetime.datetime.strptime(data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
             
-            IF ((origin_fromtime <= from_datetime <= origin_totime) or (origin_fromtime <= to_datetime <= origin_totime) or (from_datetime <= origin_fromtime <= to_datetime) or (from_datetime <= origin_totime <= to_datetime)) THEN
+            IF ((origin_fromtime <= from_datetime <= origin_totime) OR (origin_fromtime <= to_datetime <= origin_totime) OR (from_datetime <= origin_fromtime <= to_datetime) OR (from_datetime <= origin_totime <= to_datetime)) THEN
                 count += 1
             ENDIF
         ENDIF
