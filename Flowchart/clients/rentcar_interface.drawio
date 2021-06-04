@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-06-04T03:59:29.933Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="6xfeCpIlQLF1L3CQvwbu" version="14.7.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-04T04:33:08.598Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="mzpzDGp59d3wzftnYg7R" version="14.7.4" type="github">
   <diagram id="aVXqUsW4-UlWTaxkk0IP" name="Page-1">
-    <mxGraphModel dx="1204" dy="752" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
+    <mxGraphModel dx="2408" dy="1504" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -105,10 +105,19 @@
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-27" value="default.print_title(&quot;Please remember the Car ID to book a car. &quot;)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="880" y="1210" width="230" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="xEpDafs8aNGdOhIz3veM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="990" y="1680" as="targetPoint" />
+            <mxPoint x="1346" y="1250" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="1346" y="1680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-29" value="bookcar_interface(user_data, data_clients, data_carlist, data_transactions)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1235" y="1210" width="240" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Q01VI0QdXi_x2SWAzA1D-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="PGLwwLvlYjxcBt-9KEW7-30" target="Q01VI0QdXi_x2SWAzA1D-1">
+        <mxCell id="Q01VI0QdXi_x2SWAzA1D-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="PGLwwLvlYjxcBt-9KEW7-30" target="Q01VI0QdXi_x2SWAzA1D-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-30" value="default.print_title(title)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -132,8 +141,25 @@
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-35" value="default.print_table(data_carlist, 4, space_cars, login_index)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="560" y="1430" width="230" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="xEpDafs8aNGdOhIz3veM-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="PGLwwLvlYjxcBt-9KEW7-37" target="PGLwwLvlYjxcBt-9KEW7-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="675" y="1680" />
+              <mxPoint x="470" y="1680" />
+              <mxPoint x="470" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-37" value="view_allcars(user_data, data_carlist, space_cars)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="560" y="1550" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xEpDafs8aNGdOhIz3veM-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="PGLwwLvlYjxcBt-9KEW7-41">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="1680" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="995" y="1680" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-41" value="searchcar_menu(user_data, data_carlist, space_cars)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="880" y="1430" width="230" height="40" as="geometry" />
@@ -165,7 +191,7 @@
         <mxCell id="PGLwwLvlYjxcBt-9KEW7-57" value="True" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="1710" y="1140" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="Q01VI0QdXi_x2SWAzA1D-1" value="Return" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="Q01VI0QdXi_x2SWAzA1D-1" value="Return" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1650" y="1340" width="90" height="60" as="geometry" />
         </mxCell>
       </root>
