@@ -403,7 +403,7 @@ def select_time(title):
             datetime.datetime.strptime(temp, "%H:%M")
             break
         except ValueError:
-             print("Error!")
+             print("Error! Incorrect time format.")
              i = i + 1
                
         if(i > 4):
@@ -491,7 +491,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     
         #print(from_time)
  
-#Getting to time
+        #Getting to time
 
     
         while(1):
@@ -509,9 +509,11 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
         while(1):
             to_time = select_time("To: ")
             print("")
-            if(to_time == 1):
+            if(to_time == 1): 
+                #Continue to loop
                 pass
             elif(to_time == 2):
+                #Get back to previous menu
                 return
             else:
                 break
@@ -591,6 +593,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                         
                         break
                     else:
+                        print("Your points are not enough to exchange")
                         continue
             
             #print(from_date)
