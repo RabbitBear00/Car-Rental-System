@@ -404,10 +404,10 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients)
         old_password = md5_hash
         IF (old_password == user_data[3]) THEN
             BREAK
-        ENDIF
         
         ELSE
             PRINT(str(3-i-1) + " attempts are left.")
+        ENDIF
         i = i + 1
         PRINT("")
     ENDDO
@@ -467,10 +467,10 @@ FUNCTION select_date(header, user_data)
         PRINT("Please enter date IN DD-MM-YYYY")
         PRINT("Date: ")
         READ temp
-        try
+        TRY
             datetime.datetime.strptime(temp, "%d-%m-%Y")
             BREAK
-        except ValueError
+        EXCEPT ValueError
              PRINT("Error! Incorrect date format.")
              i = i + 1
         IF (i > 4) THEN
@@ -502,10 +502,10 @@ FUNCTION select_time(title)
         PRINT("Please enter time IN HH:MM")
         PRINT("Time: ")
         READ temp
-        try
+        TRY
             datetime.datetime.strptime(temp, "%H:%M")
             BREAK
-        except ValueError
+        EXCEPT ValueError
              PRINT("Error!")
              i = i + 1
                
@@ -692,10 +692,10 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     PRINT("The rebate will automatically be deducted IN your transactions")
                     PRINT("If you cancel the current payment, no points will be deducted")
                     PRINT("")
-                    try
+                    TRY
                         PROMPT "How many RM5 vouchers do you want to exchange? "
                         GET count AS INTEGER
-                    except ValueError
+                    EXCEPT ValueError
                         PRINT("Error input")
                         CONTINUE
                     IF ((int(user_data[-1])/100) >= count) THEN
