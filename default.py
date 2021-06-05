@@ -301,7 +301,7 @@ def startup_interface(main_title, data_clients, data_carlist, space_cars, space_
     while(1):
         while(1):
             choice = startup_menu(main_title)
-            if(choice == '1' or choice == '2' or choice == '3' or choice == '4'):
+            if(choice == '1' or choice == '2' or choice == '3'):
                 break  
                      
         if(choice == '1'):
