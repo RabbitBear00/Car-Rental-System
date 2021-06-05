@@ -445,22 +445,22 @@ FUNCTION addcar_menu(data_carlist, space_cars)
     DOWHILE(1)
         DECLARE data = []
         id = int(prev_id) + 1
-        APPEND data TO id
+        APPEND id TO data
         type = default.validation_cartypes()
         PRINT("")
-        APPEND data TO type
+        APPEND type TO data
         brand = default.validation_carnormal("car brand")
         PRINT("")
-        APPEND data TO brand
+        APPEND brand TO data
         model = default.validation_carnormal("car model")
         PRINT("")
-        APPEND data TO model
+        APPEND model TO data
         PRINT("Please enter model year: ")
         year = default.validation_number(4)
         PRINT("")
-        APPEND data TO year
+        APPEND year TO data
         LOOP i FROM 0 TO <range(4) STEP +1
-            APPEND data TO 0
+            APPEND 0 TO data
             NEXT i 
         ENDLOOP
         data = default.validation_totalquantity(data_carlist, data, 2)
@@ -469,19 +469,19 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         PRINT("")
         PRINT("Please enter price per hour: ")
         price = default.validation_number(4)
-        APPEND data TO price
+        APPEND price TO data
         PRINT("")
         PRINT("Please enter fuel type: ")
         fuel = default.validation_length(space_cars[10])
-        APPEND data TO fuel
+        APPEND fuel TO data
         PRINT("")
         PRINT("Please enter passenger number: ")
         passenger = default.validation_number(3)
-        APPEND data TO passenger
+        APPEND passenger TO data
         PRINT("")
         PRINT("Please enter price weight load: ")
         weight = default.validation_number(10)
-        APPEND data TO weight
+        APPEND weight TO data
         PRINT("")
         
         default.print_title("Confirm Car Details")
@@ -509,7 +509,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
                 k += 1
                 NEXT i 
             ENDLOOP
-            APPEND data_carlist TO data
+            APPEND data TO data_carlist
             WITH OPEN("./data/cars_lists.txt",  mode = 'w') AS cars_file:
                 LOOP line IN data_carlist:
                     temp = ",".join(line)
@@ -631,7 +631,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                     PRINT("Booking ID does not exist.")
                 ELSE
                     DECLARE sequence = []
-                    APPEND sequence TO index
+                    APPEND index TO sequence
                     default.print_sorttable(data_transactions, 3, sequence, space_transactions)   
                 ENDIF
             ENDIF                 
@@ -685,7 +685,7 @@ FUNCTION sub_filter_date(data_transactions)
             temp_to = data_transactions[index][9]
             temp_to = datetime.datetime.strptime(temp_to, "%d-%m-%Y")
             IF (from_date <= temp_from AND to_date >= temp_to) THEN
-                APPEND sequence TO index
+                APPEND index TO sequence
             ENDIF
             NEXT index
         ENDLOOP

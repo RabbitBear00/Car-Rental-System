@@ -506,7 +506,7 @@ FUNCTION select_time(title)
             datetime.datetime.strptime(temp, "%H:%M")
             BREAK
         EXCEPT ValueError
-             PRINT("Error!")
+             PRINT("Error! Incorrect time format.")
              i = i + 1
                
         IF (i > 4) THEN
@@ -577,18 +577,20 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
             IF (choice == '2') THEN
                 RETURN
             ENDIF
+
+            RETURN
         
         ENDIF
     ENDDO
             
         
-    APPEND data TO user_data[0]
-    APPEND data TO user_data[2]
+    APPEND user_data[0] TO data
+    APPEND user_data[2] TO data
     LOOP i FROM 0 TO <range(4) STEP +1
-        APPEND data TO data_carlist[index][i]
+        APPEND data_carlist[index][i] TO data
         NEXT i
     ENDLOOP
-    APPEND data TO data_carlist[index][9]
+    APPEND data_carlist[index][9] TO data
     
     DOWHILE(1):   
         DOWHILE(1)
@@ -689,7 +691,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 DOWHILE(1)
                     PRINT("Points currently: " + str(user_data[-1]))
                     PRINT("100 points = RM5 voucher")
-                    PRINT("The rebate will automatically be deducted IN your transactions")
+                    PRINT("The rebate will automatically be deducted in your transactions")
                     PRINT("If you cancel the current payment, no points will be deducted")
                     PRINT("")
                     TRY
@@ -723,31 +725,32 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                         
                         BREAK
                     ELSE
+                        PRINT("Your points are not enough to exchange")
                         CONTINUE
                     ENDIF
                 ENDDO
             ENDIF
 
 
-            APPEND data TO from_date
-            APPEND data TO from_time
-            APPEND data TO to_date
-            APPEND data TO to_time
-            APPEND data TO now_date
-            APPEND data TO now_time
-            APPEND data TO str(total_hours)
-            APPEND data TO str(total_price)
+            APPEND from_date TO data
+            APPEND from_time TO data
+            APPEND to_date TO data
+            APPEND to_time TO data
+            APPEND now_date TO data
+            APPEND now_time TO data
+            APPEND str(total_hours) TO data
+            APPEND str(total_price) TO data
             booking_id = int(data_transactions[-1][-4]) + 1
-            APPEND data TO str(booking_id)
-            APPEND data TO "Rented"
-            APPEND data TO "0"
-            APPEND data TO "-"
+            APPEND str(booking_id) TO data
+            APPEND "Rented" TO data
+            APPEND "0" TO data
+            APPEND "-" TO data
             choice = confirm_booking(data_transactions[0], data)
             
 
             IF (choice == 1) THEN
                 
-                APPEND data_transactions TO data
+                APPEND data TO data_transactions
                 WITH OPEN("./data/transactions.txt",  mode = 'w') AS transactions_file:
                     LOOP line IN data_transactions:
                         temp = ",".join(line)
@@ -793,7 +796,7 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
         
         
         ELSE
-            PRINT("You can only book a date for a period IN the future.")
+            PRINT("You can only book a date for a period in the future.")
         ENDIF
     ENDDO
     RETURN

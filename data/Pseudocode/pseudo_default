@@ -35,7 +35,7 @@ FUNCTION input_dataclients()
     WITH OPEN("./data/clients.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
-            data.append(temp)
+            APPEND temp TO data
             NEXT line
         ENDLOOP    
     RETURN data
@@ -48,7 +48,7 @@ FUNCTION input_datacars()
     WITH OPEN("./data/cars_lists.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
-            data_cars.append(temp)
+            APPEND temp TO data_cars
             NEXT line
         ENDLOOP
     RETURN data_cars
@@ -60,7 +60,7 @@ FUNCTION input_datatransactions()
     WITH OPEN("./data/transactions.txt") AS csv_file:
         LOOP line IN csv_file:
             temp = line.strip().split(",")
-            data.append(temp)
+            APPEND temp TO data
             NEXT line
         ENDLOOP
         
@@ -132,7 +132,7 @@ FUNCTION general_menu(list)
 FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
     
     i = 0 
-    DOWHILE(True)
+    DOWHILE(1)
         login_details = login_menu(main_title)
         username_key = check_usernameID(data_clients, login_details[0])
         password_key = check_password(data_clients, login_details[0], login_details[1])
@@ -156,7 +156,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
     IF(i > 4)THEN
         DECLARE menu = ["Continue","Return"]
             
-        DOWHILE(True)
+        DOWHILE(1)
             general_menu(menu)
             PRINT("Please Select: ")
             READ choice
@@ -184,7 +184,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
 FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_clients)
     title = "Guest, Welcome to Super Car Rental System"
     DECLARE menu = ["Register", "View Available Cars", "Return"]
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT_title(title)
         general_menu(menu)
         PRINT("Please Select: ")
@@ -200,7 +200,7 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
     IF(choice == '2')THEN
         PRINT_table(data_carlist, 6, space_cars)
         PRINT("")
-        DOWHILE(True)
+        DOWHILE(1)
             DECLARE menu = ["Return"]
             general_menu(menu)
             PRINT("Please Select: ")
@@ -223,7 +223,7 @@ FUNCTION register_interface(data_clients, space_clients)
     PRINT_title("You can register here")
     prev_id = data_clients[-1][0]
    
-    DOWHILE(True)
+    DOWHILE(1)
         sign = 0
         DECLARE DECLARE data = []
         id = int(prev_id) + 1
@@ -245,7 +245,7 @@ FUNCTION register_interface(data_clients, space_clients)
             continue
         PRINT("")
         APPEND name TO data
-        DOWHILE(True)
+        DOWHILE(1)
             PRINT("Plase enter your password")
             password_1 = validation_length(space_clients[3])
             PRINT("")
@@ -308,7 +308,7 @@ FUNCTION register_interface(data_clients, space_clients)
             
             
         DECLARE menu = ["Confirm", "Return"]
-        DOWHILE(True)
+        DOWHILE(1)
             general_menu(menu)
             PRINT("Please Select: ")
             READ choice
@@ -357,8 +357,8 @@ FUNCTION register_interface(data_clients, space_clients)
 
 FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
     
-    DOWHILE(True)
-        DOWHILE(True)
+    DOWHILE(1)
+        DOWHILE(1)
             choice = startup_menu(main_title)
             IF(choice == '1' OR choice == '2' OR choice == '3' OR choice == '4')THEN
                 BREAK  
@@ -640,7 +640,7 @@ FUNCTION search_data(data, keyword, attribute, mode)
 
 FUNCTION validation_length(length)
     length = int(length)
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT(" ")
         READ temp
         IF(LEN(temp) <=length)THEN
@@ -654,7 +654,7 @@ FUNCTION validation_length(length)
 
 FUNCTION alidation_number(length)
     length = int(length)
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT(" ")
         READ temp
         
@@ -669,7 +669,7 @@ FUNCTION alidation_number(length)
 
 FUNCTION validation_email(length)
     length = int(length)
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT(" ")
         READ temp
         
@@ -681,7 +681,7 @@ FUNCTION validation_email(length)
         ENDIF
     ENDDO
             
-    DOWHILE(True)
+    DOWHILE(1)
         IF LEN(temp) <= length THEN
             BREAK
         ELSE
@@ -697,7 +697,7 @@ FUNCTION validation_email(length)
 
 FUNCTION validation_date()
     
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("Please enter date in DD-MM-YYYY")
         PRINT(" ")
         READ temp
@@ -715,7 +715,7 @@ FUNCTION validation_date()
             
 FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
 
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("Total Quantity = Available + Unavailable + In Service")
         PRINT("You can only input upto 4 positive digits")
         PRINT("")
@@ -765,7 +765,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             PRINT("Total Quantity is the same as before")
             PRINT("Do you want to alter quantity for each section? ")
             DECLARE menu = ["Yes", "Return"]
-            DOWHILE(True)
+            DOWHILE(1)
                 general_menu(menu)
                 PRINT("Please Select: ")
                 READ choice
@@ -799,7 +799,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
     IF order == '2' THEN
         title = "deleted"
     ENDIF
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("You have " + str(title) + " " + str(count) + " cars into the total quantity for car ID: " + str(car_data[0]))
         PRINT("Available + Unavailable + In Service = " + str(count))
         PRINT("Please enter the quantity for each section below: ")
@@ -877,7 +877,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         BREAK
     ENDDO
                 
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("Do you confirm the following changes: ")
         PRINT("Available     : " + str(num1))
         PRINT("Unavailable   : " + str(num2))
@@ -904,7 +904,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
 
 FUNCTION sub_total_quantity_menu2(temp, car_data)
     count = int(temp)
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("Please reenter the quantity for 'Available', 'Unavailable', 'In Service'.")
         PRINT("Available + Unavailable + In Service = Total Quantity")
         PRINT("The total quantity now is: " + str(temp))
@@ -980,7 +980,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         BREAK
     ENDDO
                 
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("Do you confirm the following changes: ")
         PRINT("Total Quantity: " + str(temp))
         PRINT("Available     : " + str(num1))
@@ -1008,7 +1008,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
 
 FUNCTION validation_cartypes()
     
-    DOWHILE(True)
+    DOWHILE(1)
         PRINT("You can only enter: City, Electric, Prestige, Van, Truck")    
         PRINT("")
         PRINT("Please enter car type: ")
