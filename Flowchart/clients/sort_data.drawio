@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-06-05T12:31:54.445Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="gsy47YH3YG67CfImhusV" version="14.7.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-05T12:41:27.077Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="2Hq1QBfdAfa8RQHaydep" version="14.7.6" type="github">
   <diagram id="OGg4W-kkd8_lV_XXp0Lj" name="Page-1">
     <mxGraphModel dx="1444" dy="876" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="KKplSYqsVXm_G8sszua0-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-1" target="KKplSYqsVXm_G8sszua0-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="KKplSYqsVXm_G8sszua0-1" value="PRINT(&quot;Please Select: &quot;)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="KKplSYqsVXm_G8sszua0-1" value="start = 1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="430" y="120" width="230" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KKplSYqsVXm_G8sszua0-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-2" target="KKplSYqsVXm_G8sszua0-1">
@@ -19,7 +19,7 @@
         <mxCell id="KKplSYqsVXm_G8sszua0-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-4" target="KKplSYqsVXm_G8sszua0-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="KKplSYqsVXm_G8sszua0-4" value="PRINT(&quot;Please Select: &quot;)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="KKplSYqsVXm_G8sszua0-4" value="count = 1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="430" y="200" width="230" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KKplSYqsVXm_G8sszua0-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-6" target="KKplSYqsVXm_G8sszua0-8">
@@ -178,7 +178,7 @@
         <mxCell id="KKplSYqsVXm_G8sszua0-53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-49" target="KKplSYqsVXm_G8sszua0-52">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="KKplSYqsVXm_G8sszua0-49" value="APPEND data[i][index] TO sample" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="KKplSYqsVXm_G8sszua0-49" value="len_sample = LEN(sample)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="920" y="120" width="230" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KKplSYqsVXm_G8sszua0-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-38" target="KKplSYqsVXm_G8sszua0-49">
@@ -193,7 +193,7 @@
         <mxCell id="KKplSYqsVXm_G8sszua0-55" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-52" target="KKplSYqsVXm_G8sszua0-54">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="KKplSYqsVXm_G8sszua0-52" value="APPEND data[i][index] TO sample" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="KKplSYqsVXm_G8sszua0-52" value="DECLARE sequence = [*range(start, LEN_sample+count, 1)]" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="920" y="200" width="230" height="40" as="geometry" />
         </mxCell>
         <mxCell id="KKplSYqsVXm_G8sszua0-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="KKplSYqsVXm_G8sszua0-54" target="KKplSYqsVXm_G8sszua0-58">
