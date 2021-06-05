@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-06-05T13:15:55.148Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="61qoqKqkcI0rRd2uWU6J" version="14.7.6" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-05T13:26:58.432Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36" etag="091BC6Mw6LE84GBx_855" version="14.7.6" type="github">
   <diagram id="oujK_isSVb4P6oCZF3nO" name="Page-1">
     <mxGraphModel dx="1227" dy="745" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="4681" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="yym1RUzuS8589676NbFL-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-1" target="yym1RUzuS8589676NbFL-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-1" value="default.general_menu(menu)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+        <mxCell id="yym1RUzuS8589676NbFL-1" value="FUNCTION validation_number(length)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
           <mxGeometry x="260" y="80" width="240" height="70" as="geometry" />
         </mxCell>
         <mxCell id="yym1RUzuS8589676NbFL-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-2" target="yym1RUzuS8589676NbFL-3">
@@ -28,32 +28,27 @@
         <mxCell id="yym1RUzuS8589676NbFL-4" value="READ temp" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
           <mxGeometry x="266" y="400" width="229" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-5" target="yym1RUzuS8589676NbFL-10">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="yym1RUzuS8589676NbFL-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-5" target="yym1RUzuS8589676NbFL-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-5" value="&quot;@&quot; IN temp AND &quot;.com&quot; IN temp" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="273" y="500" width="214" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-10" target="yym1RUzuS8589676NbFL-18">
+        <mxCell id="yym1RUzuS8589676NbFL-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-5" target="yym1RUzuS8589676NbFL-41">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-10" value="BREAK" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="265" y="640" width="230" height="40" as="geometry" />
+        <mxCell id="yym1RUzuS8589676NbFL-5" value="temp.isdecimal() == True AND LEN(temp) &amp;lt;= Length" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="273" y="500" width="214" height="100" as="geometry" />
         </mxCell>
         <mxCell id="yym1RUzuS8589676NbFL-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-12" target="yym1RUzuS8589676NbFL-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-12" value="PRINT(&quot;Email format not correct&quot; )" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="yym1RUzuS8589676NbFL-12" value="PRINT(&quot;You can only enter &quot; + str(length) +&quot; digit of numbers&quot; )" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="530" y="530" width="230" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-14" target="yym1RUzuS8589676NbFL-3">
+        <mxCell id="yym1RUzuS8589676NbFL-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yym1RUzuS8589676NbFL-14">
           <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="270" as="targetPoint" />
             <Array as="points">
               <mxPoint x="780" y="660" />
-              <mxPoint x="780" y="320" />
+              <mxPoint x="780" y="270" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -64,10 +59,10 @@
           <mxGeometry x="487" y="530" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="yym1RUzuS8589676NbFL-17" value="True" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="380" y="600" width="40" height="20" as="geometry" />
+          <mxGeometry x="390" y="600" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="yym1RUzuS8589676NbFL-18" value="LEN(temp) &lt;= length" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="307.5" y="780" width="145" height="110" as="geometry" />
+        <mxCell id="yym1RUzuS8589676NbFL-41" value="RETURN temp" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="335.5" y="650" width="90" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
