@@ -41,7 +41,6 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
         ENDIF
     ENDDO
 
-
 FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
     DOWHILE(1):    
         DECLARE menu = ["Sort", "Search", "Return"]
@@ -70,7 +69,6 @@ FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
             RETURN
         ENDIF
     ENDDO
-
 
 FUNCTION sortclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
@@ -121,8 +119,7 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         CALL FUNCTION print_sorttable(data_clients, 1, sequence, space_clients)
         PRINT("")
     ENDDO
-
-        
+ 
 FUNCTION searchclient_menu(user_data, data_clients, space_clients)
     DOWHILE(1)
         DECLARE menu = ["User ID", "Status", "Name", "License", "Phone Number", "Email", "Return"]
@@ -178,9 +175,6 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         PRINT("")
     ENDDO
 
-        
-
-
 FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
     DOWHILE(1):    
         DECLARE menu = ["Sort All Cars", "Search for a  Car", "Edit Car Details","Add a car", "Return"]
@@ -219,7 +213,6 @@ FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
             RETURN
         ENDIF
     ENDDO
-
     
 FUNCTION sort_cars(user_data, data_carlist, space_cars)
     DOWHILE(1)
@@ -281,7 +274,6 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         PRINT("") 
     ENDDO 
   
-
 FUNCTION carprofile_menu(data_carlist, space_cars)
     
     
@@ -357,8 +349,6 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         ENDIF
     ENDDO
     
-
-              
 FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     PRINT("\nWhat do you want to edit?")
     DECLARE menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
@@ -418,15 +408,10 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
         temp = CALL FUNCTION validation_number(10)
         car_data[12] = temp
     ENDIF
-       
-
-    
         
     data_carlist[index] = car_data
     PRINT(index)
     PRINT(car_data)
-    
-
     
     WITH OPEN("./data/cars_lists.txt",  mode = 'w') AS cars_file:
         LOOP line IN data_carlist:
@@ -436,7 +421,6 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
         ENDLOOP
 
     RETURN   
-
 
 FUNCTION addcar_menu(data_carlist, space_cars)
     CALL FUNCTION print_title("You can add a car here")
@@ -532,9 +516,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
         IF (choice == '2') THEN
             RETURN
         ENDIF
-    ENDDO
-
-        
+    ENDDO  
 
 FUNCTION filter_menu(data_transactions, space_transactions)
     DOWHILE(1)
@@ -644,8 +626,6 @@ FUNCTION filter_menu(data_transactions, space_transactions)
         ENDDO
     ENDDO
 
-        
-
 FUNCTION sub_filter_date(data_transactions)
     DECLARE sequence = []
     DOWHILE(1)
@@ -671,11 +651,8 @@ FUNCTION sub_filter_date(data_transactions)
         ENDIF
     ENDDO    
 
-
     from_date = datetime.datetime.strptime(from_date, "%d-%m-%Y")
     to_date = datetime.datetime.strptime(to_date, "%d-%m-%Y")
-
-    
 
     IF from_date < to_date
         LOOP index FROM 1 TO < len(data_transactions) STEP +1
@@ -692,13 +669,10 @@ FUNCTION sub_filter_date(data_transactions)
         
         RETURN sequence
                 
-        
     ELSE
         PRINT("You can only book a date for a period IN the future.")
     ENDIF
     RETURN 3
-
-
 
 FUNCTION transaction_interface(data_transactions, space_transactions)
     CALL FUNCTION print_table(data_transactions, 3, space_transactions)
@@ -780,7 +754,6 @@ FUNCTION returncar_interface(data_transactions)
             ENDIF
         ENDDO
 
-
         to_date = data[9]
         to_time = data[10]
         return_datetime = datetime.datetime.strptime(return_date + " " + return_time, "%d-%m-%Y %H:%M")
@@ -853,17 +826,3 @@ FUNCTION returncar_interface(data_transactions)
             RETURN
     ENDDO
 
-            
-                
-            
-            
-            
-                
-            
-        
-        
-            
-        
-        
-
-    

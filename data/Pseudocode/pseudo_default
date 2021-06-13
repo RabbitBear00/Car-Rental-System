@@ -2,7 +2,7 @@ IMPORT datetime
 IMPORT hashlib
 IMPORT time 
 IMPORT sys
-        
+
 
 FUNCTION startup_menu(main_title)
     CALL FUNCTION print_title(main_title)
@@ -12,9 +12,6 @@ FUNCTION startup_menu(main_title)
     READ choice
     
     RETURN choice
-
-    
-
 
 FUNCTION login_menu(main_title)
     DECLARE lists = []
@@ -28,8 +25,6 @@ FUNCTION login_menu(main_title)
     
     RETURN lists
 
-
-
 FUNCTION input_dataclients()
     DECLARE data = []
     WITH OPEN("./data/clients.txt") AS csv_file:
@@ -38,10 +33,7 @@ FUNCTION input_dataclients()
             APPEND temp TO data
             NEXT line
         ENDLOOP    
-    RETURN data
-
-        
-
+    RETURN data  
 
 FUNCTION input_datacars()
     DECLARE data_cars = []
@@ -53,8 +45,6 @@ FUNCTION input_datacars()
         ENDLOOP
     RETURN data_cars
 
-
-
 FUNCTION input_datatransactions()
     DECLARE data = []
     WITH OPEN("./data/transactions.txt") AS csv_file:
@@ -65,8 +55,6 @@ FUNCTION input_datatransactions()
         ENDLOOP
         
     RETURN data 
-
-    
 
 FUNCTION check_password(data, username, password)
     rows = LEN(data)
@@ -91,9 +79,6 @@ FUNCTION check_password(data, username, password)
         
     RETURN 0
 
-    
-    
-
 FUNCTION check_usernameID(data, username)
     rows = LEN(data)
     LOOP i FROM 1 TO <rows step +1
@@ -108,14 +93,10 @@ FUNCTION check_usernameID(data, username)
     ENDLOOP
     RETURN 0 
 
-
-
 FUNCTION print_title(title)
     PRINT("================================================================")
     PRINT(" " * int((64-LEN(title))/2) + title)
     PRINT("================================================================")
-
-
 
 FUNCTION general_menu(list)
     length = LEN(list)
@@ -126,8 +107,6 @@ FUNCTION general_menu(list)
     ENDLOOP
         
     PRINT("\n")
-
-
 
 FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
     
@@ -176,10 +155,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
         ENDIF   
     ENDIF
 
-    RETURN password_key
-
-                        
-                    
+    RETURN password_key                
 
 FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_clients)
     title = "Guest, Welcome to Super Car Rental System"
@@ -216,8 +192,6 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
     IF(choice == '3')THEN
         RETURN
     ENDIF
-
-
 
 FUNCTION register_interface(data_clients, space_clients)
     CALL FUNCTION print_title("You can register here")
@@ -292,7 +266,6 @@ FUNCTION register_interface(data_clients, space_clients)
         APPEND 0 TO data
         APPEND 0 TO data
         
-        
         CALL FUNCTION print_title("Confirm Registeration Details")
         k = 0
         LOOP i IN data:
@@ -305,8 +278,7 @@ FUNCTION register_interface(data_clients, space_clients)
             k += 1
             NEXT i 
         ENDLOOP
-            
-            
+             
         DECLARE menu = ["Confirm", "Return"]
         DOWHILE(1)
             CALL FUNCTION general_menu(menu)
@@ -344,16 +316,11 @@ FUNCTION register_interface(data_clients, space_clients)
             RETURN
         ENDIF    
         
-        
         IF(choice == '2')THEN
             RETURN                
         ENDIF
         
     ENDDO
-
-            
-            
-    
 
 FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
     
@@ -383,9 +350,6 @@ FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, s
             EXIT()
         ENDIF
     ENDDO
-
-
-
 
 FUNCTION print_table(data, mode, space, login_name = "")
     rows = LEN(data)
@@ -478,8 +442,6 @@ FUNCTION print_table(data, mode, space, login_name = "")
         NEXT i
     ENDLOOP
 
-
-
 FUNCTION print_sorttable(data, mode, sequence, space)
     
     IF(mode == 1)THEN
@@ -524,8 +486,6 @@ FUNCTION print_sorttable(data, mode, sequence, space)
         PRINT("")
         NEXT i
     ENDLOOP
-
-
 
 FUNCTION sort_data(data, target, order, mode)
     start = 1
@@ -588,8 +548,6 @@ FUNCTION sort_data(data, target, order, mode)
     
     RETURN sequence
 
-
-
 FUNCTION search_data(data, keyword, attribute, mode)
     start = 1
     IF(mode == 1)THEN
@@ -628,16 +586,12 @@ FUNCTION search_data(data, keyword, attribute, mode)
         NEXT i
     ENDLOOP
     
-
-    
     IF(mode == 1)THEN
         sequence = [x + 2 LOOP x IN sequence]
     ELSE
          sequence = [x + 1 LOOP x IN sequence]
     ENDIF
     RETURN sequence
-
-
 
 FUNCTION validation_length(length)
     length = CALL FUNCTION (length)
@@ -652,7 +606,6 @@ FUNCTION validation_length(length)
         ENDIF
     ENDDO
 
-
 FUNCTION validation_number(length)
     length = CALL FUNCTION (length)
     DOWHILE(1)
@@ -666,7 +619,6 @@ FUNCTION validation_number(length)
             PRINT("")
         ENDIF
     ENDDO
-
 
 FUNCTION validation_email(length)
     length = CALL FUNCTION (length)
@@ -695,7 +647,6 @@ FUNCTION validation_email(length)
     ENDDO
     RETURN temp
 
-
 FUNCTION validation_date()
     
     DOWHILE(1)
@@ -713,7 +664,6 @@ FUNCTION validation_date()
             PRINT("")
     ENDDO
 
-            
 FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
 
     DOWHILE(1)
@@ -787,10 +737,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
     
        
     ENDDO
-    RETURN car_data 
-     
-            
-            
+    RETURN car_data    
 
 FUNCTION sub_total_quantity_menu1(temp, car_data, order)
     count = CALL FUNCTION (temp - int(car_data[5]))
@@ -899,9 +846,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         car_data[7] = int(car_data[7]) + num2
         car_data[8] = int(car_data[8]) + num3          
     ENDIF                
-    RETURN car_data
-
-                
+    RETURN car_data        
 
 FUNCTION sub_total_quantity_menu2(temp, car_data)
     count = CALL FUNCTION (temp)
@@ -1006,7 +951,6 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
 
     RETURN car_data
 
-
 FUNCTION validation_cartypes()
     
     DOWHILE(1)
@@ -1021,8 +965,6 @@ FUNCTION validation_cartypes()
     ENDDO        
     temp = temp[0].upper() + temp[1:LEN(temp)]
     RETURN temp 
-     
-
 
 FUNCTION validation_carnormal(target)
     

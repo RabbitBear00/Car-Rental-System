@@ -4,7 +4,6 @@ IMPORT time
 IMPORT sys
 IMPORT hashlib
 
-
 FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
     
 
@@ -43,8 +42,6 @@ FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, l
         ENDIF
     ENDDO
 
-
-
 FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
     DOWHILE(1):    
         PRINT("\n")
@@ -77,8 +74,6 @@ FUNCTION profile_menu(user_data, data_clients, login_index, space_clients)
             RETURN
         ENDIF
     ENDDO
-
-
 
 FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
     PRINT("\nWhat do you want to edit?")
@@ -122,12 +117,8 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
         temp = CALL FUNCTION validation_number(16)
         user_data[8] = temp
     ENDIF
-    
-    
 
     data_clients[login_index] = user_data
-    
-
     
     WITH OPEN("./data/clients.txt",  mode = 'w') AS clients_file:
         LOOP line IN data_clients:
@@ -137,7 +128,6 @@ FUNCTION edit_profile(user_data, data_clients, login_index, space_clients)
         ENDLOOP
         
     RETURN
-
        
 FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
     DOWHILE(1):    
@@ -176,9 +166,6 @@ FUNCTION rentcar_interface(user_data, data_clients, data_carlist, data_transacti
         ENDIF
     ENDDO
 
-
-
-
 FUNCTION view_allcars(user_data, data_carlist, space_cars)
     DOWHILE(1)
         DECLARE menu = ["Sort the List", "Return"]
@@ -190,7 +177,6 @@ FUNCTION view_allcars(user_data, data_carlist, space_cars)
                 BREAK
             ENDIF
         ENDDO
-
     
         IF (choice == '1') THEN
             CALL FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
@@ -199,8 +185,6 @@ FUNCTION view_allcars(user_data, data_carlist, space_cars)
             RETURN
         ENDIF
     ENDDO
-
-
 
 FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
     DOWHILE(1)
@@ -257,12 +241,10 @@ FUNCTION sortcar_menu(user_data, data_carlist, space_cars)
             sequence = CALL FUNCTION sort_menu(header, data_carlist, 2)
         ENDIF
     
-        
+
         CALL FUNCTION print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
     ENDDO
-
-        
 
 FUNCTION sub_sort_menu(header, data, mode)
     DECLARE sub_menu = ["Ascending", "Descending"]
@@ -286,7 +268,6 @@ FUNCTION sub_sort_menu(header, data, mode)
     ENDIF
         
     RETURN sequence
-
            
 FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
     DOWHILE(1)
@@ -342,9 +323,7 @@ FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
         CALL FUNCTION print_sorttable(data_carlist, 4, sequence, space_cars)
         PRINT("")
     ENDDO
-
     
-
 FUNCTION sub_search_menu(header, data, mode)
     title = "You have chosen " + header + ": "     
     
@@ -355,8 +334,6 @@ FUNCTION sub_search_menu(header, data, mode)
     sequence = CALL FUNCTION search_data(data, keyword, header, mode)
     
     RETURN sequence
-
-
 
 FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
     title = user_data[2] + ", view your rental history here"
@@ -376,7 +353,6 @@ FUNCTION view_indhistory(user_data,data_transactions,space_transactions)
         RETURN
     ENDIF
 
-    
 FUNCTION update_password(user_data, data_clients, login_index, space_clients)
     title = user_data[2] + ", change your password here."
     DECLARE menu = ["Change My Password", "Return"]
@@ -432,9 +408,7 @@ FUNCTION update_password(user_data, data_clients, login_index, space_clients)
         ENDLOOP
     
     RETURN
-
-
-       
+    
 FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
     DOWHILE(1)
         title = user_data[2] + ", you can book a car here"
@@ -457,8 +431,6 @@ FUNCTION bookcar_interface(user_data, data_clients, data_carlist, data_transacti
             RETURN
         ENDIF
     ENDDO
-
-
 
 FUNCTION select_date(header, user_data)
     title = user_data[2] + ", select your time here"
@@ -494,8 +466,7 @@ FUNCTION select_date(header, user_data)
     ENDDO
 
     RETURN temp
-
-        
+     
 FUNCTION select_time(title)
     i = 0
     DOWHILE(1)
@@ -531,10 +502,6 @@ FUNCTION select_time(title)
             
     RETURN temp
     
-
-
-
-
 FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     DECLARE data = []
     DECLARE time = []
@@ -544,7 +511,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     DOWHILE(1)
         PRINT("Please input the car ID: ")
         READ car_id
-        
 
         LOOP i FROM 0 TO <range(len(data_carlist)) STEP +1
             IF (car_id == data_carlist[i][0]) THEN
@@ -606,8 +572,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
             ENDIF
         ENDDO
     
-
-    
         DOWHILE(1)
             from_time = select_time("From: ")
             PRINT("")
@@ -646,7 +610,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                 BREAK
             ENDIF
         ENDDO
-    
 
         from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M")
         to_datetime = datetime.datetime.strptime(to_date + " " + to_time, "%d-%m-%Y %H:%M")
@@ -658,10 +621,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
         now_datetime = datetime.datetime.now()
         now_date = now_datetime.strftime("%d-%m-%Y")
         now_time = now_datetime.strftime("%H:%M:%S")
-
-
-
-        
 
         IF (from_datetime < to_datetime AND now_datetime < from_datetime) THEN
             result = CALL FUNCTION quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
@@ -731,7 +690,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
                     ENDIF
                 ENDDO
             ENDIF
-
 
             APPEND from_date TO data
             APPEND from_time TO data
@@ -803,8 +761,6 @@ FUNCTION bookcar_menu(user_data, data_clients, data_carlist, data_transactions)
     ENDDO
     RETURN
 
-            
-
 FUNCTION confirm_booking(headers, data)
     title = "Booking Details"
     PRINT("")
@@ -849,8 +805,6 @@ FUNCTION confirm_booking(headers, data)
         RETURN 2
     ENDIF
 
-
-
 FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
     count = 0
 
@@ -885,50 +839,3 @@ FUNCTION compare_quantity(car_id, data_transactions, from_datetime, to_datetime,
     
     ENDIF
 
-            
-        
-
-        
-        
-        
-            
-    
-    
-       
-    
-        
-    
-    
-    
-        
-        
-
-    
-    
-    
-    
-    
-        
-        
-    
-
-        
-
-    
-
-    
-
-        
-        
-        
-            
-    
-    
-
-          
-    
-    
-    
-    
-    
-    
