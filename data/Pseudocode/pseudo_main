@@ -18,19 +18,19 @@ FUNCTION main()
     DECLARE space_cars = [7, 10, 20, 13, 10, 15, 15, 15, 15, 15, 10, 20, 12]
     DECLARE space_transactions = [11, 20, 7, 10, 20, 13, 15, 10, 10, 10, 10, 15, 15, 12, 12, 10, 10, 12, 21]
 
-    data_clients = default.input_dataclients()
-    data_carlist = default.input_datacars()
-    data_transactions = default.input_datatransactions()
+    data_clients = CALL FUNCTION input_dataclients()
+    data_carlist = CALL FUNCTION input_datacars()
+    data_transactions = CALL FUNCTION input_datatransactions()
     
     DOWHILE(1)
-        login_index = default.startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
+        login_index = CALL FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
         user_data = data_clients[login_index]
         
         IF(login_index == 1) THEN
-            admin.admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            CALL FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
 
         ELSE
-            clients.client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
+            CALL FUNCTION client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)
 
         ENDIF
         
@@ -38,5 +38,5 @@ FUNCTION main()
 END
 
 BEGIN
-    main()
+    CALL FUNCTION main()
 END

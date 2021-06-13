@@ -5,9 +5,9 @@ IMPORT sys
         
 
 FUNCTION startup_menu(main_title)
-    print_title(main_title)
+    CALL FUNCTION print_title(main_title)
     DECLARE menu = ["Registered", "Unregistered","Exit"]
-    general_menu(menu)
+    CALL FUNCTION general_menu(menu)
     PRINT("Please Select: ")
     READ choice
     
@@ -18,7 +18,7 @@ FUNCTION startup_menu(main_title)
 
 FUNCTION login_menu(main_title)
     DECLARE lists = []
-    print_title(main_title)
+    CALL FUNCTION print_title(main_title)
     PRINT("Username/ID: ")
     READ username
     PRINT("   Password: ")
@@ -34,7 +34,7 @@ FUNCTION input_dataclients()
     DECLARE data = []
     WITH OPEN("./data/clients.txt") AS csv_file:
         LOOP line IN csv_file:
-            temp = line.strip().split(",")
+            temp = CALL FUNCTION strip().split(",")
             APPEND temp TO data
             NEXT line
         ENDLOOP    
@@ -47,7 +47,7 @@ FUNCTION input_datacars()
     DECLARE data_cars = []
     WITH OPEN("./data/cars_lists.txt") AS csv_file:
         LOOP line IN csv_file:
-            temp = line.strip().split(",")
+            temp = CALL FUNCTION strip().split(",")
             APPEND temp TO data_cars
             NEXT line
         ENDLOOP
@@ -59,7 +59,7 @@ FUNCTION input_datatransactions()
     DECLARE data = []
     WITH OPEN("./data/transactions.txt") AS csv_file:
         LOOP line IN csv_file:
-            temp = line.strip().split(",")
+            temp = CALL FUNCTION strip().split(",")
             APPEND temp TO data
             NEXT line
         ENDLOOP
@@ -157,7 +157,7 @@ FUNCTION login_interface(main_title, data_clients, data_carlist, space_cars, spa
         DECLARE menu = ["Continue","Return"]
             
         DOWHILE(1)
-            general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF(choice == '1' OR choice == '2')THEN
@@ -185,8 +185,8 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
     title = "Guest, Welcome to Super Car Rental System"
     DECLARE menu = ["Register", "View Available Cars", "Return"]
     DOWHILE(1)
-        print_title(title)
-        general_menu(menu)
+        CALL FUNCTION print_title(title)
+        CALL FUNCTION general_menu(menu)
         PRINT("Please Select: ")
         READ choice
         IF(choice == '1' OR choice == '2' OR choice == '3')THEN
@@ -194,15 +194,15 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
         ENDIF
     ENDDO
     IF(choice == '1')THEN
-        register_interface(data_clients, space_clients)
+        CALL FUNCTION register_interface(data_clients, space_clients)
     ENDIF
 
     IF(choice == '2')THEN
-        print_table(data_carlist, 6, space_cars)
+        CALL FUNCTION print_table(data_carlist, 6, space_cars)
         PRINT("")
         DOWHILE(1)
             DECLARE menu = ["Return"]
-            general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF(choice == '1')THEN
@@ -220,17 +220,17 @@ FUNCTION unregistered_interface(data_clients, data_carlist, space_cars,space_cli
 
 
 FUNCTION register_interface(data_clients, space_clients)
-    print_title("You can register here")
+    CALL FUNCTION print_title("You can register here")
     prev_id = data_clients[-1][0]
    
     DOWHILE(1)
         sign = 0
         DECLARE data = []
-        id = int(prev_id) + 1
+        id = CALL FUNCTION (prev_id) + 1
         APPEND id TO data
         APPEND "Normal" TO data
         PRINT("Plase enter your Username")
-        name = validation_length(space_clients[2])        
+        name = CALL FUNCTION length(space_clients[2])        
         i = 0
         LOOP i FROM 0 TO <range(len(data_clients)) STEP +1
             IF(name == data_clients[i][2]) THEN
@@ -241,7 +241,7 @@ FUNCTION register_interface(data_clients, space_clients)
             ENDIF
             NEXT i 
         ENDLOOP
-        if(sign == 1):
+        CALL FUNCTION if(sign == 1):
             continue
         PRINT("")
         APPEND name TO data
@@ -271,29 +271,29 @@ FUNCTION register_interface(data_clients, space_clients)
         APPEND birth_date TO data
         
         PRINT("Please enter your license: ")
-        license = validation_length(space_clients[5])
+        license = CALL FUNCTION length(space_clients[5])
         PRINT("")
         APPEND license TO data
         
         PRINT("Please enter your phone number: ")
-        phone = validation_number(space_clients[6])
+        phone = CALL FUNCTION number(space_clients[6])
         PRINT("")
         APPEND phone TO data
         
         PRINT("Please enter your email: ")
-        email = validation_email(space_clients[7])
+        email = CALL FUNCTION email(space_clients[7])
         PRINT("")
         APPEND email TO data
         
         PRINT("Please enter your credit/debit card number: ")
-        card = validation_number(12)
+        card = CALL FUNCTION number(12)
         PRINT("")
         APPEND card TO data
         APPEND 0 TO data
         APPEND 0 TO data
         
         
-        print_title("Confirm Registeration Details")
+        CALL FUNCTION print_title("Confirm Registeration Details")
         k = 0
         LOOP i IN data:
             IF(k == 3)THEN
@@ -309,7 +309,7 @@ FUNCTION register_interface(data_clients, space_clients)
             
         DECLARE menu = ["Confirm", "Return"]
         DOWHILE(1)
-            general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF(choice == '1' OR choice == '2')THEN
@@ -332,12 +332,12 @@ FUNCTION register_interface(data_clients, space_clients)
                     NEXT line 
                 ENDLOOP
         
-            print_title("Registeration information has successfuly recorded.")
+            CALL FUNCTION print_title("Registeration information has successfuly recorded.")
             LOOP remaining FROM 5 TO >-1 STEP -1
                 sys.stdout.write("\r")
                 sys.stdout.write("Will be directed in {:2d}......".format(remaining)) 
                 sys.stdout.flush()
-                time.sleep(1)
+                CALL FUNCTION sleep(1)
                 NEXT remaining
             ENDLOOP
             sys.stdout.write("\n")
@@ -359,7 +359,7 @@ FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, s
     
     DOWHILE(1)
         DOWHILE(1)
-            choice = startup_menu(main_title)
+            choice = CALL FUNCTION menu(main_title)
             IF(choice == '1' OR choice == '2' OR choice == '3')THEN
                 BREAK  
             ENDIF         
@@ -369,14 +369,14 @@ FUNCTION startup_interface(main_title, data_clients, data_carlist, space_cars, s
             RETURN login_index
     
         ELSE IF(choice == '2')
-            unregistered_interface(data_clients, data_carlist, space_cars, space_clients)
+            CALL FUNCTION unregistered_interface(data_clients, data_carlist, space_cars, space_clients)
 
         ELSE IF(choice == '3')
             LOOP remaining FROM 5 TO >-1 STEP -1
                 sys.stdout.write("\r")
                 sys.stdout.write("System will exit in {:2d}.............".format(remaining)) 
                 sys.stdout.flush()
-                time.sleep(1)
+                CALL FUNCTION sleep(1)
                 NEXT remaining
             ENDLOOP
         
@@ -499,7 +499,7 @@ FUNCTION print_sorttable(data, mode, sequence, space)
         blanks = 143
     ENDIF
     
-    sequence.insert(0, 0)
+    CALL FUNCTION insert(0, 0)
     
     LOOP i IN sequence:
         LOOP k FROM 0 TO <columns STEP +1 
@@ -598,7 +598,7 @@ FUNCTION search_data(data, keyword, attribute, mode)
     DECLARE sequence = []
     DECLARE sample = []
     rows = LEN(data)
-    keyword = keyword.lower()
+    keyword = CALL FUNCTION lower()
     
     k = 0
     LOOP i IN data[0]:
@@ -640,7 +640,7 @@ FUNCTION search_data(data, keyword, attribute, mode)
 
 
 FUNCTION validation_length(length)
-    length = int(length)
+    length = CALL FUNCTION (length)
     DOWHILE(1)
         PRINT(" ")
         READ temp
@@ -654,12 +654,12 @@ FUNCTION validation_length(length)
 
 
 FUNCTION validation_number(length)
-    length = int(length)
+    length = CALL FUNCTION (length)
     DOWHILE(1)
         PRINT(" ")
         READ temp
         
-        IF temp.isdecimal() == True AND LEN(temp) <= Length THEN
+        IF CALL FUNCTION isdecimal() == True AND LEN(temp) <= Length THEN
             RETURN temp
         ELSE
             PRINT("You can only enter " + str(length) +" digit of numbers" )
@@ -669,7 +669,7 @@ FUNCTION validation_number(length)
 
 
 FUNCTION validation_email(length)
-    length = int(length)
+    length = CALL FUNCTION (length)
     DOWHILE(1)
         PRINT(" ")
         READ temp
@@ -704,7 +704,7 @@ FUNCTION validation_date()
         READ temp
         TRY
             date = datetime.datetime.strptime(temp, "%d-%m-%Y")
-            birth = date.strftime("%d-%m-%Y")
+            birth = CALL FUNCTION strftime("%d-%m-%Y")
 
             RETURN birth
         
@@ -746,7 +746,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             
         ELSE IF(temp > int(car_data[5]))
             car_data = sub_total_quantity_menu1(temp, car_data, 1)
-            print_title("This is the current record.")
+            CALL FUNCTION print_title("This is the current record.")
             LOOP i FROM 0 TO <13 STEP +1
                 PRINT(data_carlist[0][i] + ": " + str(car_data[i]))    
                 NEXT i
@@ -755,7 +755,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             
         ELSE IF(temp < int(car_data[5]))
             car_data = sub_total_quantity_menu1(temp, car_data, 0)
-            print_title("This is the current record.")
+            CALL FUNCTION print_title("This is the current record.")
             LOOP i FROM 0 TO <13 STEP +1
                 PRINT(data_carlist[0][i] + ": " + str(car_data[i]))    
                 NEXT i
@@ -767,7 +767,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             PRINT("Do you want to alter quantity for each section? ")
             DECLARE menu = ["Yes", "Return"]
             DOWHILE(1)
-                general_menu(menu)
+                CALL FUNCTION general_menu(menu)
                 PRINT("Please Select: ")
                 READ choice
                 IF(choice == '1' OR choice == '2')
@@ -776,7 +776,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             
             IF(choice == '1')
                 car_data = sub_total_quantity_menu2(temp, car_data)
-                print_title("This is the current record.")
+                CALL FUNCTION print_title("This is the current record.")
                 LOOP i FROM 0 TO <13 STEP +1
                     PRINT(data_carlist[0][i] + ": " + str(car_data[i])) 
                     NEXT i
@@ -793,7 +793,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             
 
 FUNCTION sub_total_quantity_menu1(temp, car_data, order)
-    count = abs(temp - int(car_data[5]))
+    count = CALL FUNCTION (temp - int(car_data[5]))
     IF order == 1 THEN
         title = "added"
     ENDIF
@@ -885,7 +885,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         PRINT("In Service    : " + str(num3))
                 
         DECLARE menu = ["Confirm", "Return"]
-        general_menu(menu)
+        CALL FUNCTION general_menu(menu)
         PRINT("Please select: ")
         READ choice
         IF(choice == '1' OR choice == '2') THEN
@@ -904,7 +904,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
                 
 
 FUNCTION sub_total_quantity_menu2(temp, car_data)
-    count = int(temp)
+    count = CALL FUNCTION (temp)
     DOWHILE(1)
         PRINT("Please reenter the quantity for 'Available', 'Unavailable', 'In Service'.")
         PRINT("Available + Unavailable + In Service = Total Quantity")
@@ -989,7 +989,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         PRINT("In Service    : " + str(num3))
                 
         DECLARE menu = ["Confirm", "Return"]
-        general_menu(menu)
+        CALL FUNCTION general_menu(menu)
         PRINT("Please select: ")
         READ choice
         IF(choice == '1' OR choice == '2')THEN
@@ -1014,7 +1014,7 @@ FUNCTION validation_cartypes()
         PRINT("")
         PRINT("Please enter car type: ")
         READ temp
-        temp.lower()
+        CALL FUNCTION lower()
         IF temp == 'city' OR temp == 'electric' OR temp == 'prestige' OR temp == 'van' OR temp == 'truck' THEN:
             BREAK
         ENDIF    

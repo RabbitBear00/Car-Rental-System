@@ -10,8 +10,8 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
 
     DOWHILE(1)
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5') THEN
@@ -20,22 +20,22 @@ FUNCTION admin_menu(user_data, data_clients, data_carlist, data_transactions, lo
         ENDDO
         
         IF (choice == '1') THEN
-            client_interface(user_data, data_clients, login_index, space_clients)
+            CALL FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
             
             
         ELSE IF (choice == '2') THEN
-            car_interface(user_data, data_carlist, login_index, space_cars)
+            CALL FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
             
         ELSE IF (choice == '3') THEN
-            transaction_interface(data_transactions, space_transactions)
+            CALL FUNCTION transaction_interface(data_transactions, space_transactions)
             
         
         ELSE IF (choice == '4') THEN
-            returncar_interface(data_transactions)
+            CALL FUNCTION returncar_interface(data_transactions)
         
         ELSE IF (choice == '5') THEN
             title = user_data[2] + ", you have successfully log out."
-            default.print_title(title)
+            CALL FUNCTION print_title(title)
             PRINT("")
             RETURN 
         ENDIF
@@ -48,8 +48,8 @@ FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
         title = user_data[2] + ", what do you want to do?"
     
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice == '2' OR choice == '3') THEN
@@ -58,12 +58,12 @@ FUNCTION client_interface(user_data, data_clients, login_index, space_clients)
         ENDDO
         
         IF (choice == '1') THEN
-            default.print_table(data_clients, 1, space_clients, login_index)
-            sortclient_menu(user_data, data_clients, space_clients)
+            CALL FUNCTION print_table(data_clients, 1, space_clients, login_index)
+            CALL FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         ENDIF
             
         IF (choice == '2') THEN
-            searchclient_menu(user_data, data_clients, space_clients)
+            CALL FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         ENDIF    
 
         IF (choice == '3') THEN
@@ -78,8 +78,8 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         title = user_data[2] + ", you can sort the list here"
 
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice =='2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6') THEN
@@ -90,27 +90,27 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         
         IF (choice == '1') THEN
             header = "User ID"
-            sequence = clients.sub_sort_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '2') THEN
             header = "Status"
-            sequence = clients.sub_sort_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '3') THEN
             header = "Name"
-            sequence = clients.sub_sort_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_clients, 1)
         ENDIF
     
         IF (choice == '4') THEN
             header = "Email"
-            sequence = clients.sub_sort_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_clients, 1)
         ENDIF
     
         IF (choice == '5') THEN
             header = "Points"
-            sequence = clients.sub_sort_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '6') THEN
@@ -118,7 +118,7 @@ FUNCTION sortclient_menu(user_data, data_clients, space_clients)
         ENDIF
     
         
-        default.print_sorttable(data_clients, 1, sequence, space_clients)
+        CALL FUNCTION print_sorttable(data_clients, 1, sequence, space_clients)
         PRINT("")
     ENDDO
 
@@ -130,8 +130,8 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         DECLARE sequence = []
     
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice =='2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7') THEN
@@ -141,32 +141,32 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         
         IF (choice == '1') THEN
             header = "User ID"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '2') THEN
             header = "Status"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '3') THEN
             header = "Name"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
     
         IF (choice == '4') THEN
             header = "License"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
     
         IF (choice == '5') THEN
             header = "Phone Number"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '6') THEN
             header = "Email"
-            sequence = clients.sub_search_menu(header, data_clients, 1)
+            sequence = CALL FUNCTION sub_search_menu(header, data_clients, 1)
         ENDIF
         
         IF (choice == '7') THEN
@@ -174,7 +174,7 @@ FUNCTION searchclient_menu(user_data, data_clients, space_clients)
         ENDIF
         
         
-        default.print_sorttable(data_clients, 1, sequence, space_clients)
+        CALL FUNCTION print_sorttable(data_clients, 1, sequence, space_clients)
         PRINT("")
     ENDDO
 
@@ -187,8 +187,8 @@ FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
         title = user_data[2] + ", what would you like to do"
     
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5') THEN
@@ -197,21 +197,21 @@ FUNCTION car_interface(user_data, data_carlist, login_index, space_cars)
         ENDDO
         
         IF (choice == '1') THEN
-            default.print_table(data_carlist, 2, space_cars, login_index)
-            sort_cars(user_data, data_carlist, space_cars)
+            CALL FUNCTION print_table(data_carlist, 2, space_cars, login_index)
+            CALL FUNCTION sort_cars(user_data, data_carlist, space_cars)
         ENDIF
         
         IF (choice == '2') THEN
-            clients.searchcar_menu(user_data, data_carlist, space_cars)
+            CALL FUNCTION searchcar_menu(user_data, data_carlist, space_cars)
         ENDIF
 
         IF (choice == '3') THEN
-            carprofile_menu(data_carlist, space_cars)
+            CALL FUNCTION carprofile_menu(data_carlist, space_cars)
             pass  
         ENDIF
 
         IF (choice == '4') THEN
-            addcar_menu(data_carlist, space_cars)
+            CALL FUNCTION addcar_menu(data_carlist, space_cars)
             pass
         ENDIF
 
@@ -227,8 +227,8 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         title = user_data[2] + ", you can sort the list here"
     
         DOWHILE(1)
-            default.print_title(title)
-            default.general_menu(menu)
+            CALL FUNCTION print_title(title)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice =='2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7' OR choice == '8') THEN
@@ -239,37 +239,37 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         
         IF (choice == '1') THEN
             header = "Car ID"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
 
         IF (choice == '2') THEN
             header = "Car Types"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
         
         IF (choice == '3') THEN
             header = "Car Brand"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
     
         IF (choice == '4') THEN
             header = "Model Year"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
     
         IF (choice == '5') THEN
             header = "Price per Hour"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
         
         IF (choice == '6') THEN
             header = "Passenger Capacity"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
         
         IF (choice == '7') THEN
             header = "Weight Load"
-            sequence = clients.sub_sort_menu(header, data_carlist, 2)
+            sequence = CALL FUNCTION sub_sort_menu(header, data_carlist, 2)
         ENDIF
         
         IF (choice == '8') THEN
@@ -277,7 +277,7 @@ FUNCTION sort_cars(user_data, data_carlist, space_cars)
         ENDIF
         
         
-        default.print_sorttable(data_carlist, 2, sequence, space_cars)
+        CALL FUNCTION print_sorttable(data_carlist, 2, sequence, space_cars)
         PRINT("") 
     ENDDO 
   
@@ -308,7 +308,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
             IF (k > 4) THEN
                 DECLARE menu = ["Continue","Return"]
                 DOWHILE(1)
-                    default.general_menu(menu)
+                    CALL FUNCTION general_menu(menu)
                     PRINT("Please Select: ")
                     READ choice
                     IF (choice == '1' OR choice == '2') THEN
@@ -317,7 +317,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
                 ENDDO
                     
                 IF (choice == '1') THEN
-                    carprofile_menu(data_carlist, space_cars)
+                    CALL FUNCTION carprofile_menu(data_carlist, space_cars)
                 ENDIF
                     
                                 
@@ -338,7 +338,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
     
         DOWHILE(1): 
             PRINT("\n")   
-            default.general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice == '2') THEN
@@ -349,7 +349,7 @@ FUNCTION carprofile_menu(data_carlist, space_cars)
         ENDDO
     
         IF (choice == '1') THEN
-            edit_carprofile(index, car_data, data_carlist, space_cars)
+            CALL FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
             RETURN
         
         ELSE IF (choice == '2') THEN
@@ -364,7 +364,7 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     DECLARE menu = ["Car Types", "Car Brand", "Car Model", "Model Year", "Quantity", "Price per Hour", "Fuel Type", "Passenger Capacity", "Weight Load", "Return"]
     
     DOWHILE(1)
-        default.general_menu(menu)
+        CALL FUNCTION general_menu(menu)
         PRINT("Please Select: ")
         READ choice
         IF (choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5' OR choice == '6' OR choice == '7' OR choice == '8' OR choice == '9' OR choice == '10') THEN
@@ -376,46 +376,46 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
     ENDIF
     
     IF (choice == '1') THEN
-        temp = default.validation_length(space_cars[1])
+        temp = CALL FUNCTION validation_length(space_cars[1])
         car_data[1] = temp
     ENDIF
     
     IF (choice == '2') THEN
-        temp = default.validation_length(space_cars[2])
+        temp = CALL FUNCTION validation_length(space_cars[2])
         car_data[2] = temp
     ENDIF
        
     IF (choice == '3') THEN
-        temp = default.validation_length(space_cars[3])
+        temp = CALL FUNCTION validation_length(space_cars[3])
         car_data[3] = temp 
     ENDIF   
     
     IF (choice == '4') THEN
-        temp = default.validation_number(4)
+        temp = CALL FUNCTION validation_number(4)
         car_data[4] = temp
     ENDIF
     
     IF (choice == '5') THEN
-        car_data = default.validation_totalquantity(data_carlist, car_data)
+        car_data = CALL FUNCTION validation_totalquantity(data_carlist, car_data)
     ENDIF
 
     IF (choice == '6') THEN
-        temp = default.validation_number(4)
+        temp = CALL FUNCTION validation_number(4)
         car_data[9] = temp
     ENDIF
         
     IF (choice == '7') THEN
-        temp = default.validation_length(space_cars[10])
+        temp = CALL FUNCTION validation_length(space_cars[10])
         car_data[10] = temp
     ENDIF
     
     IF (choice == '8') THEN
-        temp = default.validation_number(3)
+        temp = CALL FUNCTION validation_number(3)
         car_data[11] = temp
     ENDIF
         
     IF (choice == '9') THEN
-        temp = default.validation_number(10)
+        temp = CALL FUNCTION validation_number(10)
         car_data[12] = temp
     ENDIF
        
@@ -439,52 +439,52 @@ FUNCTION edit_carprofile(index, car_data, data_carlist, space_cars)
 
 
 FUNCTION addcar_menu(data_carlist, space_cars)
-    default.print_title("You can add a car here")
+    CALL FUNCTION print_title("You can add a car here")
     prev_id = data_carlist[-1][0]
    
     DOWHILE(1)
         DECLARE data = []
-        id = int(prev_id) + 1
+        id = CALL FUNCTION (prev_id) + 1
         APPEND id TO data
-        type = default.validation_cartypes()
+        type = CALL FUNCTION validation_cartypes()
         PRINT("")
         APPEND type TO data
-        brand = default.validation_carnormal("car brand")
+        brand = CALL FUNCTION validation_carnormal("car brand")
         PRINT("")
         APPEND brand TO data
-        model = default.validation_carnormal("car model")
+        model = CALL FUNCTION validation_carnormal("car model")
         PRINT("")
         APPEND model TO data
         PRINT("Please enter model year: ")
-        year = default.validation_number(4)
+        year = CALL FUNCTION validation_number(4)
         PRINT("")
         APPEND year TO data
         LOOP i FROM 0 TO <range(4) STEP +1
             APPEND 0 TO data
             NEXT i 
         ENDLOOP
-        data = default.validation_totalquantity(data_carlist, data, 2)
+        data = CALL FUNCTION validation_totalquantity(data_carlist, data, 2)
 
       
         PRINT("")
         PRINT("Please enter price per hour: ")
-        price = default.validation_number(4)
+        price = CALL FUNCTION validation_number(4)
         APPEND price TO data
         PRINT("")
         PRINT("Please enter fuel type: ")
-        fuel = default.validation_length(space_cars[10])
+        fuel = CALL FUNCTION validation_length(space_cars[10])
         APPEND fuel TO data
         PRINT("")
         PRINT("Please enter passenger number: ")
-        passenger = default.validation_number(3)
+        passenger = CALL FUNCTION validation_number(3)
         APPEND passenger TO data
         PRINT("")
         PRINT("Please enter price weight load: ")
-        weight = default.validation_number(10)
+        weight = CALL FUNCTION validation_number(10)
         APPEND weight TO data
         PRINT("")
         
-        default.print_title("Confirm Car Details")
+        CALL FUNCTION print_title("Confirm Car Details")
         k = 0
         LOOP i IN data
             PRINT(data_carlist[0][k] + ": " + str(i))
@@ -494,7 +494,7 @@ FUNCTION addcar_menu(data_carlist, space_cars)
             
         DECLARE menu = ["Confirm", "Return"]
         DOWHILE(1)
-            default.general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please Select: ")
             READ choice
             IF (choice == '1' OR choice == '2') THEN
@@ -517,12 +517,12 @@ FUNCTION addcar_menu(data_carlist, space_cars)
                     NEXT line
 
                 ENDLOOP
-            default.print_title("Car Information has successfuly recorded.")
+            CALL FUNCTION print_title("Car Information has successfuly recorded.")
             LOOP remaining FROM 5 TO > -1 STEP  -1
                 sys.stdout.write("\r")
                 sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
                 sys.stdout.flush()
-                time.sleep(1)
+                CALL FUNCTION sleep(1)
                 NEXT remaining
             ENDLOOP
             sys.stdout.write("\n")
@@ -541,9 +541,9 @@ FUNCTION filter_menu(data_transactions, space_transactions)
         title = "You can filter transactions here"
         DECLARE menu = ["Client ID", "Name", "Date","Booking ID","Return"]
         DOWHILE(1)
-            default.print_title(title)
+            CALL FUNCTION print_title(title)
             DOWHILE(1)
-                default.general_menu(menu)
+                CALL FUNCTION general_menu(menu)
                 PRINT("Please select: ")
                 READ choice
                 IF choice == '1' OR choice == '2' OR choice == '3' OR choice == '4' OR choice == '5'
@@ -569,7 +569,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                 ENDDO
             
                 IF (key == 1) THEN
-                    default.print_table(data_transactions, 7, space_transactions, temp)
+                    CALL FUNCTION print_table(data_transactions, 7, space_transactions, temp)
                 ELSE
                     PRINT("Either client doesn't exists/Client has no transaction records before.")
                     RETURN
@@ -593,13 +593,13 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                 ENDDO
             
                 IF (key == 1) THEN
-                    default.print_table(data_transactions, 8, space_transactions, temp)
+                    CALL FUNCTION print_table(data_transactions, 8, space_transactions, temp)
                 ELSE
                     PRINT("Either client doesn't exists/Client has no transaction records before.")
                 ENDIF
         
             IF (choice == '3') THEN
-                sequence = sub_filter_date(data_transactions)
+                sequence = CALL FUNCTION filter_date(data_transactions)
                 IF (sequence == 3) THEN
                     PRINT("There's no transactions between these dates. ")
                     PRINT("")
@@ -608,7 +608,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                     PRINT("")
                     RETURN
                 ELSE
-                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)
+                    CALL FUNCTION print_sorttable(data_transactions, 3, sequence, space_transactions)
                 ENDIF
             ENDIF
             IF (choice == '4') THEN
@@ -632,7 +632,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
                 ELSE
                     DECLARE sequence = []
                     APPEND index TO sequence
-                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)   
+                    CALL FUNCTION print_sorttable(data_transactions, 3, sequence, space_transactions)   
                 ENDIF
             ENDIF                 
         
@@ -649,7 +649,7 @@ FUNCTION filter_menu(data_transactions, space_transactions)
 FUNCTION sub_filter_date(data_transactions)
     DECLARE sequence = []
     DOWHILE(1)
-        from_date = clients.select_date("From: ", "admin001")
+        from_date = CALL FUNCTION select_date("From: ", "admin001")
         PRINT("")
         IF (from_date == 1) THEN
             CONTINUE
@@ -660,7 +660,7 @@ FUNCTION sub_filter_date(data_transactions)
         ENDIF
     ENDDO
     DOWHILE(1)
-        to_date = clients.select_date("To: ", "admin001")
+        to_date = CALL FUNCTION select_date("To: ", "admin001")
         PRINT("")
         IF (to_date == 1) THEN
             continue
@@ -701,11 +701,11 @@ FUNCTION sub_filter_date(data_transactions)
 
 
 FUNCTION transaction_interface(data_transactions, space_transactions)
-    default.print_table(data_transactions, 3, space_transactions)
+    CALL FUNCTION print_table(data_transactions, 3, space_transactions)
     DOWHILE(1)
         DOWHILE(1)
             DECLARE menu = ["Filter", "Return"]
-            default.general_menu(menu)
+            CALL FUNCTION general_menu(menu)
             PRINT("Please select: ")
             READ choice
             IF choice == '1' OR choice == '2'
@@ -713,7 +713,7 @@ FUNCTION transaction_interface(data_transactions, space_transactions)
             ENDIF
         ENDDO
         IF (choice == '1') THEN
-            filter_menu(data_transactions, space_transactions)
+            CALL FUNCTION filter_menu(data_transactions, space_transactions)
         ENDIF
         
         IF (choice == '2') THEN
@@ -726,7 +726,7 @@ FUNCTION returncar_interface(data_transactions)
     DOWHILE(1)
         DOWHILE(1)
             key = 0
-            default.print_title("Return a car here")
+            CALL FUNCTION print_title("Return a car here")
             PRINT("Please enter booking id: ")
             READ booking_id
             LOOP i FROM 0 TO <range(len(data_transactions)) STEP +1
@@ -757,7 +757,7 @@ FUNCTION returncar_interface(data_transactions)
         
         data = data_transactions[index]
         DOWHILE(1)
-            return_date = clients.select_date("Return Date: ", data[1])
+            return_date = CALL FUNCTION select_date("Return Date: ", data[1])
             PRINT("")
             IF (return_date == 1) THEN
                 continue
@@ -769,7 +769,7 @@ FUNCTION returncar_interface(data_transactions)
         ENDDO
 
         DOWHILE(1)
-            return_time = clients.select_time("Return Time: ")
+            return_time = CALL FUNCTION select_time("Return Time: ")
             PRINT("")
             IF (return_time == 1) THEN
                 continue
@@ -803,7 +803,7 @@ FUNCTION returncar_interface(data_transactions)
             
             PRINT("")
             PRINT("You have returned your car late. \nPenalty = delayed hours * price per hour * 1.5 ")
-            default.print_title("Penalty Payment Details")
+            CALL FUNCTION print_title("Penalty Payment Details")
             LOOP i FROM 0 TO <range(7) STEP +1
                 PRINT(data_transactions[0][i] + ": " + data[i])
                 NEXT i 
@@ -815,7 +815,7 @@ FUNCTION returncar_interface(data_transactions)
             
             DOWHILE(1)
                 DECLARE menu = ["Confirm","Return"]
-                default.general_menu(menu)
+                CALL FUNCTION general_menu(menu)
                 PRINT("Please select: ")
                 READ choice
                 IF (choice == '1' OR choice == '2') THEN
@@ -831,7 +831,7 @@ FUNCTION returncar_interface(data_transactions)
                     sys.stdout.write("\r")
                     sys.stdout.write("Will be directed IN {:2d}......".format(remaining)) 
                     sys.stdout.flush()
-                    time.sleep(1)
+                    CALL FUNCTION sleep(1)
                     NEXT remaining
                 ENDLOOP
                 sys.stdout.write("\n")
