@@ -5,8 +5,6 @@ import sys
 import time
 
 # This is the main menu for admins
-
-
 def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
     title = user_data[2] + ", welcome back"
     menu = ["View All Clients", "View All Cars", "View All Transactions", "Car Return", "Log Out"]
@@ -40,8 +38,6 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
             return
 
 # A menu for admin to view/sort/search all clients data
-
-
 def client_interface(user_data, data_clients, login_index, space_clients):
     while(1):
         menu = ["Sort", "Search", "Return"]
@@ -424,8 +420,6 @@ def addcar_menu(data_carlist, space_cars):
             return
 
 # A menu to filter transactions according to client id/client name/date/booking id
-
-
 def filter_menu(data_transactions, space_transactions):
     while(1):
         title = "You can filter transactions here"
@@ -512,8 +506,6 @@ def filter_menu(data_transactions, space_transactions):
             return
 
 # Filter certain time period within transactions
-
-
 def sub_filter_date(data_transactions):
     sequence = []
     while(1):

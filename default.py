@@ -26,8 +26,6 @@ def login_menu(main_title):
     return lists
 
 # Reading datas from file and storing it in an array
-
-
 def input_dataclients():
     data = []
     with open("./data/clients.txt") as csv_file:
@@ -49,8 +47,6 @@ def input_datacars():
     return data_cars
 
 # Reading datas from file and storing it in an array
-
-
 def input_datatransactions():
     data = []
     with open("./data/transactions.txt") as csv_file:
@@ -61,8 +57,6 @@ def input_datatransactions():
     return data
 
 # Check password if it is correct
-
-
 def check_password(data, username, password):
     rows = len(data)
     # MD5 hash encoding
@@ -98,16 +92,12 @@ def check_usernameID(data, username):
     return 0
 
 # print all major titles for super car rental system
-
-
 def print_title(title):
     print("================================================================")
     print(" " * int((64-len(title))/2) + title)
     print("================================================================")
 
 # Widely use function, input list, and then this function will generate a list accordingly with numbers 1-xxx,2-xxx,3-xxx
-
-
 def general_menu(list):
     length = len(list)
     for i in range(length):
@@ -116,8 +106,6 @@ def general_menu(list):
     print("\n")
 
 # The login interface that checks and hints of a user login in
-
-
 def login_interface(main_title, data_clients, data_carlist, space_cars, space_clients):
 
     i = 0
@@ -195,8 +183,6 @@ def unregistered_interface(data_clients, data_carlist, space_cars, space_clients
         return
 
 # register interface is for the unregister clients
-
-
 def register_interface(data_clients, space_clients):
     print_title("You can register here")
     prev_id = data_clients[-1][0]
@@ -338,8 +324,6 @@ def startup_interface(main_title, data_clients, data_carlist, space_cars, space_
             exit()
 
 # Use to print all the tables
-
-
 def print_table(data, mode, space, login_name=""):
     rows = len(data)
     start = 1
@@ -435,8 +419,6 @@ def print_table(data, mode, space, login_name=""):
             print("")
 
 # print tables according to a given sequence
-
-
 def print_sorttable(data, mode, sequence, space):
 
     if(mode == 1):
@@ -481,8 +463,6 @@ def print_sorttable(data, mode, sequence, space):
         print("")
 
 # sorting data according to target, with ascending(order == 1) & descending(order == 0)
-
-
 def sort_data(data, target, order, mode):
     # skipping headers line in data
     start = 1
@@ -537,8 +517,6 @@ def sort_data(data, target, order, mode):
     return sequence
 
 # searching "keyword" in "data" list of "attribute" column
-
-
 def search_data(data, keyword, attribute, mode):
     start = 1
     # skipping the admin line if want to search for clients
@@ -706,8 +684,6 @@ def validation_totalquantity(data_carlist, car_data, mode=1):
 
  # If total quantity is different than previous
  # order == 1, larger than previours; order ==0, smaller than previous
-
-
 def sub_total_quantity_menu1(temp, car_data, order):
     count = abs(temp - int(car_data[5]))
     if order == 1:
@@ -809,8 +785,6 @@ def sub_total_quantity_menu1(temp, car_data, order):
     return car_data
 
 # If total quantity is the same as previous
-
-
 def sub_total_quantity_menu2(temp, car_data):
     count = int(temp)
     while(1):
@@ -920,8 +894,6 @@ def validation_cartypes():
     return temp
 
 # Ensuring the temp return is capitalised in the first alphabet and small for the rest
-
-
 def validation_carnormal(target):
 
     temp = input("Please enter " + str(target) + ": ")

@@ -5,8 +5,6 @@ import sys
 import hashlib
 
 # First menu of client
-
-
 def client_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions):
 
     #user_data = data_clients[login_index]
@@ -42,8 +40,6 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
             return
 
 # Menu shown before directed to editting
-
-
 def profile_menu(user_data, data_clients, login_index, space_clients):
     while(1):
         print("\n")
@@ -70,8 +66,6 @@ def profile_menu(user_data, data_clients, login_index, space_clients):
             return
 
 # Client can edit certain clients data
-
-
 def edit_profile(user_data, data_clients, login_index, space_clients):
     print("\nWhat do you want to edit?")
     menu = ["Name", "Date of Birth", "License", "Phone Number", "Email", "Card", "Return"]
@@ -153,8 +147,6 @@ def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, 
             return
 
 # view and sorting cars lists
-
-
 def view_allcars(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Sort the List", "Return"]
@@ -171,8 +163,6 @@ def view_allcars(user_data, data_carlist, space_cars):
             return
 
 # sort car according to certain headers
-
-
 def sortcar_menu(user_data, data_carlist, space_cars):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Model Year", "Price per Hour", "Passenger Capacity", "Weight Load", "Return"]
@@ -285,8 +275,6 @@ def searchcar_menu(user_data, data_carlist, space_cars):
         print("")
 
 # search a keyword within header and return the sequence of the searched rows
-
-
 def sub_search_menu(header, data, mode):
     title = "You have chosen " + header + ": "
 
@@ -298,8 +286,6 @@ def sub_search_menu(header, data, mode):
     return sequence
 
 # view individual history for clients
-
-
 def view_indhistory(user_data, data_transactions, space_transactions):
     title = user_data[2] + ", view your rental history here"
     default.print_table(data_transactions, 5, space_transactions, user_data[0])
@@ -440,8 +426,6 @@ def select_time(title):
     # print(from_time)
 
 # book a car: will check car availability once key in booking date, will check if car id exist
-
-
 def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     data = []
     time = []
@@ -684,8 +668,6 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     return
 
 # Confirming a booking
-
-
 def confirm_booking(headers, data):
     title = "Booking Details"
     print("")
@@ -722,8 +704,6 @@ def confirm_booking(headers, data):
         return 2
 
 # Checking if a certain date is available
-
-
 def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist):
     count = 0
     # if the car id in the transaction is the same then compare the dates, if previous transactions of this car exists in a date the the clients wants to book, count++
