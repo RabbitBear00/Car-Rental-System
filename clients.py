@@ -209,9 +209,7 @@ def sortcar_menu(user_data, data_carlist, space_cars):
         default.print_sorttable(data_carlist, 4, sequence, space_cars)
         print("")
 
- # sort ascending or descending
-
-
+# sort ascending or descending
 def sub_sort_menu(header, data, mode):
     sub_menu = ["Ascending", "Descending"]
     title = "You have chosen " + header + ": "
@@ -420,10 +418,8 @@ def select_time(title):
                 return 1
             if(choice == '2'):
                 return 2
-
-    return temp
-
     # print(from_time)
+    return temp
 
 # book a car: will check car availability once key in booking date, will check if car id exist
 def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
