@@ -112,8 +112,7 @@ def login_interface(main_title, data_clients, data_carlist, space_cars, space_cl
     while(1):
         login_details = login_menu(main_title)
         username_key = check_usernameID(data_clients, login_details[0])
-        password_key = check_password(
-            data_clients, login_details[0], login_details[1])
+        password_key = check_password(data_clients, login_details[0], login_details[1])
 
         if(username_key == 1 and password_key >= 1):
             print("You have successfully login!")
@@ -284,8 +283,7 @@ def register_interface(data_clients, space_clients):
             print_title("Registeration information has successfuly recorded.")
             for remaining in range(5, -1, -1):
                 sys.stdout.write("\r")
-                sys.stdout.write(
-                    "Will be directed in {:2d}......".format(remaining))
+                sys.stdout.write("Will be directed in {:2d}......".format(remaining))
                 sys.stdout.flush()
                 time.sleep(1)
             sys.stdout.write("\n")
@@ -305,13 +303,11 @@ def startup_interface(main_title, data_clients, data_carlist, space_cars, space_
                 break
 
         if(choice == '1'):
-            login_index = login_interface(
-                main_title, data_clients, data_carlist, space_cars, space_clients)
+            login_index = login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return login_index
 
         elif(choice == '2'):
-            unregistered_interface(
-                data_clients, data_carlist, space_cars, space_clients)
+            unregistered_interface(data_clients, data_carlist, space_cars, space_clients)
 
         elif(choice == '3'):
             for remaining in range(5, 0, -1):
@@ -579,8 +575,7 @@ def validation_number(length):
         if temp.isdecimal() == True and len(temp) <= length:
             return temp
         else:
-            print("You can only enter " + "at most " +
-                  str(length) + " digit of numbers")
+            print("You can only enter " + "at most " + str(length) + " digit of numbers")
             print("")
 
 
@@ -638,6 +633,7 @@ def validation_totalquantity(data_carlist, car_data, mode=1):
 
             if len(str(temp)) > 4:
                 print("You cannot exceed 4 digits")
+                continue
 
         except ValueError:
             print("You can only enter upto 4 positive integers. ")
@@ -692,8 +688,7 @@ def sub_total_quantity_menu1(temp, car_data, order):
     if order == '2':
         title = "deleted"
     while(1):
-        print("You have " + str(title) + " " + str(count) +
-              " cars into the total quantity for car ID: " + str(car_data[0]))
+        print("You have " + str(title) + " " + str(count) +" cars into the total quantity for car ID: " + str(car_data[0]))
         print("Available + Unavailable + In Service = " + str(count))
         print("Please enter the quantity for each section below: ")
         print("")
@@ -709,8 +704,7 @@ def sub_total_quantity_menu1(temp, car_data, order):
         if(len(str(num1)) <= 4 and num1 >= 0 and num1 <= count):
             pass
         else:
-            print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -726,8 +720,7 @@ def sub_total_quantity_menu1(temp, car_data, order):
         if(len(str(num2)) <= 4 and num2 >= 0 and num2 <= count):
             pass
         else:
-            print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -751,7 +744,7 @@ def sub_total_quantity_menu1(temp, car_data, order):
             pass
         else:
             print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+                "You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -777,10 +770,10 @@ def sub_total_quantity_menu1(temp, car_data, order):
             break
 
     if(choice == '1'):
-        car_data[5] = temp
-        car_data[6] = int(car_data[6]) + num1
-        car_data[7] = int(car_data[7]) + num2
-        car_data[8] = int(car_data[8]) + num3
+        car_data[5] = str(temp)
+        car_data[6] = str(int(car_data[6]) + num1)
+        car_data[7] = str(int(car_data[7]) + num2)
+        car_data[8] = str(int(car_data[8]) + num3)
 
     return car_data
 
@@ -803,8 +796,7 @@ def sub_total_quantity_menu2(temp, car_data):
         if(len(str(num1)) <= 4 and num1 >= 0 and num1 <= count):
             pass
         else:
-            print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -820,8 +812,7 @@ def sub_total_quantity_menu2(temp, car_data):
         if(len(str(num2)) <= 4 and num2 >= 0 and num2 <= count):
             pass
         else:
-            print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -844,8 +835,7 @@ def sub_total_quantity_menu2(temp, car_data):
         if(len(str(num3)) <= 4 and num3 >= 0 and num3 <= count):
             pass
         else:
-            print(
-                "You can only enter a 4 digit of positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue

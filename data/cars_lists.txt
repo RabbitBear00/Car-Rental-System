@@ -1,7 +1,7 @@
 Car ID,Car Types,Car Brand,Car Model,Model Year,Total Quantity,Available,Unavailable,In Service,Price per Hour,Fuel Type,Passenger Capacity,Weight Load
 100001,Electric,Tesla,Model 3,2017,9,3,3,3,100,RON97,4,1000
 100002,City,Toyota,Vios,2013,5,2,2,1,40,RON95,4,78
-100003,City,Proton,Kancil,2015,4,4,0,0,20,RON95,4,90
+100003,City,Proton,Kancil,2015,9,9,0,0,20,RON95,4,90
 100004,Prestige,Mercedes Benz,E270,2014,6,2,2,2,120,RON97,4,80
 100005,City,Proton,Myvi,2010,4,2,2,0,15,RON95,5,30
 100006,Prestige,Mercedes Benz,E270,2014,2,1,1,0,120,RON97,4,100

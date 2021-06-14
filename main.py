@@ -35,8 +35,7 @@ def main():
 
     # Looping the menu therefore the program can only via exit() in the startup_interface
     while(1):
-        login_index = default.startup_interface(
-            main_title, data_clients, data_carlist, space_cars, space_clients)
+        login_index = default.startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
         user_data = data_clients[login_index]
         if(login_index == 1):
             admin.admin_menu(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars, space_clients, space_transactions)

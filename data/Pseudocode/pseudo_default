@@ -682,6 +682,7 @@ FUNCTION validation_totalquantity(data_carlist, car_data, mode = 1)
             
             IF LEN(str(temp)) > 4 THEN
                 PRINT("You cannot exceed 4 digits")
+                CONTINUE
             ENDIF
             
         EXCEPT ValueError:
@@ -765,7 +766,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         IF(LEN(str(num1)) <= 4 AND num1 >=0 AND num1 <= count) THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE   
@@ -783,7 +784,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         IF(LEN(str(num2)) <= 4 AND num2 >=0 AND num2 <= count) THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE    
@@ -809,7 +810,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         IF(LEN(str(num3)) <= 4 AND num3 >=0 AND num3 <= count) THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE      
@@ -867,7 +868,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         IF(LEN(str(num1)) <= 4 AND num1 >=0 AND num1 <= count) THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE    
@@ -884,7 +885,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         IF(LEN(str(num2)) <= 4 AND num2 >=0 AND num2 <= count)THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE    
@@ -910,7 +911,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
         IF(LEN(str(num3)) <= 4 AND num3 >=0 AND num3 <= count)THEN
             PASS
         ELSE
-            PRINT("You can only enter a 4 digit of positive integer not larger than " + str(count))
+            PRINT("You can only enter a positive integer not larger than " + str(count))
             PRINT("Please enter again!")
             PRINT("")
             CONTINUE       
