@@ -745,18 +745,19 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
     IF order == 1 THEN
         title = "added"
     ENDIF
-    IF order == '2' THEN
+    IF order == 0 THEN
         title = "deleted"
     ENDIF
     DOWHILE(1)
         PRINT("You have " + str(title) + " " + str(count) + " cars into the total quantity for car ID: " + str(car_data[0]))
         PRINT("Available + Unavailable + In Service = " + str(count))
-        PRINT("Please enter the quantity for each section below: ")
+        PRINT("Please enter the quantity you want to edit for each section below: ")
         PRINT("")
         
         TRY
             PROMPT "Available  : "
             GET num1 AS INTEGER 
+
         EXCEPT ValueError:
             PRINT("You can only enter integers")
             PRINT("Please enter again")
@@ -771,6 +772,13 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE   
         ENDIF 
+
+        IF(int(car_data[6]) - num1 < 0 AND order == 0)THEN
+            PRINT("You have no cars to delete from this section")
+            PRINT("You need to reenter again")
+            PRINT("")
+            CONTINUE
+        ENDIF
                 
         TRY
             PROMPT "Unavailable: "
@@ -789,6 +797,13 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE    
         ENDIF
+
+        IF(int(car_data[7]) - num2 < 0 AND order == 0)THEN
+            PRINT("You have no cars to delete from this section")
+            PRINT("You need to reenter again")
+            PRINT("")
+            CONTINUE
+        ENDIF
                 
         IF(num1 + num2 > count) THEN
             PRINT("The total for three sections cannot exceed " + str(count))
@@ -800,6 +815,7 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
         TRY
             PROMPT "In Service : "
             GET num3 AS INTEGER 
+            PRINT("")
             
         EXCEPT ValueError:
             PRINT("You can only enter integers")
@@ -815,8 +831,15 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
             PRINT("")
             CONTINUE      
         ENDIF 
+
+        IF(int(car_data[8]) - num3 < 0 AND order == 0)THEN
+            PRINT("You have no cars to delete from this section")
+            PRINT("You need to reenter again")
+            PRINT("")
+            CONTINUE
+        ENDIF
                 
-        IF(num1 + num2 + num3 > count) THEN
+        IF(num1 + num2 + num3 != count) THEN
             PRINT("The total for three sections cannot exceed " + str(count))
             PRINT("Please enter again!")
             PRINT("")
@@ -842,10 +865,14 @@ FUNCTION sub_total_quantity_menu1(temp, car_data, order)
     ENDDO
                 
     IF(choice == '1') THEN
-        car_data[5] = temp
-        car_data[6] = int(car_data[6]) + num1
-        car_data[7] = int(car_data[7]) + num2
-        car_data[8] = int(car_data[8]) + num3          
+        IF(order == 0):
+            num1 *= -1
+            num2 *= -1
+            num3 *= -1
+        car_data[5] = str(temp)
+        car_data[6] = str(int(car_data[6]) + num1)
+        car_data[7] = str(int(car_data[7]) + num2)
+        car_data[8] = str(int(car_data[8]) + num3)         
     ENDIF                
     RETURN car_data        
 
@@ -917,7 +944,7 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
             CONTINUE       
         ENDIF
 
-        IF(num1 + num2 + num3 > count)THEN
+        IF(num1 + num2 + num3 != count)THEN
             PRINT("The total for three sections cannot exceed " + str(count))
             PRINT("Please enter again!")
             PRINT("")
@@ -944,10 +971,10 @@ FUNCTION sub_total_quantity_menu2(temp, car_data)
     ENDDO
                 
     IF(choice == '1')THEN
-        car_data[5] = temp
-        car_data[6] = num1
-        car_data[7] = num2
-        car_data[8] = num3          
+        car_data[5] = str(temp)
+        car_data[6] = str(num1)
+        car_data[7] = str(num2)
+        car_data[8] = str(num3)          
     ENDIF
 
     RETURN car_data

@@ -140,13 +140,11 @@ def login_interface(main_title, data_clients, data_carlist, space_cars, space_cl
 
         # If continue, recursion
         if(choice == '1'):
-            password_key = login_interface(
-                main_title, data_clients, data_carlist, space_cars, space_clients)
+            password_key = login_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return password_key
 
         if(choice == '2'):
-            login_index = startup_interface(
-                main_title, data_clients, data_carlist, space_cars, space_clients)
+            login_index = startup_interface(main_title, data_clients, data_carlist, space_cars, space_clients)
             return login_index
 
     return password_key
@@ -312,8 +310,7 @@ def startup_interface(main_title, data_clients, data_carlist, space_cars, space_
         elif(choice == '3'):
             for remaining in range(5, 0, -1):
                 sys.stdout.write("\r")
-                sys.stdout.write(
-                    "System will exit in {:2d}.............".format(remaining))
+                sys.stdout.write("System will exit in {:2d}.............".format(remaining))
                 sys.stdout.flush()
                 time.sleep(1)
 
@@ -405,8 +402,7 @@ def print_table(data, mode, space, login_name=""):
             if(mode == 1 and k == 3):
                 continue
 
-            print(str(data[i][k]) + " " * (int(space[k]) -
-                  int(len(str(data[i][k])))) + " | ", end="")
+            print(str(data[i][k]) + " " * (int(space[k]) - int(len(str(data[i][k])))) + " | ", end="")
 
         # skipping rows
         if((mode == 5 and data[i][0] != login_name) or (mode == 7 and data[i][0] != login_name) or (mode == 8 and data[i][1] != login_name)):
@@ -449,8 +445,7 @@ def print_sorttable(data, mode, sequence, space):
             if(mode == 1 and k == 3):
                 continue
 
-            print(data[i][k] + " " * (int(space[k]) -
-                  int(len(data[i][k]))) + " | ", end="")
+            print(data[i][k] + " " * (int(space[k]) - int(len(data[i][k]))) + " | ", end="")
 
         if(i == 0):
             print("")
@@ -640,7 +635,7 @@ def validation_totalquantity(data_carlist, car_data, mode=1):
             print("Please enter again")
             print("")
             continue
-        if(mode == 2):
+        if(temp == int(car_data[5])):
             car_data = sub_total_quantity_menu2(temp, car_data)
             break
 
@@ -685,16 +680,17 @@ def sub_total_quantity_menu1(temp, car_data, order):
     if order == 1:
         title = "added"
 
-    if order == '2':
+    if order == 0:
         title = "deleted"
     while(1):
         print("You have " + str(title) + " " + str(count) +" cars into the total quantity for car ID: " + str(car_data[0]))
         print("Available + Unavailable + In Service = " + str(count))
-        print("Please enter the quantity for each section below: ")
+        print("Please enter the quantity you want to edit for each section below: ")
         print("")
 
         try:
             num1 = int(input("Available  : "))
+
         except ValueError:
             print("You can only enter integers")
             print("Please enter again")
@@ -708,9 +704,16 @@ def sub_total_quantity_menu1(temp, car_data, order):
             print("Please enter again!")
             print("")
             continue
+        
+        if(int(car_data[6]) - num1 < 0 and order == 0):
+            print("You have no cars to delete from this section")
+            print("You need to reenter again")
+            print("")
+            continue
 
         try:
             num2 = int(input("Unavailable: "))
+
         except ValueError:
             print("You can only enter integers")
             print("Please enter again")
@@ -724,6 +727,12 @@ def sub_total_quantity_menu1(temp, car_data, order):
             print("Please enter again!")
             print("")
             continue
+        
+        if(int(car_data[7]) - num2 <0 and order == 0):
+            print("You have no cars to delete from this section")
+            print("You need to reenter again")
+            print("")
+            continue
 
         if(num1 + num2 > count):
             print("The total for three sections cannot exceed " + str(count))
@@ -733,6 +742,8 @@ def sub_total_quantity_menu1(temp, car_data, order):
 
         try:
             num3 = int(input("In Service : "))
+            print("")
+
 
         except ValueError:
             print("You can only enter integers")
@@ -743,14 +754,19 @@ def sub_total_quantity_menu1(temp, car_data, order):
         if(len(str(num3)) <= 4 and num3 >= 0 and num3 <= count):
             pass
         else:
-            print(
-                "You can only enter a positive integer not larger than " + str(count))
+            print("You can only enter a positive integer not larger than " + str(count))
             print("Please enter again!")
             print("")
             continue
+        
+        if(int(car_data[8]) - num3 <0 and order == 0):
+            print("You have no cars to delete from this section")
+            print("You need to reenter again")
+            print("")
+            continue
 
-        if(num1 + num2 + num3 > count):
-            print("The total for three sections cannot exceed " + str(count))
+        if(num1 + num2 + num3 != count):
+            print("The total for three sections cannot be less than/exceed " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -770,6 +786,10 @@ def sub_total_quantity_menu1(temp, car_data, order):
             break
 
     if(choice == '1'):
+        if(order == 0):
+            num1 *= -1
+            num2 *= -1
+            num3 *= -1
         car_data[5] = str(temp)
         car_data[6] = str(int(car_data[6]) + num1)
         car_data[7] = str(int(car_data[7]) + num2)
@@ -840,8 +860,8 @@ def sub_total_quantity_menu2(temp, car_data):
             print("")
             continue
 
-        if(num1 + num2 + num3 > count):
-            print("The total for three sections cannot exceed " + str(count))
+        if(num1 + num2 + num3 != count):
+            print("The total for three sections cannot be less than/exceed " + str(count))
             print("Please enter again!")
             print("")
             continue
@@ -862,10 +882,10 @@ def sub_total_quantity_menu2(temp, car_data):
             break
 
     if(choice == '1'):
-        car_data[5] = temp
-        car_data[6] = num1
-        car_data[7] = num2
-        car_data[8] = num3
+        car_data[5] = str(temp)
+        car_data[6] = str(num1)
+        car_data[7] = str(num2)
+        car_data[8] = str(num3)
 
     return car_data
 

@@ -23,15 +23,13 @@ def client_menu(user_data, data_clients, data_carlist, data_transactions, login_
             profile_menu(user_data, data_clients, login_index, space_clients)
 
         elif(choice == '2'):
-            rentcar_interface(user_data, data_clients, data_carlist,
-                              data_transactions, login_index, space_cars)
+            rentcar_interface(user_data, data_clients, data_carlist, data_transactions, login_index, space_cars)
 
         elif(choice == '3'):
             view_indhistory(user_data, data_transactions, space_transactions)
 
         elif(choice == '4'):
-            update_password(user_data, data_clients,
-                            login_index, space_clients)
+            update_password(user_data, data_clients, login_index, space_clients)
 
         elif(choice == '5'):
             title = user_data[2] + ", you have successfully log out."
@@ -140,8 +138,7 @@ def rentcar_interface(user_data, data_clients, data_carlist, data_transactions, 
             searchcar_menu(user_data, data_carlist, space_cars)
 
         if(choice == '3'):
-            bookcar_interface(user_data, data_clients,
-                              data_carlist, data_transactions)
+            bookcar_interface(user_data, data_clients, data_carlist, data_transactions)
 
         if(choice == '4'):
             return
@@ -424,9 +421,7 @@ def select_time(title):
 # book a car: will check car availability once key in booking date, will check if car id exist
 def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
     data = []
-    time = []
     index = -2
-    sum = 0
     k = 0
     while(1):
         car_id = input("Please input the car ID: ")
@@ -521,10 +516,8 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
         # print(data)
 
         # Converting inputed time from string to datetime objects
-        from_datetime = datetime.datetime.strptime(
-            from_date + " " + from_time, "%d-%m-%Y %H:%M")
-        to_datetime = datetime.datetime.strptime(
-            to_date + " " + to_time, "%d-%m-%Y %H:%M")
+        from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M")
+        to_datetime = datetime.datetime.strptime(to_date + " " + to_time, "%d-%m-%Y %H:%M")
         from_date = from_datetime.strftime("%d-%m-%Y")
         from_time = from_datetime.strftime("%H:%M:%S")
         to_date = to_datetime.strftime("%d-%m-%Y")
@@ -539,8 +532,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
 
         # ensuring clients books in a period where date(frow < from < to)
         if(from_datetime < to_datetime and now_datetime < from_datetime):
-            result = compare_quantity(
-                car_id, data_transactions, from_datetime, to_datetime, data_carlist)
+            result = compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data_carlist)
             if(result == 0):
                 print("This model of car have all been rent out.")
                 print("Please try again")
@@ -566,20 +558,16 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                 while(1):
                     print("Points currently: " + str(user_data[-1]))
                     print("100 points = RM5 voucher")
-                    print(
-                        "The rebate will automatically be deducted in your transactions")
-                    print(
-                        "If you cancel the current payment, no points will be deducted")
+                    print("The rebate will automatically be deducted in your transactions")
+                    print("If you cancel the current payment, no points will be deducted")
                     print("")
                     try:
-                        count = int(
-                            input("How many RM5 vouchers do you want to exchange? "))
+                        count = int(input("How many RM5 vouchers do you want to exchange? "))
                     except ValueError:
                         print("Error input")
                         continue
                     if((int(user_data[-1])/100) >= count):
-                        print("Eligible. Do you want to exchange " +
-                              str(count) + " RM5 voucher ?")
+                        print("Eligible. Do you want to exchange " + str(count) + " RM5 voucher ?")
                         while(1):
                             menu = ["Confirm", "Return"]
                             default.general_menu(menu)
@@ -587,13 +575,11 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
                             if(choice == '1' or choice == '2'):
                                 break
                         if(choice == '1'):
-                            print("You have successfully exchange " +
-                                  str(count) + " RM5 vouchers")
+                            print("You have successfully exchange " + str(count) + " RM5 vouchers")
                             voucher = count
                             temp = total_price
                             total_price = total_price - count * 5
-                            print("RM" + str(temp) + " - " + "RM" +
-                                  str(count * 5) + " = RM" + str(total_price))
+                            print("RM" + str(temp) + " - " + "RM" + str(count * 5) + " = RM" + str(total_price))
 
                         if(choice == '2'):
                             print("Exchange has been cancelled.")
@@ -636,8 +622,7 @@ def bookcar_menu(user_data, data_clients, data_carlist, data_transactions):
 
                 if(int(float(user_data[-2])) > 2000 and user_data[1] == "Normal"):
                     default.print_title("You have become our VIP member")
-                    print(
-                        "Congratulations " + str(user_data[2] + ",\nYou will get 10% discount for every payment"))
+                    print("Congratulations " + str(user_data[2] + ",\nYou will get 10% discount for every payment"))
                     user_data[1] = "VIP"
                     print("")
 
@@ -689,8 +674,7 @@ def confirm_booking(headers, data):
         print("Payment is successful!")
         for remaining in range(5, -1, -1):
             sys.stdout.write("\r")
-            sys.stdout.write(
-                "Will be directed in {:2d}......".format(remaining))
+            sys.stdout.write("Will be directed in {:2d}......".format(remaining))
             sys.stdout.flush()
             time.sleep(1)
         sys.stdout.write("\n")
@@ -705,10 +689,8 @@ def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data
     # if the car id in the transaction is the same then compare the dates, if previous transactions of this car exists in a date the the clients wants to book, count++
     for i in range(len(data_transactions)):
         if(car_id == data_transactions[i][2]):
-            origin_fromtime = datetime.datetime.strptime(
-                data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
-            origin_totime = datetime.datetime.strptime(
-                data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
+            origin_fromtime = datetime.datetime.strptime(data_transactions[i][7] + " " + data_transactions[i][8], "%d-%m-%Y %H:%M:%S")
+            origin_totime = datetime.datetime.strptime(data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
 
             if((origin_fromtime <= from_datetime <= origin_totime) or (origin_fromtime <= to_datetime <= origin_totime) or (from_datetime <= origin_fromtime <= to_datetime) or (from_datetime <= origin_totime <= to_datetime)):
                 count += 1

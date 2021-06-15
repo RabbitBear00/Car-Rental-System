@@ -18,8 +18,7 @@ def admin_menu(user_data, data_clients, data_carlist, data_transactions, login_i
                 break
 
         if(choice == '1'):
-            client_interface(user_data, data_clients,
-                             login_index, space_clients)
+            client_interface(user_data, data_clients, login_index, space_clients)
 
         elif(choice == '2'):
             car_interface(user_data, data_carlist, login_index, space_cars)
@@ -409,8 +408,7 @@ def addcar_menu(data_carlist, space_cars):
             default.print_title("Car Information has successfuly recorded.")
             for remaining in range(5, -1, -1):
                 sys.stdout.write("\r")
-                sys.stdout.write(
-                    "Will be directed in {:2d}......".format(remaining))
+                sys.stdout.write("Will be directed in {:2d}......".format(remaining))
                 sys.stdout.flush()
                 time.sleep(1)
             sys.stdout.write("\n")
@@ -444,11 +442,9 @@ def filter_menu(data_transactions, space_transactions):
                     break
 
                 if(key == 1):
-                    default.print_table(data_transactions,
-                                        7, space_transactions, temp)
+                    default.print_table(data_transactions, 7, space_transactions, temp)
                 else:
-                    print(
-                        "Either client doesn't exists/Client has no transaction records before.")
+                    print("Either client doesn't exists/Client has no transaction records before.")
                     return
 
             if(choice == '2'):
@@ -463,11 +459,9 @@ def filter_menu(data_transactions, space_transactions):
                     break
 
                 if(key == 1):
-                    default.print_table(data_transactions,
-                                        8, space_transactions, temp)
+                    default.print_table(data_transactions, 8, space_transactions, temp)
                 else:
-                    print(
-                        "Either client doesn't exists/Client has no transaction records before.")
+                    print("Either client doesn't exists/Client has no transaction records before.")
 
             if(choice == '3'):
                 sequence = sub_filter_date(data_transactions)
@@ -478,8 +472,7 @@ def filter_menu(data_transactions, space_transactions):
                     print("")
                     return
                 else:
-                    default.print_sorttable(
-                        data_transactions, 3, sequence, space_transactions)
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)
 
             if(choice == '4'):
                 while(1):
@@ -497,8 +490,7 @@ def filter_menu(data_transactions, space_transactions):
                 else:
                     sequence = []
                     sequence.append(index)
-                    default.print_sorttable(
-                        data_transactions, 3, sequence, space_transactions)
+                    default.print_sorttable(data_transactions, 3, sequence, space_transactions)
 
             if(choice == '5'):
                 return
@@ -621,11 +613,9 @@ def returncar_interface(data_transactions):
         #from_time = data[8]
         to_date = data[9]
         to_time = data[10]
-        return_datetime = datetime.datetime.strptime(
-            return_date + " " + return_time, "%d-%m-%Y %H:%M")
+        return_datetime = datetime.datetime.strptime(return_date + " " + return_time, "%d-%m-%Y %H:%M")
         #from_datetime = datetime.datetime.strptime(from_date + " " + from_time, "%d-%m-%Y %H:%M:%S")
-        to_datetime = datetime.datetime.strptime(
-            to_date + " " + to_time, "%d-%m-%Y %H:%M:%S")
+        to_datetime = datetime.datetime.strptime(to_date + " " + to_time, "%d-%m-%Y %H:%M:%S")
 
         # Return within the to_datetime
         if(return_datetime <= to_datetime):
@@ -642,8 +632,7 @@ def returncar_interface(data_transactions):
             data[-2] = total_price
 
             print("")
-            print(
-                "You have returned your car late. \nPenalty = delayed hours * price per hour * 1.5 ")
+            print("You have returned your car late. \nPenalty = delayed hours * price per hour * 1.5 ")
             default.print_title("Penalty Payment Details")
             for i in range(7):
                 print(data_transactions[0][i] + ": " + data[i])
@@ -663,8 +652,7 @@ def returncar_interface(data_transactions):
                 print("Payment is successful!")
                 for remaining in range(5, -1, -1):
                     sys.stdout.write("\r")
-                    sys.stdout.write(
-                        "Will be directed in {:2d}......".format(remaining))
+                    sys.stdout.write("Will be directed in {:2d}......".format(remaining))
                     sys.stdout.flush()
                     time.sleep(1)
                 sys.stdout.write("\n")

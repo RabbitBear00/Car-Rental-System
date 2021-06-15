@@ -7,5 +7,5 @@ Car ID,Car Types,Car Brand,Car Model,Model Year,Total Quantity,Available,Unavail
 100006,Prestige,Mercedes Benz,E270,2014,2,1,1,0,120,RON97,4,100
 100007,City,nissan,renault,2017,3,1,1,1,30,RON97,4,2000
 100008,Electric,XPeng,fut,2016,3,1,1,1,20,RON95,4,2000
-100009,Van,mitsubishi,hero,2013,3,1,1,1,200,Diesel,3,20000
+100009,Van,mitsubishi,hero,2013,2,1,1,0,200,Diesel,3,20000
 100010,City,Honda,Civiv,2021,2,1,1,0,20,RON97,4,1000
