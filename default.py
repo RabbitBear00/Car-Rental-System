@@ -421,7 +421,7 @@ def print_sorttable(data, mode, sequence, space):
     elif(mode == 2):
         # mode 2: admin sort list of cars(include all columns)
         columns = 13
-        blanks = 180
+        blanks = 214
 
     elif(mode == 3):
         # mode 3: admin filter certain dates of transactions
@@ -636,24 +636,6 @@ def validation_totalquantity(data_carlist, car_data, mode=1):
             print("")
             continue
         if(temp == int(car_data[5])):
-            car_data = sub_total_quantity_menu2(temp, car_data)
-            break
-
-        elif(temp > int(car_data[5])):
-            car_data = sub_total_quantity_menu1(temp, car_data, 1)
-            print_title("This is the current record.")
-            for i in range(0, 13):
-                print(data_carlist[0][i] + ": " + str(car_data[i]))
-            break
-
-        elif(temp < int(car_data[5])):
-            car_data = sub_total_quantity_menu1(temp, car_data, 0)
-            print_title("This is the current record.")
-            for i in range(0, 13):
-                print(data_carlist[0][i] + ": " + str(car_data[i]))
-            break
-
-        else:
             print("Total Quantity is the same as before")
             print("Do you want to alter quantity for each section? ")
             menu = ["Yes", "Return"]
@@ -668,8 +650,21 @@ def validation_totalquantity(data_carlist, car_data, mode=1):
                 print_title("This is the current record.")
                 for i in range(0, 13):
                     print(data_carlist[0][i] + ": " + str(car_data[i]))
+                break
 
-            return car_data
+        elif(temp > int(car_data[5])):
+            car_data = sub_total_quantity_menu1(temp, car_data, 1)
+            print_title("This is the current record.")
+            for i in range(0, len(car_data)):
+                print(data_carlist[0][i] + ": " + str(car_data[i]))
+            break
+
+        elif(temp < int(car_data[5])):
+            car_data = sub_total_quantity_menu1(temp, car_data, 0)
+            print_title("This is the current record.")
+            for i in range(0, 13):
+                print(data_carlist[0][i] + ": " + str(car_data[i]))
+            break
 
     return car_data
 
@@ -905,7 +900,7 @@ def validation_cartypes():
 
 # Ensuring the temp return is capitalised in the first alphabet and small for the rest
 def validation_carnormal(target):
-
+    
     temp = input("Please enter " + str(target) + ": ")
 
     temp = temp[0].upper() + temp[1:len(temp)].lower()

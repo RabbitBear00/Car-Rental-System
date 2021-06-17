@@ -161,7 +161,7 @@ def car_interface(user_data, data_carlist, login_index, space_cars):
             sort_cars(user_data, data_carlist, space_cars)
 
         if(choice == '2'):
-            clients.searchcar_menu(user_data, data_carlist, space_cars)
+            clients.searchcar_menu(user_data, data_carlist, space_cars, mode = 2)
 
         if(choice == '3'):
             carprofile_menu(data_carlist, space_cars)
@@ -288,7 +288,7 @@ def edit_carprofile(index, car_data, data_carlist, space_cars):
         return
 
     if(choice == '1'):
-        temp = default.validation_length(space_cars[1])
+        temp = default.validation_cartypes()
         car_data[1] = temp
 
     if(choice == '2'):
@@ -323,8 +323,8 @@ def edit_carprofile(index, car_data, data_carlist, space_cars):
         car_data[12] = temp
 
     data_carlist[index] = car_data
-    print(index)
-    print(car_data)
+    #print(index)
+    #print(car_data)
 
     # print(data_clients)
     with open("./data/cars_lists.txt",  mode='w') as cars_file:

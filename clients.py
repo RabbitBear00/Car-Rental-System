@@ -226,7 +226,7 @@ def sub_sort_menu(header, data, mode):
     return sequence
 
 
-def searchcar_menu(user_data, data_carlist, space_cars):
+def searchcar_menu(user_data, data_carlist, space_cars, mode = 4):
     while(1):
         menu = ["Car ID", "Car Types", "Car Brand", "Car Model", "Passenger Capacity", "Weight Load", "Return"]
         title = user_data[2] + ", you can search a car here"
@@ -266,7 +266,7 @@ def searchcar_menu(user_data, data_carlist, space_cars):
         if(choice == '7'):
             return
 
-        default.print_sorttable(data_carlist, 4, sequence, space_cars)
+        default.print_sorttable(data_carlist, mode, sequence, space_cars)
         print("")
 
 # search a keyword within header and return the sequence of the searched rows
@@ -693,7 +693,8 @@ def compare_quantity(car_id, data_transactions, from_datetime, to_datetime, data
             origin_totime = datetime.datetime.strptime(data_transactions[i][9] + " " + data_transactions[i][10], "%d-%m-%Y %H:%M:%S")
 
             if((origin_fromtime <= from_datetime <= origin_totime) or (origin_fromtime <= to_datetime <= origin_totime) or (from_datetime <= origin_fromtime <= to_datetime) or (from_datetime <= origin_totime <= to_datetime)):
-                count += 1
+                if(data_transactions[i][16] == "Returned"):
+                    count += 1
 
     # check the total quantity of the car with car_id
     for i in range(len(data_carlist)):
